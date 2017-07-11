@@ -1,0 +1,18 @@
+{
+  "services": {
+    "cloudantNoSQLDB": [
+      {
+        "name": "fintrade-db",
+        "label": "cloudantNoSQLDB",
+        "plan": "Lite",
+        "credentials": {
+            "username": "",
+            "password": "",
+            "host": "",
+            "port": 443,
+            "url": ""
+            }
+      }
+    ]
+  }
+}

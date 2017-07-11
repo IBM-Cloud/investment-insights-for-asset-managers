@@ -1,0 +1,7 @@
+---
+applications:
+- name: fintrade
+  host: fintrade
+  memory: 256M
+  services:
+  - fintrade-db

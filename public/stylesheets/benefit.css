@@ -1,0 +1,372 @@
+.healthContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.healthLayout {
+  padding-left: 60px;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.benefitkit {
+  flex: 1;
+  overflow: auto;
+}
+
+.benefitdata {
+    /*    border: 1px solid #aaa;*/
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.benefitfact {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.padding {
+    height: 36px;
+    min-width: 30px;
+    margin-right: 10px;
+}
+
+.owner {
+    text-align: right;
+    color: #225282;
+    font-size: 12px;
+}
+
+.header {
+    text-align: justify;
+    color: #2E425B;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.benefitfacts {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    font-size: 12px;
+    margin-left: 30px;
+    padding: 10px;
+}
+
+.factlabel {
+    max-width: 70px;
+    min-width: 70px;
+    font-weight: bold;
+    color: #919FA8;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+.benefitdetail {
+    display: none;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    background-color: white;
+    border-bottom: 1px solid #EAEAEA;
+    border-left: 1px solid #EAEAEA;
+    border-right: 1px solid #EAEAEA;
+}
+
+.benefitTypeTitle {
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+.benefitset {
+  max-width: 600px;
+}
+
+.benefitMenu{
+  font-size: 13px;
+  color: #5586D6;
+  width: 100px;
+
+}
+
+.benefit {
+    flex-direction: row;
+    min-height: 30px;
+    min-width: 26px;
+}
+
+.benefitblock {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.sideline {
+    transform: rotate(-90deg);
+    /* text-align: center; */
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #225282;
+    color: #12aaeb;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    /* align-content: center; */
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 60px; */
+    min-width: 130px;
+}
+
+.benefitimage {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.benefiticon {
+}
+
+.benefitchannel {
+    width: 18px;
+    height: 50px;
+    background: #e7f6fd;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.benefitdetailchannel {
+    width: 18px;
+    height: 220px;
+    background: #e7f6fd;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.benefitmarker {
+    height: 6px;
+    width: 6px;
+    border-radius: 6px;
+    background: #225282;
+}
+
+.benefitcap {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 5px;
+    min-width: 280px;
+}
+
+.benefitrow {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    height: 40px;
+    min-width: 280px;
+    cursor: pointer;
+    background-color: white;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #EAEAEA;
+}
+
+.benefitchanneltop {
+    background: #e7f6fd;
+    width: 18px;
+    height: 18px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.benefitchannelbottom {
+    background: #e7f6fd;
+    width: 18px;
+    height: 18px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.benefitTitle {
+    min-width: 200px;
+    width: 300px;
+    /* text-align: center; */
+    color: #225282;
+    text-transform: uppercase;
+    letter-spacing: 1;
+    font-size: 12px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.interactions {
+    min-width: 340px;
+    margin: 10px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.interactionheader {
+    text-align: right;
+    color: #12aaeb;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 0;
+}
+
+.interactionsub {
+    text-align: right;
+    color: #225282;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.claimTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.claimbox {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 320px;
+    padding: 10px;
+    border: 1px solid #EAEAEA;
+}
+
+.claimlabel {
+    color: #225282;
+    margin-right: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 120px;
+}
+
+.claiminput {
+    width: 220px;
+    height: 30px;
+    padding: 5px;
+    color: #225282;
+    font-weight: bold;
+    font-family: sans-serif;
+    background-color: white;
+}
+
+.claimrow {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    align-items: center;
+}
+
+.claimbutton {
+    background: #a0dcf7;
+    border: none;
+    color: #225282;
+    border-radius: 4px;
+    width: 140px;
+    font-size: 14px;
+    height: 40px;
+    margin: 20px;
+    margin-right: 0;
+    outline: none;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s linear;
+    font-weight: bold;
+}
+
+.claimcontrols {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.healthTabArea {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.healthTab {
+  width: 33%;
+  font-size: 12px;
+  line-height: 20px;
+  border-bottom: 1px solid #ECF0F1;
+
+  color:#919FA8;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.tabLink {
+  line-height: 36px;
+  padding: 0.7rem 0;
+}
+
+.tabLink.selected{
+  font-weight: bold;
+  border-bottom: 1px solid #5586D6;
+  color:#5586D6;
+}
+@media only screen and (max-width: 800px) {
+  .healthContainer {
+    display: flex;
+    overflow: auto;
+    min-height: auto;
+  }
+  .healthLayout {
+    padding: 0px;
+    flex-direction: column;
+  }
+
+  .healthLayout {
+    flex: none;
+  }
+
+  .benefitKit {
+    flex: none;
+  }
+
+  .healthTabArea {
+    flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+
+  .healthTab {
+    width: auto;
+    border: none;
+    text-align: center;
+  }
+
+
+}

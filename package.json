@@ -1,0 +1,35 @@
+{
+  "name": "finance-trade",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.17.1",
+    "cf-deployment-tracker-client": "*",
+    "cfenv": "^1.0.3",
+    "chrono-node":"*",
+    "cloudant":"~1.6.2",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "~1.4.3",
+    "dotenv": "*",
+    "express": "4.15.2",
+    "express-session": "1.15.2",
+    "morgan": "1.8.1",
+    "node-datetime": "1.0",
+    "socket.io":"*",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0",
+    "request": "2.81.0",
+    "watson-developer-cloud": "2.27.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM-Bluemix/cognitive-trade.git"
+  },
+  "engines": {
+    "node": "4.2.x"
+  }
+}
