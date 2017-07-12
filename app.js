@@ -1,4 +1,4 @@
-// server.js
+// app.js
 // set up ======================================================================
 // get all the tools we need
 var express = require('express');
@@ -41,10 +41,6 @@ var appName;
 if (appEnv.isLocal) {
     require('dotenv').load();
 }
-var catalog_url = process.env.CATALOG_URL;
-var orders_url = process.env.ORDERS_URL;
-console.log("Catalog URL is", catalog_url);
-console.log("Orders URL is", orders_url);
 
 // Cloudant
 var Logs, Benefits;
@@ -187,7 +183,6 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
-
 // =====================================
 // PROFILE SECTION =====================
 // =====================================
@@ -206,7 +201,6 @@ app.get('/dashboard', function(req, res) {
     } else {
         res.sendfile('./public/login.html');
     }
-
 });
 
 app.get('/soon', function(req, res) {
@@ -214,50 +208,12 @@ app.get('/soon', function(req, res) {
 });
 
 app.get('/about', function(req, res) {
-    res.redirect("https://github.com/IBM-Bluemix/cloudco-insurance/wiki");
+    res.redirect("https://github.com/IBM-Bluemix/finance-trade");
 });
-
-app.get('/healthBenefits', isLoggedIn, function(req, res) {
-
-    res.setHeader('Content-Type', 'application/json');
-
-    if (req.session.userPolicy) {
-        res.send(JSON.stringify(req.session.userPolicy, null, 3));
-    } else {
-        getUserPolicy(req, function(err, doc) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(JSON.stringify(doc, null, 3));
-            }
-        });
-    }
-});
-
-function getUserPolicy(req, callback) {
-    //console.log(req);
-
-    Benefits.find({ selector: {
-        '_id': req.user.username
-    }}, function(err, result) {
-        if (err) {
-            console.error("Error retrieving user policy: ", err);
-            return callback(err);
-        } else if (result.docs.length > 0) {
-            var doc = result.docs[0];
-            req.session.userPolicy = doc;
-            return callback(null, doc);
-        } else {
-            console.error("No user policy found.");
-            return callback("No user policy found.");
-        }
-    });
-}
 
 // launch ======================================================================
 io.on('connection', function(socket) {
     console.log("Sockets connected.");
-
     // Whenever a new client connects send them the latest data
     socket.on('disconnect', function() {
         console.log("Socket disconnected.");

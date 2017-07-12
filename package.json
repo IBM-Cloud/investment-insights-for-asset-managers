@@ -30,6 +30,6 @@
     "url": "https://github.com/IBM-Bluemix/cognitive-trade.git"
   },
   "engines": {
-    "node": "4.2.x"
+    "node": "6.10.x"
   }
 }
