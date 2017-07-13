@@ -14,6 +14,7 @@ echo "Using prefix: $PREFIX"
 # Create services
 ################################################################
 cf create-service cloudantNoSQLDB Lite ${PREFIX}fintrade-db
+cf create-service discovery free ${PREFIX}fintrade-discovery
 
 ################################################################
 # Push app with blue/green deployment
