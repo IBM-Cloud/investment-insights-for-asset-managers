@@ -1,4 +1,7 @@
 # Finance Trade
+
+[![Build Status](https://travis-ci.org/IBM-Bluemix/finance-trade.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/finance-trade)
+
 FinTrade is a Node.js application that uses IBM Financial services and Watson services.  
 
 The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact the investment to any given portfolio.
