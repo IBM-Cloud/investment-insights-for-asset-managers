@@ -2,13 +2,5 @@ node_modules
 npm-debug.log
 /.idea
 /.env
-database.js
-config/database.js
-
-config/database.js
-
 .DS_Store
-
-config/database.js
-
 vcap-local.json
