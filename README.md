@@ -1,7 +1,7 @@
 # Finance Trade
 FitTrade is a Node.js application that uses many IBM Financial services and Watson services.  
 
-The application is a modern portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio. 
+The application is a modern portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio.
 
 # Overview
 
@@ -43,34 +43,30 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. Clone the app to your local environment from your terminal using the following command:
 
-  ```
-  git clone https://github.com/IBM-Bluemix/finance-trade.git
-  ```
+   ```
+   git clone https://github.com/IBM-Bluemix/finance-trade.git
+   ```
 
 1. `cd` into this newly created directory
 
-1. Open the `manifest.yml` file and change the `host` value to something unique.
-
-  The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
-
 1. Connect to Bluemix in the command line tool and follow the prompts to log in
 
-  ```
-  cf login -a https://api.ng.bluemix.net
-  ```
+   ```
+   cf login -a https://api.ng.bluemix.net
+   ```
 
 1. Create a Cloudant service in Bluemix
 
-  ```
-  cf create-service cloudantNoSQLDB Lite fintrade-db
-  ```
+   ```
+   cf create-service cloudantNoSQLDB Lite fintrade-db
+   ```
 
 1. Push the app to Bluemix
 
-  ```
-  cf push 
-  ```
-  
+   ```
+   cf push
+   ```
+
 And voila! You now have your very own finance application running on Bluemix.
 
 ## Run the app locally
@@ -81,23 +77,23 @@ And voila! You now have your very own finance application running on Bluemix.
 
 1. Create a Cloudant service in Bluemix
 
-  ```
-  cf create-service cloudantNoSQLDB Lite fintrade-db
-  ```
+   ```
+   cf create-service cloudantNoSQLDB Lite fintrade-db
+   ```
 
 1. In the checkout directory, copy the file ```vcap-local.template.json``` to ```vcap-local.json```. Edit ```vcap-local.json``` and update the credentials for the Cloudant. You can retrieve the service credentials from the Bluemix console.
 
 1. Run
 
-  ```
-  npm install
-  ```
+   ```
+   npm install
+   ```
 
 1. Run
 
-  ```
-  npm start
-  ```
+   ```
+   npm start
+   ```
 
 ## Contribute
 
@@ -107,9 +103,9 @@ If you find a bug, please report it via the [Issues section][issues_url] or even
 
 The primary source of debugging information for your Bluemix app is the logs. To see them, run the following command using the Cloud Foundry CLI:
 
-  ```
-  $ cf logs fintrade --recent
-  ```
+   ```
+   $ cf logs fintrade --recent
+   ```
 
 For more detailed information on troubleshooting your application, see the [Troubleshooting section](https://www.ng.bluemix.net/docs/troubleshoot/tr.html) in the Bluemix documentation.
 
@@ -136,6 +132,7 @@ This data is collected from the `package.json` file in the application and the `
 
 Deployment tracking can be disabled by removing `require("cf-deployment-tracker-client").track();` from the beginning of the `app.js` file.
 
+[bluemix_signup_url]: https://console.bluemix.net/?cm_mmc=GitHubReadMe
 [cloud_foundry_url]: https://github.com/cloudfoundry/cli
 [download_node_url]: https://nodejs.org/download/
 [travis_url]: https://travis-ci.org/
