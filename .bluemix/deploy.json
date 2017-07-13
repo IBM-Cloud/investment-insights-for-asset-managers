@@ -19,7 +19,8 @@
     },
     "app-branch-name": {
       "description": "The branch name to deploy",
-      "type": "string"
+      "type": "string",
+      "pattern": "\\S"
     }
   },
   "required": [
