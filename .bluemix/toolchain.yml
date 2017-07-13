@@ -1,6 +1,6 @@
 version: '2'
 template:
-  name: "FinTrade"
+  name: "Finance Trade"
   description: "FinTrade is a modern finance portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio."
   required:
     - build
