@@ -1240,11 +1240,38 @@
         height: 400px;
         margin-top: 60px;
         float: left;
-        background: #ffeeee;
+        background: #e1ebf7;
         border-radius: 3px;
         margin-bottom: 60px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
-
+    .marketScenarios{
+        float: left;
+        width: 49.8%;
+        border-right: 2px dotted #ccdff7;
+        height: 100%;
+    }
+    .instrumentAnalytics{
+        float: left;
+        text-align: right;
+        width: 50%;
+        height: 100%;
+    }
+    .instrumentAnalytics img, .marketScenarios img{
+        width: 30px;
+        height: 30px;
+        border-radius: 25px;
+    }
+    .instrumentAnalytics .serviceHeader{
+        text-align: right;
+    }
+    .insideText{
+        height: 40px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
     .serviceHeader{
         text-align: justify;
         color: #909090;
@@ -1266,12 +1293,32 @@
         .newsArea{
             width: 100%;
             margin-right: 0%;
+            text-align: left;
         }
+        .newsArea .serviceHeader{
+            text-align: left;
+        }
+
         .analyticsArea {
             margin-top: 30px;
             width: 100%;
             margin-right: 0%;
+            height: auto;
         }
+        .marketScenarios{
+            width: 100%;
+            border-right: 0;
+            height: 400px;
+        }
+        .instrumentAnalytics{
+            text-align: left;
+            width: 100%;
+            height: 400px;
+        }
+        .instrumentAnalytics .serviceHeader{
+            text-align: left;
+        }
+
         .outline {
             display: flex;
             align-content: center;
