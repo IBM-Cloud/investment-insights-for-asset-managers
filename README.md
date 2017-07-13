@@ -33,7 +33,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. Wait for the Deploy job to complete.
 
-1. Access the app when it's ready and start uploading videos and images!
+1. Access the app when it's ready and start exploring.
 
 ## Running the app on Bluemix
 

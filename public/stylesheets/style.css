@@ -3,7 +3,7 @@
         background-color: #F8F8F9;
         margin: 0 auto;
         font-family: Lato,sans-serif;
-        color: #50b948;
+        color: #5c5d5b;
         -webkit-font-smoothing: antialiased;
     }
 
@@ -1198,7 +1198,80 @@
         font-size: 12px;
     }
 
+    .dashbaordPanel{
+        padding: 10px;
+        padding-top: 50px;
+    }
+    .userProfile{
+        width: 50%;
+        height: 500px;
+        float: left;
+        background: #ececec;
+        margin-right: 15%;
+        border-radius: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .portfolioArea{
+        height: 50%;
+    }
+    .riskArea{
+        height: 50%;
+    }
+
+
+    .newsArea{
+        width: 35%;
+        float: left;
+        height: 500px;
+        background: #ececec;
+        border-radius: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+    }
+    .newsArea .serviceHeader{
+        text-align: right;
+    }
+
+    .analyticsArea{
+        width: 100%;
+        float: left;
+        height: 400px;
+        margin-top: 60px;
+        float: left;
+        background: #ffeeee;
+        border-radius: 3px;
+        margin-bottom: 60px;
+    }
+
+    .serviceHeader{
+        text-align: justify;
+        color: #909090;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px;
+
+    }
+    aside.insidePanel{
+        padding: 10px;
+    }
+
     @media only screen and (max-width: 800px) {
+        .userProfile{
+            width: 100%;
+            margin-right: 0%;
+        }
+
+        .newsArea{
+            width: 100%;
+            margin-right: 0%;
+        }
+        .analyticsArea {
+            margin-top: 30px;
+            width: 100%;
+            margin-right: 0%;
+        }
         .outline {
             display: flex;
             align-content: center;
