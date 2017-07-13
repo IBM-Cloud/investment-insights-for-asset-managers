@@ -1,7 +1,7 @@
 # Finance Trade
-FitTrade is a Node.js application that uses many IBM Financial services and Watson services.  
+FinTrade is a Node.js application that uses IBM Financial services and Watson services.  
 
-The application is a modern portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio.
+The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact the investment to any given portfolio.
 
 # Overview
 
