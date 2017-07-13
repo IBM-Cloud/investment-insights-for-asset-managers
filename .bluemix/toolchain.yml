@@ -39,6 +39,6 @@ services:
 form:
   pipeline:
     parameters:
-      app-branch-name: "toolchain"
+      app-branch-name: "master"
     schema:
       $ref: deploy.json
