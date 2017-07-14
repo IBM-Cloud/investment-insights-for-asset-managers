@@ -3,7 +3,7 @@
         background-color: #F8F8F9;
         margin: 0 auto;
         font-family: Lato,sans-serif;
-        color: #50b948;
+        color: #5c5d5b;
         -webkit-font-smoothing: antialiased;
     }
 
@@ -1198,7 +1198,127 @@
         font-size: 12px;
     }
 
+    .dashbaordPanel{
+        padding: 10px;
+        padding-top: 50px;
+    }
+    .userProfile{
+        width: 50%;
+        height: 500px;
+        float: left;
+        background: #ececec;
+        margin-right: 15%;
+        border-radius: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .portfolioArea{
+        height: 50%;
+    }
+    .riskArea{
+        height: 50%;
+    }
+
+
+    .newsArea{
+        width: 35%;
+        float: left;
+        height: 500px;
+        background: #ececec;
+        border-radius: 3px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+    }
+    .newsArea .serviceHeader{
+        text-align: right;
+    }
+
+    .analyticsArea{
+        width: 100%;
+        float: left;
+        height: 400px;
+        margin-top: 60px;
+        float: left;
+        background: #e1ebf7;
+        border-radius: 3px;
+        margin-bottom: 60px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .marketScenarios{
+        float: left;
+        width: 49.8%;
+        border-right: 2px dotted #ccdff7;
+        height: 100%;
+    }
+    .instrumentAnalytics{
+        float: left;
+        text-align: right;
+        width: 50%;
+        height: 100%;
+    }
+    .instrumentAnalytics img, .marketScenarios img{
+        width: 30px;
+        height: 30px;
+        border-radius: 25px;
+    }
+    .instrumentAnalytics .serviceHeader{
+        text-align: right;
+    }
+    .insideText{
+        height: 40px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
+    .serviceHeader{
+        text-align: justify;
+        color: #909090;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px;
+
+    }
+    aside.insidePanel{
+        padding: 10px;
+    }
+
     @media only screen and (max-width: 800px) {
+        .userProfile{
+            width: 100%;
+            margin-right: 0%;
+        }
+
+        .newsArea{
+            width: 100%;
+            margin-right: 0%;
+            text-align: left;
+        }
+        .newsArea .serviceHeader{
+            text-align: left;
+        }
+
+        .analyticsArea {
+            margin-top: 30px;
+            width: 100%;
+            margin-right: 0%;
+            height: auto;
+        }
+        .marketScenarios{
+            width: 100%;
+            border-right: 0;
+            height: 400px;
+        }
+        .instrumentAnalytics{
+            text-align: left;
+            width: 100%;
+            height: 400px;
+        }
+        .instrumentAnalytics .serviceHeader{
+            text-align: left;
+        }
+
         .outline {
             display: flex;
             align-content: center;

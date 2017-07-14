@@ -1,11 +1,42 @@
 # Finance Trade
-FitTrade is a Node.js application that uses many IBM Financial services and Watson services.  
 
-The application is a modern portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio. 
+[![Build Status](https://travis-ci.org/IBM-Bluemix/finance-trade.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/finance-trade)
+
+FinTrade is a Node.js application that uses IBM Financial services and Watson services.  
+
+The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact the investment to any given portfolio.
 
 # Overview
 
 This repo is UNDER DEVELOPMENT...
+
+## Deploying the app automatically in Bluemix
+
+The app comes with a toolchain you can use to deploy the solution with few clicks. If you want to deploy it manually, you can skip this section.
+
+1. **Ensure your organization has enough quota for one web application using 256MB of memory and 4 services.**
+
+1. Click ***Deploy to Bluemix*** to start the Bluemix DevOps wizard:
+
+   [![Deploy To Bluemix](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/finance-trade&branch=master)
+
+1. Select the **GitHub** box.
+
+1. Decide whether you want to fork/clone the app repository.
+
+1. If you decide to Clone, set a name for your GitHub repository.
+
+1. Select the **Delivery Pipeline** box.
+
+1. Select the region, organization and space where you want to deploy the app.
+
+1. Click **Create**.
+
+1. Select the Delivery Pipeline.
+
+1. Wait for the Deploy job to complete.
+
+1. Access the app when it's ready and start exploring.
 
 ## Running the app on Bluemix
 
@@ -15,34 +46,30 @@ This repo is UNDER DEVELOPMENT...
 
 1. Clone the app to your local environment from your terminal using the following command:
 
-  ```
-  git clone https://github.com/IBM-Bluemix/finance-trade.git
-  ```
+   ```
+   git clone https://github.com/IBM-Bluemix/finance-trade.git
+   ```
 
 1. `cd` into this newly created directory
 
-1. Open the `manifest.yml` file and change the `host` value to something unique.
-
-  The host you choose will determinate the subdomain of your application's URL:  `<host>.mybluemix.net`
-
 1. Connect to Bluemix in the command line tool and follow the prompts to log in
 
-  ```
-  cf login -a https://api.ng.bluemix.net
-  ```
+   ```
+   cf login -a https://api.ng.bluemix.net
+   ```
 
 1. Create a Cloudant service in Bluemix
 
-  ```
-  cf create-service cloudantNoSQLDB Lite fintrade-db
-  ```
+   ```
+   cf create-service cloudantNoSQLDB Lite fintrade-db
+   ```
 
 1. Push the app to Bluemix
 
-  ```
-  cf push 
-  ```
-  
+   ```
+   cf push
+   ```
+
 And voila! You now have your very own finance application running on Bluemix.
 
 ## Run the app locally
@@ -53,23 +80,23 @@ And voila! You now have your very own finance application running on Bluemix.
 
 1. Create a Cloudant service in Bluemix
 
-  ```
-  cf create-service cloudantNoSQLDB Lite fintrade-db
-  ```
+   ```
+   cf create-service cloudantNoSQLDB Lite fintrade-db
+   ```
 
 1. In the checkout directory, copy the file ```vcap-local.template.json``` to ```vcap-local.json```. Edit ```vcap-local.json``` and update the credentials for the Cloudant. You can retrieve the service credentials from the Bluemix console.
 
 1. Run
 
-  ```
-  npm install
-  ```
+   ```
+   npm install
+   ```
 
 1. Run
 
-  ```
-  npm start
-  ```
+   ```
+   npm start
+   ```
 
 ## Contribute
 
@@ -79,9 +106,9 @@ If you find a bug, please report it via the [Issues section][issues_url] or even
 
 The primary source of debugging information for your Bluemix app is the logs. To see them, run the following command using the Cloud Foundry CLI:
 
-  ```
-  $ cf logs fintrade --recent
-  ```
+   ```
+   $ cf logs fintrade --recent
+   ```
 
 For more detailed information on troubleshooting your application, see the [Troubleshooting section](https://www.ng.bluemix.net/docs/troubleshoot/tr.html) in the Bluemix documentation.
 
@@ -108,6 +135,7 @@ This data is collected from the `package.json` file in the application and the `
 
 Deployment tracking can be disabled by removing `require("cf-deployment-tracker-client").track();` from the beginning of the `app.js` file.
 
+[bluemix_signup_url]: https://console.bluemix.net/?cm_mmc=GitHubReadMe
 [cloud_foundry_url]: https://github.com/cloudfoundry/cli
 [download_node_url]: https://nodejs.org/download/
 [travis_url]: https://travis-ci.org/

@@ -1,7 +1,8 @@
 ---
 applications:
 - name: fintrade
-  host: fintrade
+  random-route: true
   memory: 256M
   services:
   - fintrade-db
+  - fintrade-discovery
