@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="en" ng-app="fintradeApp">
 <head>
     <title>FinTrade</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/stylesheets/benefit.css">
     <link rel="stylesheet" href="/stylesheets/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" href="./images/favicon.ico">
 </head>
 
@@ -31,11 +32,46 @@
         </div>
     </header>
     <section class="healthLayout">
-        <div class="benefitkit">
+        <div class="benefitkit" ng-controller="fintradeController as dashboard">
             <div class="benefitdata">
                 <div id="header" class="header">FINANCE TRADE DASHBOARD</div>
-                <p>Under Development...</p>
-            </div>
+                <br>
+              <div class="w3-container">
+                <div class="w3-card-4" style="width:50%">
+                    <header class="w3-container w3-light-grey">
+                    <h3 id="username"></h3>
+                    </header>
+                    <div class="w3-container">
+                    <hr>
+                    <img src="images/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                    <p>CEO at Mighty Schools. Marketing and Advertising. Seeking a new job and new opportunities.</p><br>
+                    </div>
+                </div>
+                </div>
+                <br>
+                <!--Create Portfolio -->
+                <div class="w3-container">
+                 <div class="w3-card-4" style="width:50%;">
+                    <header class="w3-container w3-blue">
+                    <h1>Create Portfolio</h1>
+                    </header>
+                    <div class="w3-container">
+                     <form class="w3-container" id="submit"  ng-submit="dashboard.Portfolio()">
+                      <p>
+                        <label>Portfolio Name</label>
+                        <input class="w3-input" type="text" ng-model="dashboard.porfolioname">
+                      </p>
+                        <!--<button class="w3-btn w3-blue-grey">Submit</button></p>-->
+                        <p><input class="w3-btn w3-blue-grey" type="submit" value="Submit"></p>
+                        <br>
+                     </form>
+                    </div>
+                    <footer class="w3-container w3-blue">
+                    <h5>Footer</h5>
+                    </footer>
+                 </div>
+                </div>
+
         </div>
     </section>
 </div>
@@ -49,4 +85,27 @@
 </body>
 <script src="src/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="src/fintrade-angular.js"></script>
+     <!--JQUERY 
+        <script>
+	 $(document).ready(function() {
+	 	$("#submit").on("submit",function  (e) {
+	 		e.preventDefault();
+	 		console.log();
+	 		$.post("/",$(this).serialize(), function( data ) {
+			  console.log(data);
+			});
+	 	})
+     });
+     
+     $.getJSON("api/user_data", function(data) {
+    // Make sure the data contains the username as expected before using it
+    if (data.hasOwnProperty('username')) {
+        console.log('Username: ' + data.username);
+        $("#username").val(data.username);
+    }
+ });
+ 	</script>-->
 </html>

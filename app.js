@@ -2,6 +2,7 @@
 // set up ======================================================================
 // get all the tools we need
 var express = require('express');
+var http = require('https');
 var app = express();
 var cfenv = require('cfenv');
 var passport = require('passport');
@@ -210,6 +211,54 @@ app.get('/soon', function(req, res) {
 app.get('/about', function(req, res) {
     res.redirect("https://github.com/IBM-Bluemix/finance-trade");
 });
+
+app.post('/', function(req, res){
+    console.log("REQUEST:" + req.body.porfolioname);
+   var basic_auth= new Buffer("llesiduslyinswithereselo" + ':' + "346980bcb524745f491cf5ff2f3daf5437a50bc3").toString('base64');
+   var portfolio_name = req.body.porfolioname;
+    var options = {
+  "method": "POST",
+  "hostname": "investment-portfolio.mybluemix.net",
+  "port": null,
+  "path": "/api/v1/portfolios",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "authorization": "Basic "+basic_auth
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+  console.log("AUTH:" + basic_auth);
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ closed: false,
+  data: {'manager':'Vidyasagar Machupalli', 'worker':'John Doe' },
+  name: portfolio_name || "default" ,
+  timestamp: new Date().toLocaleString() }));
+req.end();
+});
+
+app.get('/api/user_data', function(req, res) {
+            if (req.user === undefined) {
+                // The user is not logged in
+                res.json({});
+            } else {
+                res.json({
+                    username: req.user
+                });
+            }
+        });
 
 // launch ======================================================================
 io.on('connection', function(socket) {
