@@ -85,8 +85,8 @@ req.end();
 
 app.get('/api/portfolios',function(req,response){
     var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
-    var islatest = req.query.latest;
-    var openOnly = req.query.openOnly; 
+    var islatest = req.query.latest || true;
+    var openOnly = req.query.openOnly || true; 
 
     var options = {
         "method": "GET",
