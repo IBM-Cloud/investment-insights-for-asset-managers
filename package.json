@@ -7,24 +7,24 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.5",
+    "angular": "^1.6.1",
+    "angular-auth0": "^2.0.0",
+    "auth0-js": "^8.8.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.17.1",
+    "bootstrap": "^3.3.7",
     "cf-deployment-tracker-client": "*",
     "cfenv": "^1.0.3",
-    "chrono-node":"*",
-    "cloudant":"~1.6.2",
-    "dotenv": "*",
+    "chrono-node": "*",
+    "cloudant": "~1.6.2",
+    "dotenv": "^4.0.0",
     "express": "4.15.2",
     "express-session": "1.15.2",
     "morgan": "1.8.1",
     "node-datetime": "1.0",
     "request": "2.81.0",
-    "watson-developer-cloud": "2.27.1",
-    "@uirouter/angularjs": "^1.0.5",
-    "angular": "^1.6.1",
-    "angular-auth0": "^2.0.0",
-    "auth0-js": "^8.8.0",
-    "bootstrap": "^3.3.7"
+    "watson-developer-cloud": "2.27.1"
   },
   "repository": {
     "type": "git",

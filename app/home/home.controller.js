@@ -23,22 +23,33 @@
         });
     }
 
-    // porfolio function
-    function portfolio()
+     // porfolio function
+    function createPortfolio()
     {
       $http({
-        method: 'POST',
-        url: '/',
-        data: {
-          porfolioname : vm.porfolioname,
-        }
-      }).then(function(response) {
-        //Success handling
-      }, function(err) {
-        //Error handling
-      });
-      vm.porfolioname = "";
+          method: 'POST',
+          url: '/api/dashboard', 
+          
+            })
+            .then(function(response) {
+                //Success handling
+            }, function(err) {
+                //Error handling
+            });
     }
+    function listPortfolios()
+    {
+      $http({
+             method: 'GET',
+             url: '/api/dashboard', 
+            })
+            .then(function(response) {
+                console.log("RESULT:"+ response);
+            }, function(err) {
+                //Error handling
+            });
+    }
+
 
   }
   homeController.$inject = ['$scope', 'authService'];

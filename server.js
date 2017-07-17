@@ -4,6 +4,8 @@ const path = require('path');
 const cfenv = require('cfenv');
 const http = require('https');
 
+//--Config------------------------------
+require('dotenv').config();
 
 //---Deployment Tracker---------------------------------------------------------
 require("cf-deployment-tracker-client").track();
@@ -34,26 +36,30 @@ var port = process.env.VCAP_APP_PORT || 3000;
 // Main routes
 app.use('/', express.static(__dirname +  '/'));
 
-app.get('/*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 
-// Adding Finance service
-app.post('/', function(req, res){
+
+// =====================================
+// INVESTMENT PORTFOLIO SECTION =====================
+// =====================================
+
+app.post('/api/dashboard', function(req, res){
     console.log("REQUEST:" + req.body.porfolioname);
-   var basic_auth= new Buffer("llesiduslyinswithereselo" + ':' + "346980bcb524745f491cf5ff2f3daf5437a50bc3").toString('base64');
+   var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
    var portfolio_name = req.body.porfolioname;
     var options = {
-  "method": "POST",
-  "hostname": "investment-portfolio.mybluemix.net",
-  "port": null,
-  "path": "/api/v1/portfolios",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json",
-    "authorization": "Basic "+basic_auth
-  }
+        "method": "POST",
+        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
+        "port": null,
+        "path": "/api/v1/portfolios",
+        "headers": {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "authorization": "Basic "+basic_auth
+        }
 };
 
 var req = http.request(options, function (res) {
@@ -76,6 +82,41 @@ req.write(JSON.stringify({ closed: false,
   timestamp: new Date().toLocaleString() }));
 req.end();
 });
+
+app.get('/api/dashboard',function(req,response){
+    var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
+    var options = {
+        "method": "GET",
+        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,
+        "port": null,
+        "path": "/api/v1/portfolios?latest=true&openOnly=true",
+        "headers": {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "authorization": "Basic "+basic_auth
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    //console.log("RESPONSE:" + body.toString());
+    response.setHeader('Content-Type','application/json');
+    response.type('application/json');
+    //response.write();
+    response.end(body.toString());
+  });
+ 
+});
+req.end();
+});
+
 
 // launch ======================================================================
 app.listen(port, "0.0.0.0", function() {
