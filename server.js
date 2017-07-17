@@ -46,7 +46,7 @@ app.get('/', function(req, res) {
 // INVESTMENT PORTFOLIO SECTION =====================
 // =====================================
 
-app.post('/api/dashboard', function(req, res){
+app.post('/api/portfolios', function(req, res){
     console.log("REQUEST:" + req.body.porfolioname);
    var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
    var portfolio_name = req.body.porfolioname;
@@ -83,13 +83,16 @@ req.write(JSON.stringify({ closed: false,
 req.end();
 });
 
-app.get('/api/dashboard',function(req,response){
+app.get('/api/portfolios',function(req,response){
     var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
+    var islatest = req.query.latest;
+    var openOnly = req.query.openOnly; 
+
     var options = {
         "method": "GET",
         "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,
         "port": null,
-        "path": "/api/v1/portfolios?latest=true&openOnly=true",
+        "path": "/api/v1/portfolios?latest="+ islatest +"&openOnly=" + openOnly,
         "headers": {
             "accept": "application/json",
             "content-type": "application/json",
