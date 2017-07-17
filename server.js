@@ -24,11 +24,12 @@ if (require('fs').existsSync('./vcap-local.json')) {
 var appEnvOpts = vcapLocal ? {
     vcap: vcapLocal
 } : {}
-var appEnv = cfenv.getAppEnv(appEnvOpts) || 3000;
+var appEnv = cfenv.getAppEnv(appEnvOpts);
 
 if (appEnv.isLocal) {
     require('dotenv').load();
 }
+var port = process.env.VCAP_APP_PORT || 3000;
 
 // Main routes
 app.use('/', express.static(__dirname +  '/'));
@@ -76,10 +77,8 @@ req.write(JSON.stringify({ closed: false,
 req.end();
 });
 
-
-
 // launch ======================================================================
-app.listen(appEnv.port, "0.0.0.0", function() {
+app.listen(port, "0.0.0.0", function() {
     // print a message when the server starts listening
-    console.log("server starting on " + appEnv.url);
+    console.log("server running on  http://localhost:" + port);
 });
