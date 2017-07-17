@@ -36,10 +36,6 @@ var port = process.env.VCAP_APP_PORT || 3000;
 // Main routes
 app.use('/', express.static(__dirname +  '/'));
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
-
 
 
 // =====================================
@@ -120,7 +116,9 @@ var req = http.request(options, function (res) {
 req.end();
 });
 
-
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
 // launch ======================================================================
 app.listen(port, "0.0.0.0", function() {
     // print a message when the server starts listening
