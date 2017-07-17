@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const cfenv = require('cfenv');
 const http = require('https');
+var bodyParser = require('body-parser');
 
 //--Config------------------------------
 require('dotenv').config();
@@ -35,21 +36,21 @@ var port = process.env.VCAP_APP_PORT || 3000;
 
 // Main routes
 app.use('/', express.static(__dirname +  '/'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-
-
 // =====================================
 // INVESTMENT PORTFOLIO SECTION =====================
 // =====================================
 
-app.post('/api/portfolios', function(req, res){
-    console.log("REQUEST:" + req.body.porfolioname);
+app.post('/api/portfolios', function(req, response){
+  console.log("REQUEST:" + req.body.porfolioname);
    var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
-   var portfolio_name = req.body.porfolioname;
+   var portfolio_name = req.body.porfolioname || "default";
     var options = {
         "method": "POST",
         "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
@@ -73,12 +74,13 @@ var req = http.request(options, function (res) {
   res.on("end", function () {
     var body = Buffer.concat(chunks);
     console.log(body.toString());
+    response.end(body.toString());
   });
 });
 
 req.write(JSON.stringify({ closed: false,
   data: {'manager':'Vidyasagar Machupalli', 'worker':'John Doe' },
-  name: portfolio_name || "default" ,
+  name: portfolio_name,
   timestamp: new Date().toLocaleString() }));
 req.end();
 });
@@ -119,6 +121,8 @@ var req = http.request(options, function (res) {
 });
 req.end();
 });
+
+//app.get("/api/holdings",function(re))
 
 
 // launch ======================================================================
