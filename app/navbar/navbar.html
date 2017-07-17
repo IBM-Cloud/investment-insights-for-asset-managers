@@ -1,0 +1,31 @@
+<header>
+    <div class="banner">
+        <div class="titleArea">
+          <div class="logo"><img class="logoImage" src="/assets/images/wash/cloud.svg"></div>
+            <div class="name"><a class="home" href=".">FINTRADE</a></div>
+        </div>
+        <div class="loginArea">
+
+          <button
+            class="btn btn-primary btn-margin"
+            ui-sref="home">
+              Home
+          </button>
+
+          <button
+            class="btn btn-primary btn-margin"
+            ng-if="!vm.auth.isAuthenticated()"
+            ng-click="vm.auth.login()">
+              Log In
+          </button>
+
+          <button
+            class="btn btn-primary btn-margin"
+            ng-if="vm.auth.isAuthenticated()"
+            ng-click="vm.auth.logout()">
+              Log Out
+          </button>
+        </div>
+        <a href="https://github.com/IBM-Bluemix/finance-trade"><img height="25px" src="/assets/images/github.svg"/></a>
+    </div>
+</header>

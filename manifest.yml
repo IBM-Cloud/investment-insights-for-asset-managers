@@ -4,5 +4,5 @@ applications:
   random-route: true
   memory: 256M
   services:
-  - fintrade-db
-  - fintrade-discovery
+    - fintrade-db
+    - fintrade-discovery

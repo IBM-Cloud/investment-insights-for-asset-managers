@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>FinTrade</title>
+    <base href="/">
+    <!-- Viewport settings-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Basic style -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/stylesheets/style.css">
+    <link rel="stylesheet" href="/assets/stylesheets/font-awesome/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="icon" href="/assets/images/favicon.ico">
+  </head>
+  <body>
+    <div ng-app="app">
+
+      <navbar></navbar>
+
+      <div class="container">
+        <ui-view></ui-view>
+      </div>
+
+
+      <div class="rowFooter">
+          <footer>
+              MADE WITH <a href="https://www.ibm.com/watson/developercloud/" target="_blank">IBM WATSON</a> & <a
+                  href="https://www.ibm.com/cloud-computing/solutions/banking/" target="_blank">IBM FINANCIAL SERVICES</a>
+          </footer>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="auth0-variables.js"></script>
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
+    <script type="text/javascript" src="node_modules/angular-auth0/dist/angular-auth0.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/app.run.js"></script>
+    <script type="text/javascript" src="app/navbar/navbar.directive.js"></script>
+    <script type="text/javascript" src="app/home/home.controller.js"></script>
+    <script type="text/javascript" src="app/callback/callback.controller.js"></script>
+    <script type="text/javascript" src="app/auth/auth.service.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </body>
+</html>

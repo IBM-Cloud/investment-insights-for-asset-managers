@@ -1,0 +1,103 @@
+<!-- =========== User is Authenticated ===========  -->
+<section class="isAuthenticated" ng-if="vm.auth.isAuthenticated()">
+    <section class="healthLayout">
+        <div class="benefitkit">
+            <div class="benefitdata">
+                <br>
+                <div class="w3-container">
+                    <div class="w3-card-4" style="width:50%">
+                        <header class="w3-container w3-light-grey">
+                            <h3 id="username"></h3>
+                        </header>
+                        <div class="w3-container">
+                            <hr>
+                            <img src="/assets/images/img_avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+                                 style="width:60px">
+                            <p>Tom is a software developer at Mighty Schools. Marketing and Advertising. Seeking a new job and new
+                                opportunities.</p><br>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--Create Portfolio -->
+                <div class="w3-container">
+                    <div class="w3-card-4" style="width:50%;">
+                        <header class="w3-container w3-blue">
+                            <h1>Create Portfolio</h1>
+                        </header>
+                        <div class="w3-container">
+                            <form class="w3-container" id="submit" ng-submit="dashboard.Portfolio()">
+                                <p>
+                                    <label>Portfolio Name</label>
+                                    <input class="w3-input" type="text" ng-model="dashboard.porfolioname">
+                                </p>
+                                <!--<button class="w3-btn w3-blue-grey">Submit</button></p>-->
+                                <p><input class="w3-btn w3-blue-grey" type="submit" value="Submit"></p>
+                                <br>
+                            </form>
+                        </div>
+                        <footer class="w3-container w3-blue">
+                            <h5>Footer</h5>
+                        </footer>
+                    </div>
+                </div>
+
+
+                <section class="dashbaordPanel">
+                    <div class="userProfile">
+                        <div class="portfolioArea">
+                            <div class="serviceHeader">
+                                <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
+                            </div>
+                            <aside class="insidePanel">
+                                <i>Under development</i>
+                            </aside>
+                        </div>
+                        <hr/>
+
+                        <div class="riskArea">
+                            <div class="serviceHeader">
+                                <i class="fa fa-user-md" aria-hidden="true"></i> Portfolio Optimizer
+                            </div>
+                            <aside class="insidePanel">
+                            </aside>
+                        </div>
+                    </div>
+
+                    <div class="newsArea">
+                        <div class="serviceHeader">
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Discovery News
+                        </div>
+                        <aside class="insidePanel">
+                            <i>Under development</i>
+                        </aside>
+                    </div>
+
+                    <div class="analyticsArea">
+                        <div class="marketScenarios">
+                            <div class="serviceHeader">
+                                <img src="./images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
+                                <span class="insideText">Predictive Market-Scenarios Service</span>
+                                <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
+                            </div>
+                        </div>
+
+                        <div class="instrumentAnalytics">
+                            <div class="serviceHeader">
+                                <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
+                                <img src="./images/instrument_Analytics.svg" alt="price and analytics under stress"
+                                     data-pin-nopin="true"> <span
+                                    class="insideText">Simulated Instrument Analytics</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+    </section>
+
+
+    <!-- =========== User is not Authenticated ===========  -->
+    <section ng-if="!vm.auth.isAuthenticated()" class="notAuthenticated">
+        You are not logged in! Please <a ng-click="vm.auth.login()">Log In</a> to continue.
+    </section>
