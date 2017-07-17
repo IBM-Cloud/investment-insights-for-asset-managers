@@ -36,7 +36,7 @@ var port = process.env.VCAP_APP_PORT || 3000;
 // Main routes
 app.use('/', express.static(__dirname +  '/'));
 
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
