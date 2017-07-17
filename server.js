@@ -39,9 +39,13 @@ app.use('/', express.static(__dirname +  '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+<<<<<<< HEAD
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
+=======
+
+>>>>>>> cc1a70f85e853d6c1cbad29bff65974cdcec5037
 
 // =====================================
 // INVESTMENT PORTFOLIO SECTION =====================
@@ -122,9 +126,15 @@ var req = http.request(options, function (res) {
 req.end();
 });
 
+<<<<<<< HEAD
 //app.get("/api/holdings",function(re))
 
 
+=======
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+>>>>>>> cc1a70f85e853d6c1cbad29bff65974cdcec5037
 // launch ======================================================================
 app.listen(port, "0.0.0.0", function() {
     // print a message when the server starts listening
