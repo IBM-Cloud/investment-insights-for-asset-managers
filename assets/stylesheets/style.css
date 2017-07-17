@@ -1199,7 +1199,6 @@ a.home:hover {
     color: #30303a;
     background-color: #cfd5da;
     border-color: #292929;
-    font-weight: bold;
 }
 
 .rowFooter {
@@ -1250,7 +1249,7 @@ footer {
 }
 
 .newsArea {
-    width: 35%;
+    width: 45%;
     float: left;
     height: 500px;
     background: #ececec;
@@ -1350,6 +1349,17 @@ footer a {
 footer a:hover {
     text-decoration: none;
     color: rgb(80, 185, 72);
+}
+section.notAuthenticated{
+    padding: 100px;
+    margin: 80px;
+    background: #e4e4e4;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+}
+section.notAuthenticated a{
+    color: #50b948;
 }
 
 @media only screen and (max-width: 800px) {

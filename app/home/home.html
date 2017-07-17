@@ -42,7 +42,6 @@
                     </div>
                 </div>
 
-
                 <section class="dashbaordPanel">
                     <div class="userProfile">
                         <div class="portfolioArea">
@@ -92,12 +91,15 @@
                         </div>
 
                     </div>
-
                 </section>
+            </div>
+        </div>
     </section>
+</section>
 
 
-    <!-- =========== User is not Authenticated ===========  -->
-    <section ng-if="!vm.auth.isAuthenticated()" class="notAuthenticated">
-        You are not logged in! Please <a ng-click="vm.auth.login()">Log In</a> to continue.
-    </section>
+<!-- =========== User is not Authenticated ===========  -->
+<section ng-if="!vm.auth.isAuthenticated()" class="notAuthenticated">
+    <br>
+    You are not logged in! Please <a ng-click="vm.auth.login()">Log In</a> to continue.
+</section>
