@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('app', ['auth0.auth0', 'ui.router'])
+    .module('app', ['auth0.auth0', 'ui.router', 'ngMaterial'])
     .config(config);
 
   config.$inject = [

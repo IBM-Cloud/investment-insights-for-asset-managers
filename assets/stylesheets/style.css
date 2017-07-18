@@ -37,11 +37,7 @@ button:disabled {
     opacity: 0.65;
 }
 
-.container {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}
+
 
 .outline {
     display: flex;
@@ -1357,9 +1353,14 @@ section.notAuthenticated{
     border-radius: 3px;
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
 }
 section.notAuthenticated a{
     color: #50b948;
+}
+.md-toolbar-tools{
+    background: -webkit-radial-gradient(#40404b, #111118) rgba(34,34,40,0.94);
+    background: radial-gradient(#40404b, #111118) rgba(34,34,40,0.94);
 }
 
 @media only screen and (max-width: 800px) {
