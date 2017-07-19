@@ -1,0 +1,20 @@
+{
+	"portfolios": [
+		{
+			"closed": "false",
+			"data": {},
+			"name": "technology",
+			"timestamp": "currentdate"
+		}, {
+			"closed": "false",
+			"data": {},
+			"name": "pharmaceutical",
+			"timestamp": "currentdate"
+		}, {
+			"closed": "false",
+			"data": {},
+			"name": "agriculture",
+			"timestamp": "currentdate"
+		}
+	]
+}
