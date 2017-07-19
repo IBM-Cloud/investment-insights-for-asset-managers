@@ -10,8 +10,15 @@
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
                             <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
-                                 <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open">
-                                    {{portfolio.timestamp}}
+                                 <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
+                                                               
+                                                <table>
+                                                <tr ng-repeat="x in holdings">
+                                                    <td>{{ x.companyName }}</td>
+                                                    <td>{{ x.quantity }}</td>
+                                                </tr>
+                                                </table>
+
                                     <uib-accordion-heading>
                                         {{portfolio.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                                         </uib-accordion-heading>

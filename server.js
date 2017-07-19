@@ -43,6 +43,10 @@ app.use(bodyParser.json());
 // =====================================
 // INVESTMENT PORTFOLIO SECTION =====================
 // =====================================
+
+//======================================
+// Portfolios API calls
+//======================================
 //To Create a single portfolio
 app.post('/api/portfolios', function(req, response){
     console.log("REQUEST:" + req.body.porfolioname);
@@ -155,7 +159,10 @@ app.get('/api/portfolios',function(req,response){
     req.end();
 });
 
-//Holdings POST & GET methods
+//======================================
+// Holdings API calls
+//======================================
+//To create single Holdings mapped to a Portfolio
 app.post("/api/holdings/:porfolioname",function (request,response){
     const basic_auth = toBase64();
     var portfolioname = request.params.porfolioname || "default";

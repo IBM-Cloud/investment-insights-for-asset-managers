@@ -1,9 +1,9 @@
 {
 	"holdings": [{
-		"asset": "AMGN 4.1 06/15/21",
+		"asset": "PFIZER 4.1 06/15/21",
 		"quantity": 10,
 		"instrumentId": "CX_US031162BG42_USD",
-		"companyName": "AMGEN INC"
+		"companyName": "PFIZER INC"
 	}, {
 		"asset": "AMGN 5.15 11/15/41",
 		"quantity": 30,
