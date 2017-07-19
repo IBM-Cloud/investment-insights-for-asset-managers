@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 // =====================================
 // INVESTMENT PORTFOLIO SECTION =====================
 // =====================================
-//Portfolios POST & GET Methods
+//To Create a single portfolio
 app.post('/api/portfolios', function(req, response){
     console.log("REQUEST:" + req.body.porfolioname);
     var basic_auth= toBase64();
@@ -79,6 +79,42 @@ app.post('/api/portfolios', function(req, response){
         data: {'manager':'Vidyasagar Machupalli', 'worker':'John Doe' },
         name: portfolio_name,
         timestamp: currentISOTimestamp()}));
+    req.end();
+});
+
+//To Create multiple portfolios
+app.post('/api/bulkportfolios', function(req, response){
+    var basic_auth= toBase64();
+    var requestBody = req.body;
+    console.log("REQUESTBODY" + JSON.stringify(requestBody));
+    var options = {
+        "method": "POST",
+        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
+        "port": null,
+        "path": "/api/v1/bulk_portfolios",
+        "headers": {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "authorization": "Basic "+basic_auth
+        }
+    };
+
+    var req = http.request(options, function (res) {
+        var chunks = [];
+        console.log("AUTH:" + basic_auth);
+
+        res.on("data", function (chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on("end", function () {
+            var body = Buffer.concat(chunks);
+            console.log(body.toString());
+            response.end(body.toString());
+        });
+    });
+    
+    req.write(JSON.stringify(requestBody));
     req.end();
 });
 

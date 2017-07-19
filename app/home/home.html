@@ -1,33 +1,22 @@
 <!-- =========== User is Authenticated ===========  -->
 <section class="isAuthenticated" ng-if="vm.auth.isAuthenticated()">
     <section class="healthLayout">
-        <div class="benefitkit">
+        <div class="benefitkit" ng-controller="HomeController as vm">
             <div class="benefitdata">
                 <section class="dashbaordPanel">
                     <div class="userProfile">
                         <div class="portfolioArea">
-                            <div class="serviceHeader">
+                            <div class="serviceHeader" ng-init="vm.initialSetup()">
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
-                            <div class="w3-card-4">
-                                <header class="w3-container w3-blue">
-                                    <h4>Create Portfolio</h4>
-                                </header>
-                                <div class="w3-container">
-                                    <form class="w3-container" id="submit" ng-submit="dashboard.Portfolio()">
-                                        <p>
-                                            <label>Portfolio Name</label>
-                                            <input class="w3-input" type="text" ng-model="dashboard.porfolioname">
-                                        </p>
-                                        <!--<button class="w3-btn w3-blue-grey">Submit</button></p>-->
-                                        <p><input class="w3-btn w3-blue-grey" type="submit" value="Submit"></p>
-                                        <br>
-                                    </form>
-                                </div>
-                                <footer class="w3-container w3-blue">
-                                    <h5>Footer</h5>
-                                </footer>
-                            </div>
+                            <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
+                                 <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open">
+                                    {{portfolio.timestamp}}
+                                    <uib-accordion-heading>
+                                        {{portfolio.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                        </uib-accordion-heading>
+                                    </div>
+                            </uib-accordion>
                         </div>
                         <hr/>
 

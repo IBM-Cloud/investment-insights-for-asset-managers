@@ -11,6 +11,7 @@
     "angular": "^1.6.1",
     "angular-auth0": "^2.0.0",
     "angular-material": "^1.1.4",
+    "angular-ui-bootstrap": "^2.5.0",
     "auth0-js": "^8.8.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
