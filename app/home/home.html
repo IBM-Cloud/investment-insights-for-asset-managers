@@ -6,28 +6,37 @@
                 <section class="dashbaordPanel">
                     <div class="userProfile">
                         <div class="portfolioArea">
-                            <div class="serviceHeader" ng-init="vm.initialSetup()">
+                            <div class="serviceHeader">
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
-                            <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
-                                <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
 
-                                    <table>
-                                        <tr ng-repeat="x in holdings">
-                                            <td>{{ x.companyName }}</td>
-                                            <td>{{ x.quantity }}</td>
-                                        </tr>
-                                    </table>
+                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Select a portfolio</h2>
+                                <div class="widget--header-spacer"></div>
+                                <button class="base--button widget--header-button" ng-click="portfolioButton()">View API</button>
+                            </div>
 
-                                    <uib-accordion-heading>
-                                        {{portfolio.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                    </uib-accordion-heading>
-                                </div>
-                            </uib-accordion>
+                            <div ng-init="vm.initialSetup()">
+                                <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
+                                    <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
+                                        <table>
+                                            <tr ng-repeat="holding in holdings">
+                                                <td>{{ holding.companyName }}</td>
+                                                <td>{{ holding.quantity }}</td>
+                                                <td><button ng-click="vm.toDiscovery(holding.companyName)">Discover</button></td>
+                                            </tr>
+                                        </table>
+
+                                        <uib-accordion-heading>
+                                            {{portfolio.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                        </uib-accordion-heading>
+                                    </div>
+                                </uib-accordion>
+                            </div>
+
                         </div>
                         <hr/>
 
-                        <div class="riskArea">
+                        <div class="riskArea" ng-init="vm.discoveryNews()">
                             <div class="serviceHeader">
                                 <i class="fa fa-user-md" aria-hidden="true"></i> Portfolio Optimizer
                             </div>
@@ -40,15 +49,52 @@
                         <div class="serviceHeader">
                             <i class="fa fa-newspaper-o" aria-hidden="true"></i> Discovery News
                         </div>
-                        <aside class="insidePanel">
-                            <i>Under development</i>
-                        </aside>
+
+                        <div class="top-stories widget" >
+                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Top Stories</h2>
+                                <div class="widget--header-spacer"></div>
+                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()">View API</button>
+                            </div>
+                            <p class="base--p top-stories--description">Find the most recent and relevant news articles.</p>
+                        </div>
+                        <div class="top-stories widget" >
+                            <div class="top-stories--list" ng-repeat="news in newslist">
+                                <div class="story" ng-repeat="items in news">
+                                    <div class="story--date">{{items.yyyymmdd}}</div>
+                                    <a class="story--title base--a results--a"
+                                       href="{{items.url}}"
+                                       target="_blank"
+                                       title="{{items.title}}"
+                                       rel="noopener noreferrer">{{items.title}}</a>
+                                    <div class="story--source-and-score">
+                                        <span class="base--p story--source">{{items.host}}</span>
+                                        <span class="story--source-score-divider"> | </span>
+                                        <span class="story--score base--p">
+                                            <span>Score:</span> {{items.score}}
+                                        </span>
+                                        <span class="story--source-score-divider"> | </span>
+                                        <span class="story--score base--p">
+                                            <span>Sentiment:</span>
+                                            <!--Checking the value where if negative or not-->
+                                            <span ng-if="items.docSentiment.type == 'negative'" class="red">
+                                                <strong>{{items.docSentiment.type}}</strong>
+                                            </span>
+
+                                            <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
+                                                <strong>{{items.docSentiment.type}}</strong>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="analyticsArea">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
-                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
+                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios"
+                                     data-pin-nopin="true">
                                 <span class="insideText">Predictive Market-Scenarios Service</span>
                                 <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
                             </div>
@@ -57,7 +103,8 @@
                         <div class="instrumentAnalytics">
                             <div class="serviceHeader">
                                 <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
-                                <img src="/assets/images/instrument_Analytics.svg" alt="price and analytics under stress"
+                                <img src="/assets/images/instrument_Analytics.svg"
+                                     alt="price and analytics under stress"
                                      data-pin-nopin="true"> <span
                                     class="insideText">Simulated Instrument Analytics</span>
                             </div>
@@ -76,3 +123,4 @@
     <br>
     You are not logged in! Please <a ng-click="vm.auth.login()">Log In</a> to continue.
 </section>
+

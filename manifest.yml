@@ -6,3 +6,4 @@ applications:
   services:
     - fintrade-db
     - fintrade-discovery
+    - investment-portfolio-fintrade

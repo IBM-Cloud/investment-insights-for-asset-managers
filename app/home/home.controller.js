@@ -1,11 +1,7 @@
 (function () {
-
-    'use strict';
-
     angular
         .module('app')
         .controller('HomeController', homeController);
-
 
     function homeController($scope, authService, $http, $location) {
         var vm = this;
@@ -13,8 +9,12 @@
         vm.login = login;
         $scope.oneAtATime = true;
         var mapping = [
-            { name: 'technology',file: '/data/technology_holdings.json'}];
+            {name: 'technology', file: '/data/technology_holdings.json'},
+            { name: 'pharmaceutical',file: '/data/pharma_holdings.json'}
+            ];
+
         var holdingsArray = [];
+        var count = 0;
         // login function making a call to signin that comes from auth service and send the user profile to the profile that user is logged in with. If all good the storing user profile on local storage.
         function login() {
             //profile will hold user profile info and the token will get us the jwt
@@ -22,120 +22,128 @@
                 store.set('profile', profile);
                 store.set('id_token', token);
                 $location.path('/test'); // user is sent to home page
-            }, function (error){
+            }, function (error) {
                 console.log(error);
             });
         }
 
-// porfolio function
-        vm.initialSetup = function ()
-        {
-            //Reading Porfolios JSON
+        // portfolio function
+        vm.initialSetup = function () {
+            //Reading Portfolios JSON
             $http({
                 method: 'GET',
                 url: '/data/portfolios.json'
-            }).then(function(result){
+            }).then(function (result) {
                 $scope.portfolios = result.data.portfolios;
 
-                if(result !== null && (result.data !== null || result.data !== ''))
-                {
+                if (result !== null && (result.data !== null || result.data !== '')) {
                     //console.log(replaceAll(JSON.stringify(result.data),"currentdate",currentISOTimestamp()));
                     //Creating Porfolios
                     $http({
                         method: 'POST',
                         url: '/api/bulkportfolios',
-                        data: replaceAll(JSON.stringify(result.data),"currentdate",currentISOTimestamp())
+                        data: replaceAll(JSON.stringify(result.data), "currentdate", currentISOTimestamp())
                     })
-                        .then(function(response) {
+                        .then(function (response) {
                             //Reading Holdings JSON one at a time.
-                            angular.forEach(mapping,function(value,key){
+                            angular.forEach(mapping, function (value, key) {
                                     $http({
                                         method: 'GET',
                                         url: value.file
-                                    })
-                                        .then(function(holdings){
-                                            console.log("HOLDINGS JSON:" + holdings.data);
+                                    }).then(function (holdings) {
+                                            //console.log("HOLDINGS JSON:" + holdings.data);
                                             //Creating Holdings and mapping them to respective portfolio
                                             $http({
                                                 method: 'POST',
-                                                url: '/api/holdings/'+ value.name,
+                                                url: '/api/holdings/' + value.name,
                                                 data: holdings.data
-                                            })
-                                                .then(function(holdingsresult){
-                                                    console.log("HOLDINGS CREATION result:" + holdingsresult.data);
-                                                },function(err) {
-                                                    console.log("CREATE HOLDINGS FAILED");
+                                            }).then(function (holdingsresult) {
+                                                    //console.log("HOLDINGS CREATION result:" + holdingsresult.data);
+                                                }, function (err) {
+                                                    console.log("CREATE HOLDINGS FAILED", err);
                                                 });
                                             holdingsArray.push(holdings.data.holdings);
-                                        },function(err) {
-                                        });
-
+                                        }, function (err) {
+                                        console.log(err);
+                                    });
                                 }
                             );
                             $scope.holdings = holdingsArray;
-                            console.log("HOLDINGS ARRAY:" + holdingsArray);
-                        }, function(err) {
-                            console.log("CREATE PORTFOLIOS FAILED");
+                            //console.log("HOLDINGS ARRAY:" + holdingsArray);
+                        }, function (err) {
+                            console.log("CREATE PORTFOLIOS FAILED", err);
                         });
                 }
-
                 //return replaceAll(JSON.stringify(result.data),"currentdate",currentISOTimestamp());
-            },function(err){
-
+            }, function (err) {
+                console.log(err);
             });
+        };
 
-        }
-        function listPortfolios()
-        {
-            $http({
-                method: 'GET',
-                url: '/api/portfolios',
-            })
-                .then(function(response) {
-                    console.log("RESULT:"+ response);
-                }, function(err) {
-                    //Error handling
-                });
-        }
-
-        vm.getHoldings = function (portfolio)
-        {
+        // Holdings Function
+        vm.getHoldings = function (portfolio) {
             $scope.holdings = "";
-            switch(portfolio.name){
+            switch (portfolio.name) {
                 case 'technology':
                     //alert("technology");
-                    $http({
-                        method: 'GET',
-                        url: '/data/technology_holdings.json'
-                    })
-                        .then(function(holdings){
-                            $scope.holdings = holdings.data.holdings;
-                        });
-                    break;
+                    returnHoldings("technology");
 
-                case 'pharmaceutical':
-                {
-                    //alert("pharma");
-                    $http({
-                        method: 'GET',
-                        url: '/data/pharma_holdings.json'
-                    })
-                        .then(function(holdings){
-                            $scope.holdings = holdings.data.holdings;
-                        });
+                    break;
+                case 'pharmaceutical': {
+                    //alert("pharmaceutical");
+                    returnHoldings("pharmaceutical");
+
                     break;
                 }
             }
+        };
+
+        function returnHoldings(portfolioname){
+            $http({
+                method: 'GET',
+                url: '/api/holdings/'+ portfolioname
+            }).then(function(holdings){
+                $scope.holdings = holdings.data.holdings[0].holdings;
+            });
+        }
+        function currentISOTimestamp() {
+            return new Date().toISOString();
         }
 
+        function replaceAll(str, find, replace) {
+            //console.log("REPLACE CALLED");
+            return str.replace(new RegExp(find, 'g'), replace);
+        }
+
+
+        // Alert when company selected
+        vm.toDiscovery = function(companyname){
+            console.log(companyname)
+        };
+
+        // Discovery News function
+        vm.discoveryNews = function () {
+            $http({
+                method: 'GET',
+                url: '/api/news'
+            }).then(function (result) {
+                $scope.newslist = result.data;
+                console.log(result);
+            }, function (err) {
+                console.log(err);
+            });
+        };
+
+        $scope.discoveryNewsButton = function() {
+            window.location = "./api/news";
+        };
+        $scope.portfolioButton = function() {
+            window.location = "./api/portfolios";
+        };
+
     }
 
-    function currentISOTimestamp(){
-        return new Date().toISOString();
-    }
-    function replaceAll(str, find, replace) {
-        return str.replace(new RegExp(find, 'g'), replace);
-    }
+
+
     homeController.$inject = ['$scope', 'authService', '$http'];
-
 })();
