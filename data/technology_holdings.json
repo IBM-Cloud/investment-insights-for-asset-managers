@@ -1,38 +1,20 @@
 {
 	"holdings": [{
-		"asset": "AMGN 4.1 06/15/21",
-		"quantity": 10,
-		"instrumentId": "CX_US031162BG42_USD",
-		"companyName": "AMGEN INC"
-	}, {
-		"asset": "AMGN 5.15 11/15/41",
-		"quantity": 30,
-		"instrumentId": "CX_US031162BK53_USD",
-		"companyName": "AMGEN INC"
-	}, {
-		"asset": "EVHC 5.625 07/15/22",
-		"quantity": 50,
-		"instrumentId": "CX_US03232PAD06_USD",
-		"companyName": "ENVISION HEALTHCARE CORP"
-	}, {
-		"asset": "APC 4.85 03/15/21",
-		"quantity": 40,
-		"instrumentId": "CX_US032511BM81_USD",
-		"companyName": "ANADARKO PETROLEUM CORP"
-	}, {
-		"asset": "ADI 3.5 12/05/26",
-		"quantity": 30,
-		"instrumentId": "CX_US032654AN54_USD",
-		"companyName": "ANALOG DEVICES INC"
-	}, {
-		"asset": "ABIBB 2.65 02/01/21",
-		"quantity": 20,
-		"instrumentId": "CX_US035242AJ52_USD",
-		"companyName": "ANHEUSER-BUSCH INBEV FIN"
-	}, {
-		"asset": "ABIBB 3.3 02/01/23",
-		"quantity": 10,
-		"instrumentId": "CX_US035242AL09_USD",
-		"companyName": "ANHEUSER-BUSCH INBEV FIN"
-	}]
+			"asset": "AMGN 4.1 06/15/21",
+			"quantity": 10,
+			"instrumentId": "CX_US031162BG42_USD",
+			"companyName": "AMGEN INC"
+		},
+	    {
+			"asset": "ADI 3.5 12/05/26",
+			"quantity": 30,
+			"instrumentId": "CX_US032654AN54_USD",
+			"companyName": "ANALOG DEVICES INC"
+		}, {
+			"asset": "ABIBB 2.65 02/01/21",
+			"quantity": 20,
+			"instrumentId": "CX_US035242AJ52_USD",
+			"companyName": "ANHEUSER-BUSCH INBEV FIN"
+		}
+	]
 }

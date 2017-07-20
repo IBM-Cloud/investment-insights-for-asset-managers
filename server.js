@@ -4,6 +4,7 @@ const path = require('path');
 const cfenv = require('cfenv');
 const http = require('https');
 const bodyParser = require('body-parser');
+const url = require('url');
 
 //--Config------------------------------
 require('dotenv').config();
@@ -22,7 +23,6 @@ if (require('fs').existsSync('./vcap-local.json')) {
         console.error(e);
     }
 }
-
 // get the app environment from Cloud Foundry, defaulting to local VCAP
 var appEnvOpts = vcapLocal ? {
     vcap: vcapLocal
@@ -34,11 +34,31 @@ if (appEnv.isLocal) {
 }
 var port = process.env.VCAP_APP_PORT || 3000;
 
+var INVESTMENT_PORFOLIO_BASE_URL,INVESTMENT_PORFOLIO_USERNAME,INVESTMENT_PORFOLIO_PASSWORD;
+
+if (process.env.VCAP_SERVICES)
+{
+   var env = JSON.parse(process.env.VCAP_SERVICES);
+  
+   // console.log(env);
+    // Find the service
+    if (env['fss-portfolio-service']) {
+
+         //console.log("URL " + getHostName(env['fss-portfolio-service'][0].credentials.url));
+        // console.log("userid "+ env['fss-portfolio-service'][0].credentials.writer.userid);
+         INVESTMENT_PORFOLIO_BASE_URL = getHostName(env['fss-portfolio-service'][0].credentials.url);
+         INVESTMENT_PORFOLIO_USERNAME = env['fss-portfolio-service'][0].credentials.writer.userid;
+         INVESTMENT_PORFOLIO_PASSWORD = env['fss-portfolio-service'][0].credentials.writer.password;
+    }
+    else {
+        console.log('You must bind the Investment Portfolio service to this application');
+    }
+}
+
 // Main routes
 app.use('/', express.static(__dirname +  '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 
 // =====================================
 // INVESTMENT PORTFOLIO SECTION =====================
@@ -49,12 +69,12 @@ app.use(bodyParser.json());
 //======================================
 //To Create a single portfolio
 app.post('/api/portfolios', function(req, response){
-    console.log("REQUEST:" + req.body.porfolioname);
+    //console.log("REQUEST:" + req.body.porfolioname);
     var basic_auth= toBase64();
     var portfolio_name = req.body.porfolioname || "default";
     var options = {
         "method": "POST",
-        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
+        "hostname": getHostName(INVESTMENT_PORFOLIO_BASE_URL) || process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
         "port": null,
         "path": "/api/v1/portfolios",
         "headers": {
@@ -66,7 +86,7 @@ app.post('/api/portfolios', function(req, response){
 
     var req = http.request(options, function (res) {
         var chunks = [];
-        console.log("AUTH:" + basic_auth);
+        //console.log("AUTH:" + basic_auth);
 
         res.on("data", function (chunk) {
             chunks.push(chunk);
@@ -88,12 +108,12 @@ app.post('/api/portfolios', function(req, response){
 
 //To Create multiple portfolios
 app.post('/api/bulkportfolios', function(req, response){
-    var basic_auth= toBase64();
+    var basic_auth = toBase64();
     var requestBody = req.body;
-    console.log("REQUESTBODY" + JSON.stringify(requestBody));
+    //console.log("REQUESTBODY" + JSON.stringify(requestBody));
     var options = {
         "method": "POST",
-        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
+        "hostname": INVESTMENT_PORFOLIO_BASE_URL || process.env.INVESTMENT_PORFOLIO_BASE_URL,
         "port": null,
         "path": "/api/v1/bulk_portfolios",
         "headers": {
@@ -105,7 +125,7 @@ app.post('/api/bulkportfolios', function(req, response){
 
     var req = http.request(options, function (res) {
         var chunks = [];
-        console.log("AUTH:" + basic_auth);
+        //console.log("AUTH:" + basic_auth);
 
         res.on("data", function (chunk) {
             chunks.push(chunk);
@@ -113,7 +133,7 @@ app.post('/api/bulkportfolios', function(req, response){
 
         res.on("end", function () {
             var body = Buffer.concat(chunks);
-            console.log(body.toString());
+            //console.log(body.toString());
             response.end(body.toString());
         });
     });
@@ -123,13 +143,13 @@ app.post('/api/bulkportfolios', function(req, response){
 });
 
 app.get('/api/portfolios',function(req,response){
-    const basic_auth= toBase64();
+    const basic_auth = toBase64();
     var islatest = req.query.latest || true;
     var openOnly = req.query.openOnly || true;
 
     var options = {
         "method": "GET",
-        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,
+        "hostname": INVESTMENT_PORFOLIO_BASE_URL || process.env.INVESTMENT_PORFOLIO_BASE_URL,
         "port": null,
         "path": "/api/v1/portfolios?latest="+ islatest +"&openOnly=" + openOnly,
         "headers": {
@@ -169,7 +189,7 @@ app.post("/api/holdings/:porfolioname",function (request,response){
     var holdings = request.body.holdings;
     var options = {
         "method": "POST",
-        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,
+        "hostname": INVESTMENT_PORFOLIO_BASE_URL || process.env.INVESTMENT_PORFOLIO_BASE_URL ,
         "port": null,
         "path": "/api/v1/portfolios/"+ portfolioname + "/holdings",
         "headers": {
@@ -188,7 +208,7 @@ app.post("/api/holdings/:porfolioname",function (request,response){
 
         res.on("end", function () {
             var body = Buffer.concat(chunks);
-            console.log(body.toString());
+           // console.log(body.toString());
             response.send(JSON.parse(body.toString()));
         });
     });
@@ -204,7 +224,7 @@ app.get("/api/holdings/:portfolioname",function(request,response){
     var latest = request.query.latest || "true";
     var options = {
         "method": "GET",
-        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,
+        "hostname": INVESTMENT_PORFOLIO_BASE_URL || process.env.INVESTMENT_PORFOLIO_BASE_URL,
         "port": null,
         "path": "/api/v1/portfolios/"+ portfolioname + "/holdings?atDate="+ currentISOTimestamp() +"&latest=" + latest,
         "headers": {
@@ -215,7 +235,7 @@ app.get("/api/holdings/:portfolioname",function(request,response){
 
     var req = http.request(options, function (res) {
         var chunks = [];
-        console.log("Options:"+options);
+        //console.log("Options:"+options);
 
         res.on("data", function (chunk) {
             chunks.push(chunk);
@@ -223,10 +243,10 @@ app.get("/api/holdings/:portfolioname",function(request,response){
 
         res.on("end", function () {
             var body = Buffer.concat(chunks);
-            console.log(body.toString());
+            //console.log(body.toString());
             response.setHeader('Content-Type','application/json');
             response.type('application/json');
-            response.end(body.toString());
+            response.send(body.toString());
         });
     });
 
@@ -243,13 +263,25 @@ app.get('/*', function(req, res) {
 //To generate basic authorization
 function toBase64()
 {
-    var basic_auth= new Buffer(process.env.INVESTMENT_PORFOLIO_USERNAME + ':' + process.env.INVESTMENT_PORFOLIO_PASSWORD).toString('base64');
+    //console.log("ENV:"+ INVESTMENT_PORFOLIO_USERNAME);
+    var basic_auth= new Buffer((INVESTMENT_PORFOLIO_USERNAME || process.env.INVESTMENT_PORFOLIO_USERNAME) + ':' + (INVESTMENT_PORFOLIO_PASSWORD || process.env.INVESTMENT_PORFOLIO_PASSWORD)).toString('base64');
     return basic_auth;
 }
 
-function currentISOTimestamp()
-{
+function currentISOTimestamp(){
     return new Date().toISOString();
+}
+
+function getHostName(url)
+{
+  var match = url.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i);
+    if (match != null && match.length > 2 && typeof match[2] === 'string' && match[2].length > 0) {
+    //console.log("HOSTNAME:" + match[2]);
+    return match[2];
+    }
+    else {
+        return null;
+    }
 }
 // launch ======================================================================
 app.listen(port, "0.0.0.0", function() {

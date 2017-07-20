@@ -6,16 +6,17 @@
                 <section class="dashbaordPanel">
                     <div class="userProfile">
                         <div class="portfolioArea">
-                            <div class="serviceHeader" ng-init="vm.initialSetup()">
+                            <div class="serviceHeader">
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
+                            <div ng-init="vm.initialSetup()">
                             <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
-                                 <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
-                                                               
+                                 <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">              
                                                 <table>
-                                                <tr ng-repeat="x in holdings">
-                                                    <td>{{ x.companyName }}</td>
-                                                    <td>{{ x.quantity }}</td>
+                                                <tr ng-repeat="holding in holdings">
+                                                    <td>{{ holding.companyName }}</td>
+                                                    <td>{{ holding.quantity }}</td>
+                                                    <td><button ng-click="vm.toDiscovery(holding.companyName)">Discover</button></td>
                                                 </tr>
                                                 </table>
 
@@ -24,6 +25,7 @@
                                         </uib-accordion-heading>
                                     </div>
                             </uib-accordion>
+                         </div>
                         </div>
                         <hr/>
 

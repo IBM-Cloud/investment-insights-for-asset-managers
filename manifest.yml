@@ -5,4 +5,5 @@ applications:
   memory: 256M
   services:
     - fintrade-db
-    - fintrade-discovery
+    - fintrade-discovery-test
+    - Investment-Portfolio-fintrade
