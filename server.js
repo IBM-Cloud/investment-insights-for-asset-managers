@@ -71,7 +71,7 @@ app.post('/api/portfolios', function(req, response){
     var portfolio_name = req.body.porfolioname || "default";
     var options = {
         "method": "POST",
-        "hostname": process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
+        "hostname": getHostName(INVESTMENT_PORFOLIO_BASE_URL) || process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
         "port": null,
         "path": "/api/v1/portfolios",
         "headers": {
@@ -134,7 +134,6 @@ app.post('/api/bulkportfolios', function(req, response){
             response.end(body.toString());
         });
     });
-
     req.write(JSON.stringify(requestBody));
     req.end();
 });
@@ -294,8 +293,7 @@ function toBase64()
     return basic_auth;
 }
 
-function currentISOTimestamp()
-{
+function currentISOTimestamp(){
     return new Date().toISOString();
 }
 

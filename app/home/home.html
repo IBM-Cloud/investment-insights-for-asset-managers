@@ -18,11 +18,18 @@
                             <div ng-init="vm.initialSetup()">
                                 <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
                                     <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
-                                        <table>
+                                        <table id="portfolio">
+                                            <tr>
+                                                <th>Company</th>
+                                                <th>Asset</th>
+                                                <th>Quantity</th>
+                                                <th>Discover</th>
+                                            </tr>
                                             <tr ng-repeat="holding in holdings">
                                                 <td>{{ holding.companyName }}</td>
+                                                <td>{{ holding.asset }}
                                                 <td>{{ holding.quantity }}</td>
-                                                <td><button ng-click="vm.toDiscovery(holding.companyName)">Discover</button></td>
+                                                <td><button ng-click="vm.toDiscovery(holding.companyName)">Select</button></td>
                                             </tr>
                                         </table>
 
