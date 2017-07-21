@@ -37,16 +37,20 @@ button:disabled {
     opacity: 0.65;
 }
 
-table, th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
+table {
+   font-family: arial, sans-serif;
+   font-size: 12px;
+    border-collapse: collapse;
+    width: 100%;
 }
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 2px;
 }
-table tr:nth-child(even) {
-  background-color: #ffffff;
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
 
 .outline {
