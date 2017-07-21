@@ -40,7 +40,6 @@ button:disabled {
 /*******TABLE Portfolio*********/
 table {
    font-family: arial, sans-serif;
-   font-size: 12px;
     border-collapse: collapse;
     width: 100%;
 }
@@ -55,7 +54,7 @@ tr:nth-child(even) {
 }
 
 #portfolio {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
