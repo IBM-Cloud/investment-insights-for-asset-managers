@@ -14,8 +14,6 @@
                                 <div class="widget--header-spacer"></div>
                                 <button class="base--button widget--header-button" ng-click="portfolioButton()">View API</button>
                             </div>
-                            <!--TODO-->
-                            <!--<div class="loadingspinner" ng-show="loading"><img src="/assets/images/spinner.gif">LOADING...</div>-->
                             <div ng-init="vm.initialSetup()">
                                 <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
                                     <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
@@ -35,12 +33,13 @@
                                         </table>
 
                                         <uib-accordion-heading>
-                                            {{portfolio.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                            {{portfolio.name | titleCase }} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                                         </uib-accordion-heading>
                                     </div>
                                 </uib-accordion>
                             </div>
-
+                             <div class="loadingspinner" ng-show="loading"> </div>
+                                                <!--<img src="/assets/images/spinner.gif">-->
                         </div>
                         <hr/>
 

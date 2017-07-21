@@ -141,7 +141,7 @@ app.post('/api/bulkportfolios', function(req, response){
 app.get('/api/portfolios',function(req,response){
     const basic_auth = toBase64();
     var islatest = req.query.latest || true;
-    var openOnly = req.query.openOnly || true;
+    var openOnly = req.query.openOnly || false;
 
     var options = {
         "method": "GET",

@@ -1,7 +1,13 @@
 (function () {
     angular
         .module('app')
-        .controller('HomeController', homeController);
+        .controller('HomeController', homeController)
+        .filter('titleCase', function() {
+         return function(input) {
+      input = input || '';
+      return input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    };
+    });
 
     function homeController($scope, authService, $http, $location) {
         var vm = this;
@@ -84,7 +90,7 @@
         // Holdings Function
         vm.getHoldings = function (portfolio) {
             $scope.holdings = "";
-            //$scope.loading = true;
+            $scope.loading = true;
             switch (portfolio.name) {
                 case 'technology':
                     //alert("technology");
@@ -108,7 +114,7 @@
                 url: '/api/holdings/'+ portfolioname
             }).then(function(holdings){
                 $scope.holdings = holdings.data.holdings[0].holdings;
-                //$scope.loading = false;
+                $scope.loading = false;
             });
         }
         function currentISOTimestamp() {
