@@ -1,7 +1,7 @@
 <!-- =========== User is Authenticated ===========  -->
 <section class="isAuthenticated" ng-if="vm.auth.isAuthenticated()">
     <section class="healthLayout">
-        <div class="benefitkit" ng-controller="HomeController as vm">
+        <div class="benefitkit">
             <div class="benefitdata">
                 <section class="dashbaordPanel">
                     <div class="userProfile">
@@ -40,11 +40,11 @@
                                 </uib-accordion>
                             </div>
                              <div class="loadingspinner" ng-show="loading"> </div>
-                                                <!--<img src="/assets/images/spinner.gif">-->
+                              <!--<img src="/assets/images/spinner.gif">-->
                         </div>
                         <hr/>
 
-                        <div class="riskArea" ng-init="vm.discoveryNews()">
+                        <div class="riskArea" ng-init="vm.toDiscovery()">
                             <div class="serviceHeader">
                                 <i class="fa fa-user-md" aria-hidden="true"></i> Portfolio Optimizer
                             </div>
@@ -66,7 +66,7 @@
                             <p class="base--p top-stories--description">Find the most recent and relevant news articles.</p>
                         </div>
                         <div class="top-stories widget" >
-                            <div class="top-stories--list" ng-repeat="news in newslist">
+                            <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 0">
                                 <div class="story" ng-repeat="items in news">
                                     <div class="story--date">{{items.yyyymmdd}}</div>
                                     <a class="story--title base--a results--a"

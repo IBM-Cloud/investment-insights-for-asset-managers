@@ -1399,11 +1399,11 @@ footer {
 }
 
 .portfolioArea {
-    height: 50%;
+
 }
 
 .riskArea {
-    height: 50%;
+
 }
 
 .newsArea {
@@ -1672,6 +1672,12 @@ table tr:nth-child(even) {
 }
 .normal{
     color: #152935;
+}
+top-stories--list ng-scope{
+
+}
+top-stories--list ng-scope:first-child{
+    display: inline;
 }
 /****************************END - Discovery News Widget*/
 

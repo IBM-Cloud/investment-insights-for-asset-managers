@@ -32,7 +32,6 @@ if (process.env.VCAP_SERVICES)
         DISCOVERY_USERNAME = env['discovery'][0].credentials.username;
         DISCOVERY_PASSWORD = env['discovery'][0].credentials.password;
     }
-
     else {
         console.log('You must bind the Investment Portfolio service to this application');
     }
@@ -67,11 +66,11 @@ var discovery = new DiscoveryV1({
     version_date: '2017-07-19'
 });
 
-console.log('Before environment_id ');
-discovery.getEnvironment(('{environment_id}'), function(error, data) {
-    console.log(JSON.stringify(data, null, 2));
-});
-console.log('After environment_id ');
+// console.log('Before environment_id ');
+// discovery.getEnvironment(('{environment_id}'), function(error, data) {
+//     console.log(JSON.stringify(data, null, 2));
+// });
+// console.log('After environment_id ');
 
 //--Setting up the middle ware--------------------
 app.use('/', express.static(__dirname +  '/'));
@@ -288,11 +287,47 @@ app.get('/api/news',function(req,res){
         if (err) {
             console.error(err);
         } else {
-            //console.log(JSON.stringify(response, null, 2));
+            // console.log(JSON.stringify(response, null, 2));
             res.json(response);
         }
     });
 });
+
+
+app.post("/api/news/:company", function (req, res) {
+    //console.log(req.body.company);
+
+    discovery.query({
+        environment_id: '7194d449-dc7e-4f82-939c-3c9205a0a701',
+        collection_id: '4f444003-d770-4c27-8e17-8f6b43d9952a',
+        // query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
+        query: req.body.company,
+        count: 6,
+        return: "title,enrichedTitle.text,url,host,blekko.chrondate,docSentiment,yyyymmdd",
+        aggregations: [
+            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
+            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
+            "term(enrichedTitle.concepts.text)",
+            "term(blekko.basedomain).term(docSentiment.type:positive)",
+            "term(docSentiment.type)",
+            "min(docSentiment.score)",
+            "max(docSentiment.score)",
+            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
+        ],
+        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
+        sort: "-_score"
+    }, function(err, response) {
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(response.results);
+            res.json(response.results);
+        }
+    });
+
+    //res.send(req.body.company);
+});
+
 
 
 //--All other routes to be sent to home page--------------------

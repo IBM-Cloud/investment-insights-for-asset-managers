@@ -21,7 +21,7 @@
             ];
 
         var holdingsArray = [];
-        var count = 0;
+
         // login function making a call to signin that comes from auth service and send the user profile to the profile that user is logged in with. If all good the storing user profile on local storage.
         function login() {
             //profile will hold user profile info and the token will get us the jwt
@@ -50,8 +50,7 @@
                         method: 'POST',
                         url: '/api/bulkportfolios',
                         data: replaceAll(JSON.stringify(result.data), "currentdate", currentISOTimestamp())
-                    })
-                        .then(function (response) {
+                    }).then(function (response) {
                             //Reading Holdings JSON one at a time.
                             angular.forEach(mapping, function (value, key) {
                                     $http({
@@ -129,18 +128,25 @@
             return str.replace(new RegExp(find, 'g'), replace);
         }
 
-        // Discovery News function
-        vm.discoveryNews = function () {
+        //When user selected a portfolio
+        vm.toDiscovery = function(company){
             $http({
-                method: 'GET',
-                url: '/api/news'
+                method: 'POST',
+                url: '/api/news/' + company,
+                data: {company: company}
             }).then(function (result) {
-                $scope.newslist = result.data;
-                console.log(result);
+                if(result.config.data.company !== undefined){
+                    //result = JSON.stringify(result, null, 2);
+                    $scope.newslist = result;
+                    console.log(result);
+                }else {
+                    console.log('Please select a portfolio company');
+                }
             }, function (err) {
                 console.log(err);
             });
         };
+
 
         $scope.discoveryNewsButton = function() {
             window.location = "./api/news";
@@ -149,15 +155,7 @@
             window.location = "./api/portfolios";
         };
 
-        vm.toDiscovery = function(company){
-            alert("test " + company);
-        }
-
-
     }
-
-
-
 
     homeController.$inject = ['$scope', 'authService', '$http'];
 })();
