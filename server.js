@@ -62,14 +62,16 @@ var discovery_collection_id = process.env.DISCOVERY_collection_id;
 
 //--Temp setup of discovery service--------------------
 var discovery = new DiscoveryV1({
-    username: discovery_username || '<username>',
-    password: discovery_password || '<password>',
+    username: discovery_username || DISCOVERY_USERNAME,
+    password: discovery_password || DISCOVERY_PASSWORD,
     version_date: '2017-07-19'
 });
 
+console.log('Before environment_id ');
 discovery.getEnvironment(('{environment_id}'), function(error, data) {
     console.log(JSON.stringify(data, null, 2));
 });
+console.log('After environment_id ');
 
 //--Setting up the middle ware--------------------
 app.use('/', express.static(__dirname +  '/'));
