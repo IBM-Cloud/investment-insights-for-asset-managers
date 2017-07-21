@@ -91,6 +91,7 @@
         vm.getHoldings = function (portfolio) {
             $scope.holdings = "";
             $scope.loading = true;
+
             switch (portfolio.name) {
                 case 'technology':
                     //alert("technology");
@@ -106,6 +107,7 @@
                     break;
                 }
             }
+
         };
 
         function returnHoldings(portfolioname){
@@ -117,6 +119,7 @@
                 $scope.loading = false;
             });
         }
+
         function currentISOTimestamp() {
             return new Date().toISOString();
         }
@@ -125,12 +128,6 @@
             //console.log("REPLACE CALLED");
             return str.replace(new RegExp(find, 'g'), replace);
         }
-
-
-        // Alert when company selected
-        vm.toDiscovery = function(companyname){
-            console.log(companyname)
-        };
 
         // Discovery News function
         vm.discoveryNews = function () {
@@ -152,12 +149,14 @@
             window.location = "./api/portfolios";
         };
 
+        vm.toDiscovery = function(company){
+            alert("test " + company);
+        }
+
+
     }
 
-  /*vm.toDiscovery = function(companyname)
-  {
-      //alert(companyname);
-  }*/
+
 
 
     homeController.$inject = ['$scope', 'authService', '$http'];

@@ -78,19 +78,6 @@ tr:nth-child(even) {
 
 /**************END TABLE***************/
 /**************SPINNER*************/
-.loadingspinner { 
-    /*border:1px solid #ddd; padding:10px; margin:20px 5px; width:40px;*/
-    position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: show;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
 
 /* Absolute Center Spinner */
 .loadingspinner {
@@ -146,7 +133,6 @@ tr:nth-child(even) {
 }
 
 /* Animation */
-
 @-webkit-keyframes spinner {
   0% {
     -webkit-transform: rotate(0deg);
@@ -213,6 +199,8 @@ tr:nth-child(even) {
 }
 /**********SPINNER END*************/
 
+/*.loadingspinner { border:1px solid #ddd; padding:10px; margin:20px 5px; width:40px;}*/
+/**************TABLE***************/
 .outline {
     display: flex;
     align-content: center;
@@ -1520,13 +1508,14 @@ footer a:hover {
     color: #152935;
 }
 section.notAuthenticated{
-    padding: 100px;
-    margin: 80px;
+    padding: 50px;
+    margin: 30px;
     background: #e4e4e4;
     border-radius: 3px;
     font-size: 16px;
     font-weight: 600;
     text-align: center;
+    margin-top: 80px;
 }
 section.notAuthenticated a{
     color: #152935;

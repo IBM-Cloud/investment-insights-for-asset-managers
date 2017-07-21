@@ -10,6 +10,7 @@ var port = process.env.VCAP_APP_PORT || 3000;
 var vcapLocal = null;
 // declare service variables
 var INVESTMENT_PORFOLIO_BASE_URL,INVESTMENT_PORFOLIO_USERNAME,INVESTMENT_PORFOLIO_PASSWORD;
+var DISCOVERY_USERNAME, DISCOVERY_PASSWORD;
 
 if (process.env.VCAP_SERVICES)
 {
@@ -23,6 +24,15 @@ if (process.env.VCAP_SERVICES)
         INVESTMENT_PORFOLIO_USERNAME = env['fss-portfolio-service'][0].credentials.writer.userid;
         INVESTMENT_PORFOLIO_PASSWORD = env['fss-portfolio-service'][0].credentials.writer.password;
     }
+
+    // Find the service
+    if (env['discovery']) {
+        console.log("username: " + env['discovery'][0].credentials.username);
+        INVESTMENT_PORFOLIO_BASE_URL = getHostName(env['fss-portfolio-service'][0].credentials.url);
+        DISCOVERY_USERNAME = env['discovery'][0].credentials.username;
+        DISCOVERY_PASSWORD = env['discovery'][0].credentials.password;
+    }
+
     else {
         console.log('You must bind the Investment Portfolio service to this application');
     }
@@ -55,6 +65,10 @@ var discovery = new DiscoveryV1({
     username: discovery_username || '<username>',
     password: discovery_password || '<password>',
     version_date: '2017-07-19'
+});
+
+discovery.getEnvironment(('{environment_id}'), function(error, data) {
+    console.log(JSON.stringify(data, null, 2));
 });
 
 //--Setting up the middle ware--------------------
@@ -251,10 +265,10 @@ app.get("/api/holdings/:portfolioname",function(request,response){
 //--Discovery News GET--------------------
 app.get('/api/news',function(req,res){
     discovery.query({
-        environment_id: discovery_environment_id,
-        collection_id: discovery_collection_id,
-        query: 'AMGEN INC',
-        count: 5,
+        environment_id: '7194d449-dc7e-4f82-939c-3c9205a0a701',
+        collection_id: '4f444003-d770-4c27-8e17-8f6b43d9952a',
+        query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
+        count: 6,
         return: "title,enrichedTitle.text,url,host,blekko.chrondate,docSentiment,yyyymmdd",
         aggregations: [
             "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
