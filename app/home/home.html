@@ -12,7 +12,7 @@
                             <div ng-init="vm.initialSetup()">
                             <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
                                  <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">              
-                                                <table>
+                                                <table id="portfolio">
                                                     <tr>
                                                         <th>Company</th>
                                                        <!-- <th>Asset</th>-->
