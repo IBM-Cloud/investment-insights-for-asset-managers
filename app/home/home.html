@@ -29,7 +29,7 @@
                                                 <td>{{ holding.asset }}
                                                 <td>{{ holding.quantity }}</td>
                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                                <td><button ng-click="vm.toDiscovery(holding.companyName)" >Select</button></td>
+                                                <td class="discoverRun"><button class="base--button widget--header-button" ng-click="vm.toDiscovery(holding.companyName)" >Run Discovery</button></td>
                                             </tr>
                                         </table>
 
@@ -42,12 +42,14 @@
                              <div class="loadingspinner" ng-show="loading"> </div>
                               <!--<img src="/assets/images/spinner.gif">-->
                         </div>
-                        <hr/>
 
                         <div class="riskArea" ng-init="vm.toDiscovery()">
+                            <hr/>
+
                             <div class="serviceHeader">
                                 <i class="fa fa-user-md" aria-hidden="true"></i> Portfolio Optimizer
                             </div>
+                            Under Development
                             <aside class="insidePanel">
                             </aside>
                         </div>

@@ -37,48 +37,8 @@ button:disabled {
     opacity: 0.65;
 }
 
-/*******TABLE Portfolio*********/
-table {
-   font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 2px;
-}
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-#portfolio {
-    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#portfolio td, #portfolio th {
-    border: 1px solid #ddd;
-    padding: 3px !important;
-}
-
-#portfolio tr:nth-child(even){background-color: #f2f2f2;}
-
-#portfolio tr:hover {background-color: #ddd;}
-
-#portfolio th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}
-
-/**************END TABLE***************/
 /**************SPINNER*************/
-
 /* Absolute Center Spinner */
 .loadingspinner {
   position: fixed;
@@ -1383,7 +1343,7 @@ footer {
 }
 
 .dashbaordPanel {
-    padding: 10px;
+    padding: 15px;
     padding-top: 50px;
 }
 
@@ -1396,6 +1356,8 @@ footer {
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
+    min-height: 500px;
+
 }
 
 .portfolioArea {
@@ -1403,7 +1365,7 @@ footer {
 }
 
 .riskArea {
-
+    margin-top: 50px;
 }
 
 .newsArea {
@@ -1414,6 +1376,7 @@ footer {
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
+    min-height: 500px;
 }
 
 .newsArea .serviceHeader {
@@ -1541,6 +1504,53 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
    background-color: #ffffff;
  }
+a.accordion-toggle{
+    border: 0;
+}
+/*******TABLE Portfolio*********/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 2px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#portfolio {
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#portfolio td, #portfolio th {
+    border: 1px solid #ddd;
+    padding: 5px !important;
+}
+
+#portfolio tr:nth-child(even){background-color: #f2f2f2;}
+
+#portfolio tr:hover {background-color: #ddd;}
+
+#portfolio th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(17, 36, 48);
+    color: white;
+}
+
+.discoverRun{
+    text-align: center;
+}
+
+/**************END TABLE***************/
 /****************************- END Investment Portfolio Widget*/
 
 
