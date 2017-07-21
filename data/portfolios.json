@@ -16,5 +16,9 @@
 			"name": "agriculture",
 			"timestamp": "currentdate"
 		}
+<<<<<<< HEAD
 		]
+=======
+	]
+>>>>>>> 35d8d4f0597d56c881eedf2dedb2fa3cef532bde
 }
