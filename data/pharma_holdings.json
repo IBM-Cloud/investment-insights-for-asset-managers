@@ -1,18 +1,18 @@
 {
 	"holdings": [{
-		"asset": "PFIZER 4.1 06/15/21",
+		"asset": "PFE 4.125 12/15/46",
 		"quantity": 10,
-		"instrumentId": "CX_US031162BG42_USD",
-		"companyName": "PFIZER INC"
+		"instrumentId": "CX_US717081ED10_USD",
+		"companyName": "Pfizer Inc."
 	}, {
-		"asset": "AMGN 5.15 11/15/41",
+		"asset": "TEVA 2.2 07/21/21",
 		"quantity": 30,
-		"instrumentId": "CX_US031162BK53_USD",
-		"companyName": "AMGEN INC"
+		"instrumentId": "CX_US88167AAC53_USD",
+		"companyName": "Teva Pharmaceutical Industries Ltd (ADR)"
 	}, {
-		"asset": "EVHC 5.625 07/15/22",
+		"asset": "VRX 5.875 05/15/23",
 		"quantity": 50,
-		"instrumentId": "CX_US03232PAD06_USD",
-		"companyName": "ENVISION HEALTHCARE CORP"
+		"instrumentId": "CX_USC96729AB14_USD",
+		"companyName": "Valeant Pharmaceuticals Intl Inc"
 	}]
 }

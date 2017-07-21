@@ -3,18 +3,18 @@
 		"asset": "AMGN 4.1 06/15/21",
 		"quantity": 10,
 		"instrumentId": "CX_US031162BG42_USD",
-		"companyName": "AMGEN INC"
+		"companyName": "Amgen Inc."
 	},
 		{
-			"asset": "ADI 3.5 12/05/26",
+			"asset": "AAPL 3.25 02/23/26",
 			"quantity": 30,
-			"instrumentId": "CX_US032654AN54_USD",
-			"companyName": "ANALOG DEVICES INC"
+			"instrumentId": "CX_US037833BY53_USD",
+			"companyName": "Apple Inc."
 		}, {
-			"asset": "ABIBB 2.65 02/01/21",
+			"asset": "HON 2.25 02/22/28",
 			"quantity": 20,
-			"instrumentId": "CX_US035242AJ52_USD",
-			"companyName": "ANHEUSER-BUSCH INBEV FIN"
+			"instrumentId": "CX_XS1366026919_EUR",
+			"companyName": "Honeywell International Inc"
 		}
 	]
 }
