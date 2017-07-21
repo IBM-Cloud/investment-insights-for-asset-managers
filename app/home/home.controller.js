@@ -10,7 +10,8 @@
         $scope.oneAtATime = true;
         var mapping = [
             {name: 'technology', file: '/data/technology_holdings.json'},
-            { name: 'pharmaceutical',file: '/data/pharma_holdings.json'}
+            { name: 'pharmaceutical',file: '/data/pharma_holdings.json'},
+            { name: 'agriculture',file: '/data/agriculture_holdings.json'}
             ];
 
         var holdingsArray = [];
@@ -83,16 +84,19 @@
         // Holdings Function
         vm.getHoldings = function (portfolio) {
             $scope.holdings = "";
+            //$scope.loading = true;
             switch (portfolio.name) {
                 case 'technology':
                     //alert("technology");
                     returnHoldings("technology");
-
                     break;
                 case 'pharmaceutical': {
                     //alert("pharmaceutical");
                     returnHoldings("pharmaceutical");
-
+                    break;
+                }
+                case 'agriculture':{
+                    returnHoldings("agriculture");
                     break;
                 }
             }
@@ -104,6 +108,7 @@
                 url: '/api/holdings/'+ portfolioname
             }).then(function(holdings){
                 $scope.holdings = holdings.data.holdings[0].holdings;
+                //$scope.loading = false;
             });
         }
         function currentISOTimestamp() {

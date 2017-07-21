@@ -1,0 +1,18 @@
+{
+	"holdings": [{
+		"asset": "MON 4.65 11/15/23",
+		"quantity": 10,
+		"instrumentId": "CX_US61166WAK71_USD",
+		"companyName": "Monsanto Company"
+	}, {
+		"asset": "MOS 2.2 01/15/28",
+		"quantity": 30,
+		"instrumentId": "CX_US449669AK64_USD",
+		"companyName": "The Mosaic Company"
+	}, {
+		"asset": "CF 7.125 05/01/20",
+		"quantity": 50,
+		"instrumentId": "CX_US12527GAB95_USD",
+		"companyName": "CF Industries Holdings, Inc."
+	}]
+}
