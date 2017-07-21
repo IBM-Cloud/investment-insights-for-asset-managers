@@ -1,20 +1,11 @@
 {
 	"holdings": [{
-<<<<<<< HEAD
-			"asset": "AMGN 4.1 06/15/21",
-			"quantity": 10,
-			"instrumentId": "CX_US031162BG42_USD",
-			"companyName": "AMGEN INC"
-		},
-	    {
-=======
 		"asset": "AMGN 4.1 06/15/21",
 		"quantity": 10,
 		"instrumentId": "CX_US031162BG42_USD",
 		"companyName": "AMGEN INC"
 	},
 		{
->>>>>>> 35d8d4f0597d56c881eedf2dedb2fa3cef532bde
 			"asset": "ADI 3.5 12/05/26",
 			"quantity": 30,
 			"instrumentId": "CX_US032654AN54_USD",

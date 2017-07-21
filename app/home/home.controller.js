@@ -143,10 +143,10 @@
 
     }
 
-  vm.toDiscovery = function(companyname)
+  /*vm.toDiscovery = function(companyname)
   {
       //alert(companyname);
-  }
+  }*/
 
 
     homeController.$inject = ['$scope', 'authService', '$http'];
