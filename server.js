@@ -5,7 +5,6 @@ const cfenv = require('cfenv');
 const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
-const url = require('url');
 
 var port = process.env.VCAP_APP_PORT || 3000;
 var vcapLocal = null;
@@ -71,7 +70,7 @@ app.post('/api/portfolios', function(req, response){
     var portfolio_name = req.body.porfolioname || "default";
     var options = {
         "method": "POST",
-        "hostname": getHostName(INVESTMENT_PORFOLIO_BASE_URL) || process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
+        "hostname": INVESTMENT_PORFOLIO_BASE_URL || process.env.INVESTMENT_PORFOLIO_BASE_URL,//"investment-portfolio.mybluemix.net",
         "port": null,
         "path": "/api/v1/portfolios",
         "headers": {
