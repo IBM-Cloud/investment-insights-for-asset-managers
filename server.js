@@ -53,16 +53,15 @@ if (appEnv.isLocal) {
     require('dotenv').load();
 }
 
-//Discovery info for local dev
-var discovery_username =  process.env.DISCOVERY_USERNAME;
-var discovery_password = process.env.DISCOVERY_PASSWORD;
+//--Discovery service setup--------------------
+var discovery_usernameLocal =  process.env.DISCOVERY_USERNAME;
+var discovery_passwordLocal = process.env.DISCOVERY_PASSWORD;
 var discovery_environment_id = process.env.DISCOVERY_environment_id;
 var discovery_collection_id = process.env.DISCOVERY_collection_id;
 
-//--Temp setup of discovery service--------------------
 var discovery = new DiscoveryV1({
-    username: discovery_username || DISCOVERY_USERNAME,
-    password: discovery_password || DISCOVERY_PASSWORD,
+    username: discovery_usernameLocal || DISCOVERY_USERNAME,
+    password: discovery_passwordLocal || DISCOVERY_PASSWORD,
     version_date: '2017-07-19'
 });
 
@@ -269,7 +268,7 @@ app.get('/api/news',function(req,res){
         environment_id: '7194d449-dc7e-4f82-939c-3c9205a0a701',
         collection_id: '4f444003-d770-4c27-8e17-8f6b43d9952a',
         query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
-        count: 6,
+        count: 20,
         return: "title,enrichedTitle.text,url,host,blekko.chrondate,docSentiment,yyyymmdd",
         aggregations: [
             "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
@@ -282,18 +281,31 @@ app.get('/api/news',function(req,res){
             "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
     ],
         filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
-        sort: "-_score"
+        sort: "-title"
     }, function(err, response) {
         if (err) {
             console.error(err);
         } else {
-            // console.log(JSON.stringify(response, null, 2));
+            var docSentiment2 = JSON.stringify(response.results, null, 2);
+            // console.log(docSentiment);
+            // docSentiment.forEach(function (value) {
+            //     console.log(value);
+            // });
+            
+            // for(var i = 0; i < docSentiment2.length;i++){
+            //     var t = JSON.stringify(i.docSentiment, null, 2);
+            //     for(var i2 = 0; i2 < 20; i2++){
+            //         console.log(i2.type);
+            //     }
+                
+            // }
+
             res.json(response);
         }
     });
 });
 
-
+//--Discovery News POST returning 6 results--------------------
 app.post("/api/news/:company", function (req, res) {
     //console.log(req.body.company);
 
@@ -302,7 +314,7 @@ app.post("/api/news/:company", function (req, res) {
         collection_id: '4f444003-d770-4c27-8e17-8f6b43d9952a',
         // query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
         query: req.body.company,
-        count: 6,
+        count: 20,
         return: "title,enrichedTitle.text,url,host,blekko.chrondate,docSentiment,yyyymmdd",
         aggregations: [
             "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
@@ -315,7 +327,7 @@ app.post("/api/news/:company", function (req, res) {
             "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
         ],
         filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
-        sort: "-_score"
+        sort: "yyyymmdd"
     }, function(err, response) {
         if (err) {
             console.log(err);

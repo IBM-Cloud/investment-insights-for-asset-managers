@@ -1360,10 +1360,6 @@ footer {
 
 }
 
-.portfolioArea {
-
-}
-
 .riskArea {
     margin-top: 50px;
 }
@@ -1377,11 +1373,7 @@ footer {
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
     min-height: 500px;
-}
-
-.newsArea .serviceHeader {
-
-}
+    }
 
 .analyticsArea {
     width: 100%;
@@ -1557,9 +1549,6 @@ tr:nth-child(even) {
 
 
 /****************************- Discovery News Widget*/
-.widget {
-
-}
 .widget--header-title {
     font-size: 2.25em;
 }
@@ -1683,11 +1672,41 @@ tr:nth-child(even) {
 .normal{
     color: #152935;
 }
-top-stories--list ng-scope{
-
-}
 top-stories--list ng-scope:first-child{
     display: inline;
+}
+.top-stories--list.ng-scope{
+    height: 405px;
+    overflow: auto;
+    background: rgba(206, 219, 236, 0.18);
+    padding: 10px;
+    border-right: solid 5px #122531;
+}
+span.userMessage.ng-scope {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    text-align: center;
+    font-size: 14px;
+    background-color: #c0e6ff;
+    color: #325c80;
+    border-radius: 30px;
+}
+span.userMessage.ng-scope p{
+    text-align: center;
+    width: 100%;
+}
+
+/*discoveryAnalytics*/
+.discoveryAnalytics{
+    display: flex;
+    width: 45%;
+    float: right;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 1rem 2rem 1rem;
+    border: 1px solid rgba(61, 112, 178, 0.25);
 }
 /****************************END - Discovery News Widget*/
 
@@ -1707,9 +1726,6 @@ top-stories--list ng-scope:first-child{
         text-align: left;
     }
 
-    .newsArea .serviceHeader {
-
-    }
 
     .analyticsArea {
         margin-top: 30px;

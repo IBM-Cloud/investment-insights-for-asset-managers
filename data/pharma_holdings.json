@@ -3,12 +3,12 @@
 		"asset": "PFE 4.125 12/15/46",
 		"quantity": 10,
 		"instrumentId": "CX_US717081ED10_USD",
-		"companyName": "Pfizer Inc."
+		"companyName": "Pfizer Inc"
 	}, {
 		"asset": "TEVA 2.2 07/21/21",
 		"quantity": 30,
 		"instrumentId": "CX_US88167AAC53_USD",
-		"companyName": "Teva Pharmaceutical Industries Ltd (ADR)"
+		"companyName": "Teva Pharmaceutical Industries Ltd"
 	}, {
 		"asset": "VRX 5.875 05/15/23",
 		"quantity": 50,

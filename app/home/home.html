@@ -10,7 +10,7 @@
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
 
-                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Select a portfolio</h2>
+                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Choose a portfolio</h2>
                                 <div class="widget--header-spacer"></div>
                                 <button class="base--button widget--header-button" ng-click="portfolioButton()">View API</button>
                             </div>
@@ -61,16 +61,28 @@
                         </div>
 
                         <div class="top-stories widget" >
-                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Top Stories</h2>
+                            <div class="widget--header">
+                                <h2 class="base--h2 widget--header-title">Top Stories</h2>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()">View API</button>
+                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage != true">View API</button>
                             </div>
-                            <p class="base--p top-stories--description">Find the most recent and relevant news articles that impact your portfolio</p>
+
+                            <span class="userMessage" ng-if="showMessage == true">
+                                <p>
+                                    Choose a portfolio to view Discovery
+                                </p>
+                            </span>
+                            
+                            <span ng-if="showMessage != true">
+                                <p class="base--p top-stories--description">Find the most recent and relevant news articles that impact your portfolio.<br>
+                                <strong>20 results found in the last 2 weeks</strong></p>
+                            </span>
                         </div>
+
                         <div class="top-stories widget" >
                             <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 0">
-                                <div class="story" ng-repeat="items in news">
-                                    <div class="story--date">{{items.yyyymmdd}}</div>
+                                <div class="story" ng-repeat="items in news | orderBy: items.yyyymmdd">
+                                    <div class="story--date">{{items.score}}</div>
                                     <a class="story--title base--a results--a"
                                        href="{{items.url}}"
                                        target="_blank"
@@ -98,13 +110,34 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--<div class="" ng-repeat="news in newslist" ng-if="$index == 0">
+                            <div class="discoveryAnalytics2" ng-if="showMessage != true" ng-repeat="items in news | orderBy: items.yyyymmdd" ng-init="number = countInit()">
+                                <br><br><hr/>
+                                hello
+                                <span class="story--score base--p">
+                                    <span>Sentiment:</span>
+
+                                    <span ng-if="items.docSentiment.type == 'negative'" class="red">
+                                        <strong>{{items.docSentiment.type}}</strong>
+                                        Count: {{number}}
+                                    </span>
+
+                                    <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
+                                        <strong>{{items.docSentiment.type}}</strong>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>-->
+
+
                     </div>
+
 
                     <div class="analyticsArea">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
-                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios"
-                                     data-pin-nopin="true">
+                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
                                 <span class="insideText">Predictive Market-Scenarios Service</span>
                                 <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
                             </div>
@@ -119,7 +152,6 @@
                                     class="insideText">Simulated Instrument Analytics</span>
                             </div>
                         </div>
-
                     </div>
                 </section>
             </div>

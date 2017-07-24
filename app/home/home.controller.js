@@ -128,6 +128,9 @@
             return str.replace(new RegExp(find, 'g'), replace);
         }
 
+        var showMessage = false;
+        $scope.totalCount = 0;
+        
         //When user selected a portfolio
         vm.toDiscovery = function(company){
             $http({
@@ -138,9 +141,16 @@
                 if(result.config.data.company !== undefined){
                     //result = JSON.stringify(result, null, 2);
                     $scope.newslist = result;
-                    console.log(result);
+                    $scope.showMessage = false;
+                    //console.log(result);
+
+                    $scope.countInit = function() {
+                        return $scope.totalCount++;
+                    }
+
                 }else {
                     console.log('Please select a portfolio company');
+                    $scope.showMessage = true;
                 }
             }, function (err) {
                 console.log(err);
