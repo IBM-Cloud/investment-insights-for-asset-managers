@@ -3,13 +3,13 @@
 		"asset": "AMGN 4.1 06/15/21",
 		"quantity": 10,
 		"instrumentId": "CX_US031162BG42_USD",
-		"companyName": "Amgen Inc."
+		"companyName": "Amgen Inc"
 	},
 		{
 			"asset": "AAPL 3.25 02/23/26",
 			"quantity": 30,
 			"instrumentId": "CX_US037833BY53_USD",
-			"companyName": "Apple Inc."
+			"companyName": "Apple Inc"
 		}, {
 			"asset": "HON 2.25 02/22/28",
 			"quantity": 20,

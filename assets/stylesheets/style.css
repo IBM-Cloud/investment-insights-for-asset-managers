@@ -37,48 +37,130 @@ button:disabled {
     opacity: 0.65;
 }
 
-/*******TABLE Portfolio*********/
-table {
-   font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 2px;
-}
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-#portfolio {
-    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+/**************SPINNER*************/
+/* Absolute Center Spinner */
+.loadingspinner {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-#portfolio td, #portfolio th {
-    border: 1px solid #ddd;
-    padding: 3px !important;
+/* Transparent Overlay */
+.loadingspinner:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
 }
 
-#portfolio tr:nth-child(even){background-color: #f2f2f2;}
-
-#portfolio tr:hover {background-color: #ddd;}
-
-#portfolio th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
+/* :not(:required) hides these rules from IE9 and below */
+.loadingspinner:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
 }
-/***TODO***/
+
+.loadingspinner:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/**********SPINNER END*************/
+
 /*.loadingspinner { border:1px solid #ddd; padding:10px; margin:20px 5px; width:40px;}*/
 /**************TABLE***************/
-
 .outline {
     display: flex;
     align-content: center;
@@ -1261,7 +1343,7 @@ footer {
 }
 
 .dashbaordPanel {
-    padding: 10px;
+    padding: 15px;
     padding-top: 50px;
 }
 
@@ -1274,14 +1356,12 @@ footer {
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
-}
+    min-height: 500px;
 
-.portfolioArea {
-    height: 50%;
 }
 
 .riskArea {
-    height: 50%;
+    margin-top: 50px;
 }
 
 .newsArea {
@@ -1292,11 +1372,8 @@ footer {
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
-}
-
-.newsArea .serviceHeader {
-
-}
+    min-height: 500px;
+    }
 
 .analyticsArea {
     width: 100%;
@@ -1386,13 +1463,14 @@ footer a:hover {
     color: #152935;
 }
 section.notAuthenticated{
-    padding: 100px;
-    margin: 80px;
+    padding: 50px;
+    margin: 30px;
     background: #e4e4e4;
     border-radius: 3px;
     font-size: 16px;
     font-weight: 600;
     text-align: center;
+    margin-top: 80px;
 }
 section.notAuthenticated a{
     color: #152935;
@@ -1418,15 +1496,59 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
    background-color: #ffffff;
  }
+a.accordion-toggle{
+    border: 0;
+}
+/*******TABLE Portfolio*********/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 2px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#portfolio {
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#portfolio td, #portfolio th {
+    border: 1px solid #ddd;
+    padding: 5px !important;
+}
+
+#portfolio tr:nth-child(even){background-color: #f2f2f2;}
+
+#portfolio tr:hover {background-color: #ddd;}
+
+#portfolio th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(17, 36, 48);
+    color: white;
+}
+
+.discoverRun{
+    text-align: center;
+}
+
+/**************END TABLE***************/
 /****************************- END Investment Portfolio Widget*/
 
 
 
 
 /****************************- Discovery News Widget*/
-.widget {
-
-}
 .widget--header-title {
     font-size: 2.25em;
 }
@@ -1550,6 +1672,42 @@ table tr:nth-child(even) {
 .normal{
     color: #152935;
 }
+top-stories--list ng-scope:first-child{
+    display: inline;
+}
+.top-stories--list.ng-scope{
+    height: 405px;
+    overflow: auto;
+    background: rgba(206, 219, 236, 0.18);
+    padding: 10px;
+    border-right: solid 5px #122531;
+}
+span.userMessage.ng-scope {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    text-align: center;
+    font-size: 14px;
+    background-color: #c0e6ff;
+    color: #325c80;
+    border-radius: 30px;
+}
+span.userMessage.ng-scope p{
+    text-align: center;
+    width: 100%;
+}
+
+/*discoveryAnalytics*/
+.discoveryAnalytics{
+    display: flex;
+    width: 45%;
+    float: right;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 1rem 2rem 1rem;
+    border: 1px solid rgba(61, 112, 178, 0.25);
+}
 /****************************END - Discovery News Widget*/
 
 
@@ -1568,9 +1726,6 @@ table tr:nth-child(even) {
         text-align: left;
     }
 
-    .newsArea .serviceHeader {
-
-    }
 
     .analyticsArea {
         margin-top: 30px;

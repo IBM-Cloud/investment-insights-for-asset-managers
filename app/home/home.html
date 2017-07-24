@@ -1,7 +1,7 @@
 <!-- =========== User is Authenticated ===========  -->
 <section class="isAuthenticated" ng-if="vm.auth.isAuthenticated()">
     <section class="healthLayout">
-        <div class="benefitkit" ng-controller="HomeController as vm">
+        <div class="benefitkit">
             <div class="benefitdata">
                 <section class="dashbaordPanel">
                     <div class="userProfile">
@@ -10,12 +10,10 @@
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
 
-                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Select a portfolio</h2>
+                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Choose a portfolio</h2>
                                 <div class="widget--header-spacer"></div>
                                 <button class="base--button widget--header-button" ng-click="portfolioButton()">View API</button>
                             </div>
-                            <!--TODO-->
-                            <!--<div class="loadingspinner" ng-show="loading"><img src="/assets/images/spinner.gif">LOADING...</div>-->
                             <div ng-init="vm.initialSetup()">
                                 <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
                                     <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
@@ -30,24 +28,32 @@
                                                 <td>{{ holding.companyName }}</td>
                                                 <td>{{ holding.asset }}
                                                 <td>{{ holding.quantity }}</td>
-                                                <td><button ng-click="vm.toDiscovery(holding.companyName)">Select</button></td>
+                                                <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
+                                                <td class="discoverRun"><button class="base--button widget--header-button" ng-click="vm.toDiscovery(holding.companyName)" >Run Discovery</button></td>
                                             </tr>
                                         </table>
 
                                         <uib-accordion-heading>
+<<<<<<< HEAD
                                             {{portfolio.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">Click</i>
+=======
+                                            {{portfolio.name | titleCase }} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+>>>>>>> 1291e5e046e64500cbfc7079fa4de83c9e3abc51
                                         </uib-accordion-heading>
                                     </div>
                                 </uib-accordion>
                             </div>
-
+                             <div class="loadingspinner" ng-show="loading"> </div>
+                              <!--<img src="/assets/images/spinner.gif">-->
                         </div>
-                        <hr/>
 
-                        <div class="riskArea" ng-init="vm.discoveryNews()">
+                        <div class="riskArea" ng-init="vm.toDiscovery()">
+                            <hr/>
+
                             <div class="serviceHeader">
                                 <i class="fa fa-user-md" aria-hidden="true"></i> Portfolio Optimizer
                             </div>
+                            Under Development
                             <aside class="insidePanel">
                             </aside>
                         </div>
@@ -59,16 +65,28 @@
                         </div>
 
                         <div class="top-stories widget" >
-                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Top Stories</h2>
+                            <div class="widget--header">
+                                <h2 class="base--h2 widget--header-title">Top Stories</h2>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()">View API</button>
+                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage != true">View API</button>
                             </div>
-                            <p class="base--p top-stories--description">Find the most recent and relevant news articles.</p>
+
+                            <span class="userMessage" ng-if="showMessage == true">
+                                <p>
+                                    Choose a portfolio to view Discovery
+                                </p>
+                            </span>
+                            
+                            <span ng-if="showMessage != true">
+                                <p class="base--p top-stories--description">Find the most recent and relevant news articles that impact your portfolio.<br>
+                                <strong>20 results found in the last 2 weeks</strong></p>
+                            </span>
                         </div>
+
                         <div class="top-stories widget" >
-                            <div class="top-stories--list" ng-repeat="news in newslist">
-                                <div class="story" ng-repeat="items in news">
-                                    <div class="story--date">{{items.yyyymmdd}}</div>
+                            <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 0">
+                                <div class="story" ng-repeat="items in news | orderBy: items.yyyymmdd">
+                                    <div class="story--date">{{items.score}}</div>
                                     <a class="story--title base--a results--a"
                                        href="{{items.url}}"
                                        target="_blank"
@@ -96,13 +114,34 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--<div class="" ng-repeat="news in newslist" ng-if="$index == 0">
+                            <div class="discoveryAnalytics2" ng-if="showMessage != true" ng-repeat="items in news | orderBy: items.yyyymmdd" ng-init="number = countInit()">
+                                <br><br><hr/>
+                                hello
+                                <span class="story--score base--p">
+                                    <span>Sentiment:</span>
+
+                                    <span ng-if="items.docSentiment.type == 'negative'" class="red">
+                                        <strong>{{items.docSentiment.type}}</strong>
+                                        Count: {{number}}
+                                    </span>
+
+                                    <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
+                                        <strong>{{items.docSentiment.type}}</strong>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>-->
+
+
                     </div>
+
 
                     <div class="analyticsArea">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
-                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios"
-                                     data-pin-nopin="true">
+                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
                                 <span class="insideText">Predictive Market-Scenarios Service</span>
                                 <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
                             </div>
@@ -117,7 +156,6 @@
                                     class="insideText">Simulated Instrument Analytics</span>
                             </div>
                         </div>
-
                     </div>
                 </section>
             </div>

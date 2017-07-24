@@ -1,7 +1,13 @@
 (function () {
     angular
         .module('app')
-        .controller('HomeController', homeController);
+        .controller('HomeController', homeController)
+        .filter('titleCase', function() {
+         return function(input) {
+      input = input || '';
+      return input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    };
+    });
 
     function homeController($scope, authService, $http, $location) {
         var vm = this;
@@ -15,7 +21,7 @@
             ];
 
         var holdingsArray = [];
-        var count = 0;
+
         // login function making a call to signin that comes from auth service and send the user profile to the profile that user is logged in with. If all good the storing user profile on local storage.
         function login() {
             //profile will hold user profile info and the token will get us the jwt
@@ -44,8 +50,7 @@
                         method: 'POST',
                         url: '/api/bulkportfolios',
                         data: replaceAll(JSON.stringify(result.data), "currentdate", currentISOTimestamp())
-                    })
-                        .then(function (response) {
+                    }).then(function (response) {
                             //Reading Holdings JSON one at a time.
                             angular.forEach(mapping, function (value, key) {
                                     $http({
@@ -84,7 +89,8 @@
         // Holdings Function
         vm.getHoldings = function (portfolio) {
             $scope.holdings = "";
-            //$scope.loading = true;
+            $scope.loading = true;
+
             switch (portfolio.name) {
                 case 'technology':
                     //alert("technology");
@@ -100,6 +106,7 @@
                     break;
                 }
             }
+
         };
 
         function returnHoldings(portfolioname){
@@ -108,9 +115,10 @@
                 url: '/api/holdings/'+ portfolioname
             }).then(function(holdings){
                 $scope.holdings = holdings.data.holdings[0].holdings;
-                //$scope.loading = false;
+                $scope.loading = false;
             });
         }
+
         function currentISOTimestamp() {
             return new Date().toISOString();
         }
@@ -120,24 +128,35 @@
             return str.replace(new RegExp(find, 'g'), replace);
         }
 
-
-        // Alert when company selected
-        vm.toDiscovery = function(companyname){
-            console.log(companyname)
-        };
-
-        // Discovery News function
-        vm.discoveryNews = function () {
+        var showMessage = false;
+        $scope.totalCount = 0;
+        
+        //When user selected a portfolio
+        vm.toDiscovery = function(company){
             $http({
-                method: 'GET',
-                url: '/api/news'
+                method: 'POST',
+                url: '/api/news/' + company,
+                data: {company: company}
             }).then(function (result) {
-                $scope.newslist = result.data;
-                console.log(result);
+                if(result.config.data.company !== undefined){
+                    //result = JSON.stringify(result, null, 2);
+                    $scope.newslist = result;
+                    $scope.showMessage = false;
+                    //console.log(result);
+
+                    $scope.countInit = function() {
+                        return $scope.totalCount++;
+                    }
+
+                }else {
+                    console.log('Please select a portfolio company');
+                    $scope.showMessage = true;
+                }
             }, function (err) {
                 console.log(err);
             });
         };
+
 
         $scope.discoveryNewsButton = function() {
             window.location = "./api/news";
@@ -147,12 +166,6 @@
         };
 
     }
-
-  /*vm.toDiscovery = function(companyname)
-  {
-      //alert(companyname);
-  }*/
-
 
     homeController.$inject = ['$scope', 'authService', '$http'];
 })();
