@@ -342,6 +342,44 @@ app.post("/api/news/:company", function (req, res) {
 
 
 
+//--Predictive Market Scenarios Service POST-----------
+app.post('/api/generatepredictive',function(request,response){
+    var req_body = JSON.stringify(request.body);
+    //console.log(req_body);
+    var options = {
+        "method": "POST",
+        "hostname": process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
+        "port": null,
+        "path": "/api/v1/scenario/generate_predictive",
+        "headers": {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "X-IBM-Access-Token": process.env.PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN
+        }
+    };
+
+    // Set up the request
+ var req = http.request(options, function (res) {
+        var chunks = [];
+        console.log("Options:"+options);
+
+        res.on("data", function (chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on("end", function () {
+            var body = Buffer.concat(chunks);
+            console.log(body.toString());
+            response.setHeader('Content-Type','application/json');
+            response.type('application/json');
+            response.send(body.toString());
+        });
+    });
+    req.write(req_body);
+    req.end();
+
+});
+
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
