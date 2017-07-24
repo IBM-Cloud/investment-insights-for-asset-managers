@@ -24,17 +24,17 @@
                                                 <th>Quantity</th>
                                                 <th>Discover</th>
                                             </tr>
-                                            <tr ng-repeat="holding in holdings">
+                                            <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding.companyName)">
                                                 <td>{{ holding.companyName }}</td>
                                                 <td>{{ holding.asset }}
                                                 <td>{{ holding.quantity }}</td>
                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                                <td class="discoverRun"><button class="base--button widget--header-button" ng-click="vm.toDiscovery(holding.companyName)" >Run Discovery</button></td>
+                                                <td class="discoverRun"><button class="base--button widget--header-button">Run Discovery</button></td>
                                             </tr>
                                         </table>
 
                                         <uib-accordion-heading>
-                                            {{portfolio.name | titleCase }} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                            <p style="margin-bottom: 0;">{{portfolio.name | titleCase }} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></p>
                                         </uib-accordion-heading>
                                     </div>
                                 </uib-accordion>
