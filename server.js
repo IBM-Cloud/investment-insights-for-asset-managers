@@ -344,8 +344,8 @@ app.post("/api/news/:company", function (req, res) {
 
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
-    var req_body = request.body;
-    console.log(req_body);
+    var req_body = JSON.stringify(request.body);
+    //console.log(req_body);
     var options = {
         "method": "POST",
         "hostname": process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
@@ -375,7 +375,7 @@ app.post('/api/generatepredictive',function(request,response){
             response.send(body.toString());
         });
     });
-
+    req.write(req_body);
     req.end();
 
 });
