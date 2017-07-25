@@ -1381,11 +1381,10 @@ footer {
     height: 400px;
     margin-top: 60px;
     float: left;
-    background: #e1ebf7;
     border-radius: 3px;
     margin-bottom: 60px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 1rem 2rem 1rem;
+    border: 1px solid rgba(61, 112, 178, 0.25);
 }
 
 .marketScenarios {
@@ -1524,6 +1523,7 @@ tr:nth-child(even) {
 #portfolio td, #portfolio th {
     border: 1px solid #ddd;
     padding: 5px !important;
+    font-size: 12px;
 }
 
 #portfolio tr:nth-child(even){background-color: #f2f2f2;}
@@ -1691,22 +1691,76 @@ span.userMessage.ng-scope {
     background-color: #c0e6ff;
     color: #325c80;
     border-radius: 30px;
+    margin-top: 40px;
 }
 span.userMessage.ng-scope p{
     text-align: center;
     width: 100%;
+    margin: 0;
 }
 
 /*discoveryAnalytics*/
 .discoveryAnalytics{
     display: flex;
-    width: 45%;
+    width: 100%;
     float: right;
     border-radius: 3px;
-    margin-top: 10px;
+    margin-top: 50px;
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
-    border: 1px solid rgba(61, 112, 178, 0.25);
+    border: 1px solid rgb(17, 36, 48);
+    background: rgba(17, 36, 48, 0.87);
+    font-size: 18px;
+    color: white;
+}
+
+.discoveryAnalyticsMessage {
+    text-align: center;
+    width: 100%;
+}
+
+.redBold{
+    font-weight: bold;
+    font-size: 20px;
+    color: #de6b6b;
+}
+
+
+.sentimentsFound{
+    display: flex;
+}
+
+.negativeCount{
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-right: 10px;
+    border-bottom: none;
+    border-radius: 15px;
+    font-weight: normal;
+    background: #de6b6b;
+    color: #fbfbfb;
+}
+
+.positiveCount{
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-right: 10px;
+    border-bottom: none;
+    border-radius: 15px;
+    font-weight: normal;
+    background: #aaf9e6;
+    color: #238070;
+}
+
+.neutralCount{
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-right: 10px;
+    border-bottom: none;
+    border-radius: 15px;
+    font-weight: normal;
+    background: #f6f9fc;
+    color: #3d70b2;
 }
 /****************************END - Discovery News Widget*/
 

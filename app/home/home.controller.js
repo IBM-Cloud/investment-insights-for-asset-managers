@@ -128,8 +128,9 @@
             return str.replace(new RegExp(find, 'g'), replace);
         }
 
-        var showMessage = false;
-        $scope.totalCount = 0;
+        var showMessage;
+        var dateAndTime;
+        $scope.showMessage = true
         
         //When user selected a portfolio
         vm.toDiscovery = function(company){
@@ -139,17 +140,50 @@
                 data: {company: company}
             }).then(function (result) {
                 if(result.config.data.company !== undefined){
-                    //result = JSON.stringify(result, null, 2);
-                    $scope.newslist = result;
+                    $scope.newslist = result.data;
                     $scope.showMessage = false;
-                    //console.log(result);
+                    
+                    // Total docSentiment (negative, positive and neutral)
+                    var negativeCount = 0;
+                    var positiveCount = 0;
+                    var neutralCount = 0;
+                    var shockvalue = 0;
 
-                    $scope.countInit = function() {
-                        return $scope.totalCount++;
-                    }
+                    angular.forEach(result.data.results, function (item) {
+                        if(item.docSentiment.type == 'negative'){
+                            negativeCount++;
+
+                            // Setting shock values
+                            if(negativeCount >= 1 && negativeCount <= 3){
+                                $scope.shockvalue = 0.5; 
+                            }
+                            if(negativeCount >= 4 && negativeCount <= 6){
+                                $scope.shockvalue = 1.5; 
+                                console.log($scope.shockvalue);
+                            }
+                            if(negativeCount >= 7 && negativeCount <= 10){
+                                $scope.shockvalue = 2.5; 
+                            }
+                            if(negativeCount >= 10 && negativeCount <= 20){
+                                $scope.shockvalue = 3.5; 
+                            }
+                            if(negativeCount > 21){
+                                $scope.shockvalue = 5.5; 
+                            }
+                        }
+                        if(item.docSentiment.type == 'positive'){
+                            positiveCount++;
+                        }
+                        if(item.docSentiment.type == 'neutral'){
+                            neutralCount++;
+                        }                        
+                    });
+                    $scope.negativeCount = negativeCount;
+                    $scope.positiveCount = positiveCount;
+                    $scope.neutralCount = neutralCount;
 
                 }else {
-                    console.log('Please select a portfolio company');
+                    //console.log('Please select a portfolio company');
                     $scope.showMessage = true;
                 }
             }, function (err) {
@@ -157,6 +191,12 @@
             });
         };
 
+        $scope.dateAndTime = function(_date) { 
+            //console.log("date: ", _date);
+
+            //console.log(parseInt(_date));
+            return parseInt(_date); 
+        }
 
         $scope.discoveryNewsButton = function() {
             window.location = "./api/news";

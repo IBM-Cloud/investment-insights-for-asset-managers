@@ -56,12 +56,17 @@ if (appEnv.isLocal) {
 //--Discovery service setup--------------------
 var discovery_usernameLocal =  process.env.DISCOVERY_USERNAME;
 var discovery_passwordLocal = process.env.DISCOVERY_PASSWORD;
-var discovery_environment_id = process.env.DISCOVERY_environment_id;
-var discovery_collection_id = process.env.DISCOVERY_collection_id;
+// var discovery_environment_id = process.env.DISCOVERY_environment_id;
+// var discovery_collection_id = process.env.DISCOVERY_collection_id;
+var discovery_environment_id = '6da0267e-7fa2-46ff-9086-f093dcff3961';
+var discovery_collection_id = 'f4f53ecc-4307-4c54-b8e0-018df036e12d';
 
+// Temp api credentials - this service will be removed
 var discovery = new DiscoveryV1({
-    username: discovery_usernameLocal || DISCOVERY_USERNAME,
-    password: discovery_passwordLocal || DISCOVERY_PASSWORD,
+    // username: discovery_usernameLocal || DISCOVERY_USERNAME,
+    // password: discovery_passwordLocal || DISCOVERY_PASSWORD,
+    username: 'bde04da9-aac0-4c8f-83e5-93cf5c68535a',
+    password: 'DarQsrwRjyOR',
     version_date: '2017-07-19'
 });
 
@@ -265,58 +270,13 @@ app.get("/api/holdings/:portfolioname",function(request,response){
 //--Discovery News GET--------------------
 app.get('/api/news',function(req,res){
     discovery.query({
-        environment_id: '7194d449-dc7e-4f82-939c-3c9205a0a701',
-        collection_id: '4f444003-d770-4c27-8e17-8f6b43d9952a',
-        query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
+        environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
+        collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
+        query: 'Honeywell International Inc',
         count: 20,
-        return: "title,enrichedTitle.text,url,host,blekko.chrondate,docSentiment,yyyymmdd",
+        return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
         aggregations: [
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
-            "term(enrichedTitle.concepts.text)",
-            "term(blekko.basedomain).term(docSentiment.type:positive)",
-            "term(docSentiment.type)",
-            "min(docSentiment.score)",
-            "max(docSentiment.score)",
-            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
-    ],
-        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
-        sort: "-title"
-    }, function(err, response) {
-        if (err) {
-            console.error(err);
-        } else {
-            var docSentiment2 = JSON.stringify(response.results, null, 2);
-            // console.log(docSentiment);
-            // docSentiment.forEach(function (value) {
-            //     console.log(value);
-            // });
-            
-            // for(var i = 0; i < docSentiment2.length;i++){
-            //     var t = JSON.stringify(i.docSentiment, null, 2);
-            //     for(var i2 = 0; i2 < 20; i2++){
-            //         console.log(i2.type);
-            //     }
-                
-            // }
-
-            res.json(response);
-        }
-    });
-});
-
-//--Discovery News POST returning 6 results--------------------
-app.post("/api/news/:company", function (req, res) {
-    //console.log(req.body.company);
-
-    discovery.query({
-        environment_id: '7194d449-dc7e-4f82-939c-3c9205a0a701',
-        collection_id: '4f444003-d770-4c27-8e17-8f6b43d9952a',
-        // query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
-        query: req.body.company,
-        count: 20,
-        return: "title,enrichedTitle.text,url,host,blekko.chrondate,docSentiment,yyyymmdd",
-        aggregations: [
+            "term(docSentiment.type,count:3)",
             "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
             "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
             "term(enrichedTitle.concepts.text)",
@@ -327,16 +287,48 @@ app.post("/api/news/:company", function (req, res) {
             "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
         ],
         filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
-        sort: "yyyymmdd"
+        sort: "-_score"
+    }, function(err, response) {
+        if (err) {
+            console.error(err);
+        } else {
+            var docSentiment2 = JSON.stringify(response.results, null, 2);
+            res.json(response);
+        }
+    });
+});
+
+//--Discovery News POST returning 6 results--------------------
+app.post("/api/news/:company", function (req, res) {
+    //console.log(req.body.company);
+
+    discovery.query({
+        environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
+        collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
+        // query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
+        query: req.body.company,
+        count: 20,
+        return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
+        aggregations: [
+            "term(docSentiment.type,count:3)",
+            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
+            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
+            "term(enrichedTitle.concepts.text)",
+            "term(blekko.basedomain).term(docSentiment.type:positive)",
+            "term(docSentiment.type)",
+            "min(docSentiment.score)",
+            "max(docSentiment.score)",
+            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
+        ],
+        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
+        sort: "-_score"
     }, function(err, response) {
         if (err) {
             console.log(err);
         } else {
-            //console.log(response.results);
-            res.json(response.results);
+            res.send(response);
         }
     });
-
     //res.send(req.body.company);
 });
 

@@ -21,14 +21,14 @@
                                             <tr>
                                                 <th>Company</th>
                                                 <th>Asset</th>
-                                                 <th>InstrumentID</th>
-                                                <th>Quantity</th>
+                                                 <!--<th>InstrumentID</th>-->
+                                                <th>Shares QTY</th>
                                                 <th>Discover</th>
                                             </tr>
                                             <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding.companyName)">
                                                 <td>{{ holding.companyName }}</td>
                                                 <td>{{ holding.asset }}
-                                                <td>{{ holding.instrumentId }}
+                                                <!--<td>{{ holding.instrumentId }}-->
                                                 <td>{{ holding.quantity }}</td>
                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
                                                 <td class="discoverRun"><button class="base--button widget--header-button">Run Discovery</button></td>
@@ -45,9 +45,8 @@
                               <!--<img src="/assets/images/spinner.gif">-->
                         </div>
 
-                        <div class="riskArea" ng-init="vm.toDiscovery()">
+                        <div class="riskArea">
                             <hr/>
-
                             <div class="serviceHeader">
                                 <i class="fa fa-user-md" aria-hidden="true"></i> Portfolio Optimizer
                             </div>
@@ -66,7 +65,7 @@
                             <div class="widget--header">
                                 <h2 class="base--h2 widget--header-title">Top Stories</h2>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage != true">View API</button>
+                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage == false">View API</button>
                             </div>
 
                             <span class="userMessage" ng-if="showMessage == true">
@@ -75,16 +74,18 @@
                                 </p>
                             </span>
                             
-                            <span ng-if="showMessage != true">
+                            <span ng-if="showMessage == false">
                                 <p class="base--p top-stories--description">Find the most recent and relevant news articles that impact your portfolio.<br>
-                                <strong>20 results found in the last 2 weeks</strong></p>
+                                Showing <strong>20</strong> of {{newslist.matching_results}} matching documents</p>
                             </span>
                         </div>
 
                         <div class="top-stories widget" >
-                            <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 0">
-                                <div class="story" ng-repeat="items in news | orderBy: items.yyyymmdd">
-                                    <div class="story--date">{{items.score}}</div>
+                            <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 1">
+                        
+                                <div class="story" ng-repeat="items in news">
+                                    <div class="story--date">{{dateAndTime(items.yyyymmdd)}}</div>
+
                                     <a class="story--title base--a results--a"
                                        href="{{items.url}}"
                                        target="_blank"
@@ -100,7 +101,7 @@
                                         <span class="story--score base--p">
                                             <span>Sentiment:</span>
                                             <!--Checking the value where if negative or not-->
-                                            <span ng-if="items.docSentiment.type == 'negative'" class="red">
+                                            <span ng-if="items.docSentiment.type === 'negative'" class="red">
                                                 <strong>{{items.docSentiment.type}}</strong>
                                             </span>
 
@@ -112,35 +113,25 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--<div class="" ng-repeat="news in newslist" ng-if="$index == 0">
-                            <div class="discoveryAnalytics2" ng-if="showMessage != true" ng-repeat="items in news | orderBy: items.yyyymmdd" ng-init="number = countInit()">
-                                <br><br><hr/>
-                                hello
-                                <span class="story--score base--p">
-                                    <span>Sentiment:</span>
-
-                                    <span ng-if="items.docSentiment.type == 'negative'" class="red">
-                                        <strong>{{items.docSentiment.type}}</strong>
-                                        Count: {{number}}
-                                    </span>
-
-                                    <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
-                                        <strong>{{items.docSentiment.type}}</strong>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>-->
-
-
+                        
+                        <hr/>
+                        <div class="sentimentsFound" ng-if="showMessage == false">
+                            <span class="negativeCount">{{negativeCount}} Negative</span> 
+                            <span class="positiveCount">{{positiveCount}} Positive</span> 
+                            <span class="neutralCount">{{neutralCount}} Neutral</span> 
+                        </div>
                     </div>
 
+                    <!--Shock value calculated in controller-->
+                    <div class="discoveryAnalytics" ng-if="showMessage == false">
+                        <span class="discoveryAnalyticsMessage">Assumption made, <span class="redBold">({{shockvalue}}% fall)</span> to your portfolio based on the impacted news to your portfolio.</span>
+                    </div>
 
                     <div class="analyticsArea">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
                                 <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
-                                <span class="insideText">Predictive Market-Scenarios Service</span>
+                                <span class="">Predictive Market-Scenarios Service</span>
                                 <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
                             </div>
                         </div>
@@ -151,7 +142,7 @@
                                 <img src="/assets/images/instrument_Analytics.svg"
                                      alt="price and analytics under stress"
                                      data-pin-nopin="true"> <span
-                                    class="insideText">Simulated Instrument Analytics</span>
+                                    class="">Simulated Instrument Analytics</span>
                             </div>
                         </div>
                     </div>
