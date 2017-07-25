@@ -5,6 +5,7 @@ const cfenv = require('cfenv');
 const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+var fs = require('fs');
 
 var port = process.env.VCAP_APP_PORT || 3000;
 var vcapLocal = null;
@@ -344,6 +345,9 @@ app.post("/api/news/:company", function (req, res) {
 
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
+
+    if(!fs.existsSync('data/predictivescenarios.csv'))
+    {
     var req_body = JSON.stringify(request.body);
     //console.log(req_body);
     var options = {
@@ -369,15 +373,22 @@ app.post('/api/generatepredictive',function(request,response){
 
         res.on("end", function () {
             var body = Buffer.concat(chunks);
-            console.log(body.toString());
-            response.setHeader('Content-Type','application/json');
-            response.type('application/json');
-            response.send(body.toString());
+            //console.log(body.toString());
+            //response.setHeader('Content-Type','application/json');
+            //response.type('application/json');
+            response.send(toCSV(body.toString()));
+            //toCSV(body.toString());
         });
     });
     req.write(req_body);
     req.end();
-
+    }
+  else
+    {
+        response.setHeader('Content-Type','application/json');
+        response.type('application/json');
+        response.send(JSON.stringify("{'error':'file exists'}"));
+    }
 });
 
 //--All other routes to be sent to home page--------------------
@@ -408,6 +419,18 @@ function getHostName(url)
         return null;
     }
 }
+
+function toCSV(datatowrite)
+{
+    fs.writeFile('data/predictivescenarios.csv', datatowrite, 'utf8', function (err) {
+  if (err) {
+    console.log('Some error occured - file either not saved or corrupted file saved.');
+  } else{
+    console.log('It\'s saved!');
+  }
+});
+}
+
 
 //--launch--------------------
 app.listen(port, "0.0.0.0", function() {
