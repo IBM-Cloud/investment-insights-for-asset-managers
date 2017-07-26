@@ -305,12 +305,9 @@ app.get('/api/news',function(req,res){
 
 //--Discovery News POST returning 6 results--------------------
 app.post("/api/news/:company", function (req, res) {
-    //console.log(req.body.company);
-
     discovery.query({
         environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
         collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
-        // query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
         query: req.body.company,
         count: 20,
         return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
@@ -334,7 +331,6 @@ app.post("/api/news/:company", function (req, res) {
             res.send(response);
         }
     });
-    //res.send(req.body.company);
 });
 
 
@@ -390,29 +386,29 @@ app.post('/api/generatepredictive',function(request,response){
 //-- Simulated Instrument Analysis Service POST-----
 app.post('/api/instruments',upload.single('scenario_file'),function(request,response){
 
-    if(fs.existsSync('data/predictivescenarios.csv'))
+    if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
     {
-            var formData = {
-            instruments: request.body.instruments,
-            scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
-            };
+        var formData = {
+        instruments: request.body.instruments,
+        scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
+        };
 
-            var req = requestmodule.post(
-                {
-                   url:'https://'+ process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI +'/api/v1/scenario/instruments',
-                   formData:formData
-                },requestCallback);
-            //r._form = form;
-            req.setHeader('enctype',"multipart/form-data");
-            req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
-            
-            function requestCallback(err, res, body) {
-            console.log("BODY"+body);
-            console.log("RESPONSE:"+ JSON.stringify(res));
-            response.setHeader('Content-Type','application/json');
-            response.type('application/json');
-            response.send(body);
-            }
+        var req = requestmodule.post(
+            {
+                url:'https://'+ process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI +'/api/v1/scenario/instruments',
+                formData:formData
+            },requestCallback);
+        //r._form = form;
+        req.setHeader('enctype',"multipart/form-data");
+        req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
+        
+        function requestCallback(err, res, body) {
+        console.log("BODY"+body);
+        console.log("RESPONSE:"+ JSON.stringify(res));
+        response.setHeader('Content-Type','application/json');
+        response.type('application/json');
+        response.send(body);
+        }
     }
 });
 

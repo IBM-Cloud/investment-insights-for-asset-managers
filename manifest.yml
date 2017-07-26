@@ -7,3 +7,5 @@ applications:
     - fintrade-db
     - fintrade-discovery
     - investment-portfolio-fintrade
+    - predictive-market-scenarios-fintrade
+    - simulated-instrument-analytics-fintrade
