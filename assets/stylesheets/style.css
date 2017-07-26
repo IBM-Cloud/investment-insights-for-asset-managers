@@ -1282,12 +1282,6 @@ a.menulink {
     display: none;
 }
 
-.signuplink {
-}
-
-input:not([type="image" i]), textarea {
-    box-sizing: border-box;
-}
 
 /*Used from here*/
 .banner {
@@ -1375,42 +1369,6 @@ footer {
     min-height: 500px;
     }
 
-.analyticsArea {
-    width: 100%;
-    float: left;
-    height: 400px;
-    margin-top: 60px;
-    float: left;
-    border-radius: 3px;
-    margin-bottom: 60px;
-    padding: 1rem 2rem 1rem;
-    border: 1px solid rgba(61, 112, 178, 0.25);
-}
-
-.marketScenarios {
-    float: left;
-    width: 49.8%;
-    border-right: 2px dotted #ccdff7;
-    height: 100%;
-}
-
-.instrumentAnalytics {
-    float: left;
-    text-align: right;
-    width: 50%;
-    height: 100%;
-}
-
-.instrumentAnalytics img, .marketScenarios img {
-    width: 30px;
-    height: 30px;
-    border-radius: 25px;
-}
-
-.instrumentAnalytics .serviceHeader {
-    text-align: right;
-}
-
 .insideText {
     height: 40px;
     display: inline-block;
@@ -1430,6 +1388,9 @@ aside.insidePanel {
     padding: 10px;
 }
 
+
+
+/****************************- Nav bar*/
 .btn-margin {
     margin-top: 7px
 }
@@ -1481,6 +1442,9 @@ section.notAuthenticated a:hover{
 }
 .md-toolbar-tools{
     background: radial-gradient(#0f212e, #152935) rgba(61,112,178,0.1);}
+/****************************- END Nav bar*/
+
+
 
 
 /****************************- Investment Portfolio Widget*/
@@ -1498,7 +1462,6 @@ table tr:nth-child(even) {
 a.accordion-toggle{
     border: 0;
 }
-/*******TABLE Portfolio*********/
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -1541,8 +1504,6 @@ tr:nth-child(even) {
 .discoverRun{
     text-align: center;
 }
-
-/**************END TABLE***************/
 /****************************- END Investment Portfolio Widget*/
 
 
@@ -1768,6 +1729,62 @@ span.userMessage.ng-scope p{
 
 
 
+/****************************- Predictive Market-Scenarios Widget*/
+.analyticsArea {
+    width: 100%;
+    float: left;
+    height: 400px;
+    margin-top: 60px;
+    float: left;
+    border-radius: 3px;
+    margin-bottom: 60px;
+    padding: 1rem 2rem 1rem;
+    border: 1px solid rgba(61, 112, 178, 0.25);
+}
+
+.marketScenarios {
+    width: 50%;
+    float: left;
+    margin-right: 5%;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 1rem 2rem 1rem;
+    border: 1px solid rgba(61, 112, 178, 0.25);
+    margin-top: 80px;
+}
+
+.instrumentAnalytics {
+    width: 45%;
+    float: left;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 1rem 2rem 1rem;
+    border: 1px solid rgba(61, 112, 178, 0.25);
+    min-height: 500px;
+    margin-top: 80px;
+}
+
+.instrumentAnalytics img, .marketScenarios img {
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+}
+.marketScenariosBody{
+    margin-top: 20px; 
+}
+button.base--button.widget--header-button.csv {
+    background-color: #132632;
+    color: white;
+}
+.downloadCSV{
+    border: 0;
+}
+/****************************END - Predictive Market-Scenarios Widget*/
+
+
+
 @media only screen and (max-width: 800px) {
     .userProfile {
         width: 100%;
@@ -1792,17 +1809,16 @@ span.userMessage.ng-scope p{
         width: 100%;
         border-right: 0;
         height: 400px;
+        margin-top: 20px;
     }
 
     .instrumentAnalytics {
         text-align: left;
         width: 100%;
         height: 400px;
+        margin-top: 20px;
     }
 
-    .instrumentAnalytics .serviceHeader {
-        text-align: left;
-    }
 
     .outline {
         display: flex;

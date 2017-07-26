@@ -127,21 +127,30 @@
                         <span class="discoveryAnalyticsMessage">Assumption made, <span class="redBold">({{shockvalue}}% fall)</span> to your portfolio based on the impacted news to your portfolio.</span>
                     </div>
 
-                    <div class="analyticsArea">
+
+
+                    <div>
                         <div class="marketScenarios">
                             <div class="serviceHeader">
-                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
-                                <span class="">Predictive Market-Scenarios Service</span>
-                                <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
+                                <i class="fa fa-university" aria-hidden="true"></i> Predictive Market-Scenarios Service
+                            </div>
+                            
+                            <div class="marketScenariosBody">
+                                <h2 class="base--h2 widget--header-title">Scenarios</h2>
+                                <p class="base--p top-stories--description">
+                                    A CSV scenario generated based the portfolio selected. 
+                                </p>
+                                <a target="_self" ng-href="{{csv_link}}" class="downloadCSV">
+                                    <button class="base--button widget--header-button csv">Download CSV</button>
+                                </a>
                             </div>
                         </div>
 
                         <div class="instrumentAnalytics">
                             <div class="serviceHeader">
                                 <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
-                                <img src="/assets/images/instrument_Analytics.svg" data-pin-nopin="true"> 
-                                <span class="">Simulated Instrument Analytics</span>
-                                Analysis: {{analysisData}}
+                                <i class="fa fa-university" aria-hidden="true"></i> Simulated Instrument Analytics
+                                <br>Coming Soon!
                             </div>
                         </div>
                     </div>

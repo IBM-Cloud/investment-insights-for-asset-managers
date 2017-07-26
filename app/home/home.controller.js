@@ -198,17 +198,9 @@
             window.location = "./api/portfolios";
         };
 
-                
-        vm.instrumentAnalysis = function(analysis){
-            $http({
-                method: 'POST',
-                url: '/api/instruments' + analysis,
-                data: {analysis: analysis}
-            }).then(function (result){
-                $scope.analysisData = result;
-                console.log(result);
-            });
-        }
+        // ToDo - update the CSV based user selection
+        $scope.csv_link = './data/predictiveMarketScenarios/predictivescenarios.csv';
+
 
     }
 
