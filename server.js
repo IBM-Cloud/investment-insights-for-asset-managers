@@ -6,8 +6,8 @@ const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 var fs = require('fs');
-var multer  = require('multer')
-var upload = multer({ dest: 'tmp/' })
+//var multer  = require('multer')
+//var upload = multer({ dest: 'tmp/' })
 var FormData = require("form-data");
 var requestmodule = require('request');
 
@@ -342,8 +342,8 @@ app.post("/api/news/:company", function (req, res) {
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
 
-    if(!fs.existsSync('data/predictivescenarios.csv'))
-    {
+   // if(!fs.existsSync('data/predictivescenarios.csv'))
+    //{
     var req_body = JSON.stringify(request.body);
     //console.log(req_body);
     var options = {
@@ -378,22 +378,23 @@ app.post('/api/generatepredictive',function(request,response){
     });
     req.write(req_body);
     req.end();
-    }
+   /* }
   else
     {
         response.setHeader('Content-Type','application/json');
         response.type('application/json');
         response.send(JSON.stringify("{'error':'file exists'}"));
-    }
+    }*/
 });
 
 //-- Simulated Instrument Analysis Service POST-----
-app.post('/api/instruments',upload.single('scenario_file'),function(request,response){
+app.post('/api/instruments/:instruments',function(request,response){
 
     if(fs.existsSync('data/predictivescenarios.csv'))
     {
+            //console.log(request.params.instruments);
             var formData = {
-            instruments: request.body.instruments,
+            instruments: request.params.instruments || "CX_US037833CM07_USD",
             scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
             };
 
@@ -407,8 +408,8 @@ app.post('/api/instruments',upload.single('scenario_file'),function(request,resp
             req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
             
             function requestCallback(err, res, body) {
-            console.log("BODY"+body);
-            console.log("RESPONSE:"+ JSON.stringify(res));
+            //console.log("BODY"+body);
+            //console.log("RESPONSE:"+ JSON.stringify(res));
             response.setHeader('Content-Type','application/json');
             response.type('application/json');
             response.send(body);
