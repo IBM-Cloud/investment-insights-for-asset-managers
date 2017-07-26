@@ -383,6 +383,7 @@ app.post('/api/generatepredictive',function(request,response){
     }
 });
 
+
 //-- Simulated Instrument Analysis Service POST-----
 app.post('/api/instruments',upload.single('scenario_file'),function(request,response){
 
@@ -390,7 +391,7 @@ app.post('/api/instruments',upload.single('scenario_file'),function(request,resp
     {
         var formData = {
         instruments: request.body.instruments,
-        scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
+        scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios.csv'),
         };
 
         var req = requestmodule.post(

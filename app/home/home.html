@@ -31,7 +31,7 @@
                                                 <!--<td>{{ holding.instrumentId }}-->
                                                 <td>{{ holding.quantity }}</td>
                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                                <td class="discoverRun"><button class="base--button widget--header-button">Run Discovery</button></td>
+                                                <td class="discoverRun"><button class="base--button widget--header-button">Call Watson Discovery</button></td>
                                             </tr>
                                         </table>
 
@@ -58,14 +58,14 @@
 
                     <div class="newsArea">
                         <div class="serviceHeader">
-                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Discovery News
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Watson Discovery News
                         </div>
 
                         <div class="top-stories widget" >
                             <div class="widget--header">
                                 <h2 class="base--h2 widget--header-title">Top Stories</h2>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage == false">View API</button>
+                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage == false">View API Response</button>
                             </div>
 
                             <span class="userMessage" ng-if="showMessage == true">
@@ -139,10 +139,9 @@
                         <div class="instrumentAnalytics">
                             <div class="serviceHeader">
                                 <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
-                                <img src="/assets/images/instrument_Analytics.svg"
-                                     alt="price and analytics under stress"
-                                     data-pin-nopin="true"> <span
-                                    class="">Simulated Instrument Analytics</span>
+                                <img src="/assets/images/instrument_Analytics.svg" data-pin-nopin="true"> 
+                                <span class="">Simulated Instrument Analytics</span>
+                                Analysis: {{analysisData}}
                             </div>
                         </div>
                     </div>

@@ -131,7 +131,7 @@
         var showMessage;
         var dateAndTime;
         $scope.showMessage = true
-        
+
         //When user selected a portfolio
         vm.toDiscovery = function(company){
             $http({
@@ -191,19 +191,24 @@
             });
         };
 
-        $scope.dateAndTime = function(_date) { 
-            //console.log("date: ", _date);
-
-            //console.log(parseInt(_date));
-            return parseInt(_date); 
-        }
-
         $scope.discoveryNewsButton = function() {
             window.location = "./api/news";
         };
         $scope.portfolioButton = function() {
             window.location = "./api/portfolios";
         };
+
+                
+        vm.instrumentAnalysis = function(analysis){
+            $http({
+                method: 'POST',
+                url: '/api/instruments' + analysis,
+                data: {analysis: analysis}
+            }).then(function (result){
+                $scope.analysisData = result;
+                console.log(result);
+            });
+        }
 
     }
 
