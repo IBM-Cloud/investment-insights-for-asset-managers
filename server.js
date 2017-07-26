@@ -5,6 +5,11 @@ const cfenv = require('cfenv');
 const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+var fs = require('fs');
+var multer  = require('multer')
+var upload = multer({ dest: 'tmp/' })
+var FormData = require("form-data");
+var requestmodule = require('request');
 
 var port = process.env.VCAP_APP_PORT || 3000;
 var vcapLocal = null;
@@ -80,7 +85,7 @@ var discovery = new DiscoveryV1({
 app.use('/', express.static(__dirname +  '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+//app.use(upload.single());
 
 //--Portfolios POST Methods - To Create single portfolios--------------------
 app.post('/api/portfolios', function(req, response){
@@ -336,6 +341,9 @@ app.post("/api/news/:company", function (req, res) {
 
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
+
+    if(!fs.existsSync('data/predictivescenarios.csv'))
+    {
     var req_body = JSON.stringify(request.body);
     //console.log(req_body);
     var options = {
@@ -361,16 +369,53 @@ app.post('/api/generatepredictive',function(request,response){
 
         res.on("end", function () {
             var body = Buffer.concat(chunks);
-            console.log(body.toString());
-            response.setHeader('Content-Type','application/json');
-            response.type('application/json');
-            response.send(body.toString());
+            //console.log(body.toString());
+            //response.setHeader('Content-Type','application/json');
+            //response.type('application/json');
+            response.send(toCSV(body.toString()));
+            //toCSV(body.toString());
         });
     });
     req.write(req_body);
     req.end();
-
+    }
+  else
+    {
+        response.setHeader('Content-Type','application/json');
+        response.type('application/json');
+        response.send(JSON.stringify("{'error':'file exists'}"));
+    }
 });
+
+//-- Simulated Instrument Analysis Service POST-----
+app.post('/api/instruments',upload.single('scenario_file'),function(request,response){
+
+    if(fs.existsSync('data/predictivescenarios.csv'))
+    {
+            var formData = {
+            instruments: request.body.instruments,
+            scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
+            };
+
+            var req = requestmodule.post(
+                {
+                   url:'https://'+ process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI +'/api/v1/scenario/instruments',
+                   formData:formData
+                },requestCallback);
+            //r._form = form;
+            req.setHeader('enctype',"multipart/form-data");
+            req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
+            
+            function requestCallback(err, res, body) {
+            console.log("BODY"+body);
+            console.log("RESPONSE:"+ JSON.stringify(res));
+            response.setHeader('Content-Type','application/json');
+            response.type('application/json');
+            response.send(body);
+            }
+    }
+});
+
 
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
@@ -399,6 +444,17 @@ function getHostName(url)
     else {
         return null;
     }
+}
+
+function toCSV(datatowrite)
+{
+    fs.writeFile('data/predictivescenarios.csv', datatowrite, 'utf8', function (err) {
+  if (err) {
+    console.log('Some error occured - file either not saved or corrupted file saved.');
+  } else{
+    console.log('It\'s saved!');
+  }
+});
 }
 
 //--launch--------------------
