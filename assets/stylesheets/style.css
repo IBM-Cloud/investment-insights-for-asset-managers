@@ -1762,8 +1762,9 @@ span.userMessage.ng-scope p{
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
-    min-height: 500px;
+    min-height: 200px;
     margin-top: 80px;
+    margin-bottom: 100px;
 }
 
 .instrumentAnalytics img, .marketScenarios img {
@@ -1817,6 +1818,7 @@ button.base--button.widget--header-button.csv {
         width: 100%;
         height: 400px;
         margin-top: 20px;
+        margin-bottom: 50px;
     }
 
 
