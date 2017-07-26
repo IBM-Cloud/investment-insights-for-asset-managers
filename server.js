@@ -6,6 +6,10 @@ const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 var fs = require('fs');
+var multer  = require('multer')
+var upload = multer({ dest: 'tmp/' })
+var FormData = require("form-data");
+var requestmodule = require('request');
 
 var port = process.env.VCAP_APP_PORT || 3000;
 var vcapLocal = null;
@@ -76,7 +80,7 @@ var discovery = new DiscoveryV1({
 app.use('/', express.static(__dirname +  '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+//app.use(upload.single());
 
 //--Portfolios POST Methods - To Create single portfolios--------------------
 app.post('/api/portfolios', function(req, response){
@@ -391,6 +395,36 @@ app.post('/api/generatepredictive',function(request,response){
     }
 });
 
+//-- Simulated Instrument Analysis Service POST-----
+app.post('/api/instruments',upload.single('scenario_file'),function(request,response){
+
+    if(fs.existsSync('data/predictivescenarios.csv'))
+    {
+            var formData = {
+            instruments: request.body.instruments,
+            scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
+            };
+
+            var req = requestmodule.post(
+                {
+                   url:'https://'+ process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI +'/api/v1/scenario/instruments',
+                   formData:formData
+                },requestCallback);
+            //r._form = form;
+            req.setHeader('enctype',"multipart/form-data");
+            req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
+            
+            function requestCallback(err, res, body) {
+            console.log("BODY"+body);
+            console.log("RESPONSE:"+ JSON.stringify(res));
+            response.setHeader('Content-Type','application/json');
+            response.type('application/json');
+            response.send(body);
+            }
+    }
+});
+
+
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -430,7 +464,6 @@ function toCSV(datatowrite)
   }
 });
 }
-
 
 //--launch--------------------
 app.listen(port, "0.0.0.0", function() {
