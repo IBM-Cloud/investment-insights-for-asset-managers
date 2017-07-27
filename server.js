@@ -41,7 +41,7 @@ if (process.env.VCAP_SERVICES)
 
     if(env['fss-scenario-analytics-service'])
         {
-            SCENARIO_INSTRUMENTS_URI = getHostName(env['fss-scenario-analytics-service'[0].credentials.uri]);
+            SCENARIO_INSTRUMENTS_URI = getHostName(env['fss-scenario-analytics-service'][0].credentials.uri);
             SCENARIO_INSTRUMENTS_ACCESS_TOKEN = env['fss-scenario-analytics-service'][0].credentials.accessToken;
         }
     else {
