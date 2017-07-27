@@ -137,7 +137,8 @@
             $scope.holding = holding;
             $scope.currentprice = "";
             $scope.stressedprice = "";
-            $scope.difference="";
+            $scope.difference = "";
+            $scope.simulateheading = false;
             //console.log($scope.holding);
             $http({
                 method: 'POST',
@@ -183,6 +184,7 @@
                             neutralCount++;
                         }                        
                     });
+                    $scope.csv_link = './data/predictiveMarketScenarios/predictivescenarios'+ ($scope.shockvalue*10) +'.csv';
                     $scope.negativeCount = negativeCount;
                     $scope.positiveCount = positiveCount;
                     $scope.neutralCount = neutralCount;
@@ -206,7 +208,7 @@
             //console.log($scope.holding.instrumentId);
          $http({
                 method: 'POST',
-                url: '/api/instruments/'+$scope.holding.instrumentId
+                url: '/api/instruments/'+$scope.holding.instrumentId+'/'+$scope.shockvalue
             }).then(function(instruments){
            // console.log(JSON.stringify(instruments));
             var valuesArray = [];
@@ -221,7 +223,8 @@
            $scope.stressedprice = valuesArray[1];
            $scope.difference = difference.toFixed(3);
            $scope.loading = false;
-           $scope.$apply();
+           $scope.simulateheading = true;
+           //$scope.$apply();
           
             });
            
@@ -241,8 +244,6 @@
             window.location = "./api/portfolios";
         };
 
-        // ToDo - update the CSV based user selection
-        $scope.csv_link = './data/predictiveMarketScenarios/predictivescenarios.csv';
 
 
     }

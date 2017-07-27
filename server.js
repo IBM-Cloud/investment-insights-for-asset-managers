@@ -348,7 +348,8 @@ app.post('/api/generatepredictive',function(request,response){
    // if(!fs.existsSync('data/predictivescenarios.csv'))
     //{
     var req_body = JSON.stringify(request.body);
-    //console.log(req_body);
+    //console.log(request.body.market_change.shock);
+    const shock_value = request.body.market_change.shock || 1.5;
     var options = {
         "method": "POST",
         "hostname": process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
@@ -375,7 +376,7 @@ app.post('/api/generatepredictive',function(request,response){
             //console.log(body.toString());
             //response.setHeader('Content-Type','application/json');
             //response.type('application/json');
-            response.send(toCSV(body.toString()));
+            response.send(toCSV(body.toString(),shock_value));
             //toCSV(body.toString());
         });
     });
@@ -392,14 +393,14 @@ app.post('/api/generatepredictive',function(request,response){
 
 
 //-- Simulated Instrument Analysis Service POST-----
-app.post('/api/instruments/:instruments',function(request,response){
+app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
 
-    if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
-    {
-            //console.log(request.params.instruments);
+    //if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
+    //{
+            console.log("SHOCK"+request.params.shockvalue);
             var formData = {
             instruments: request.params.instruments || "CX_US037833CM07_USD",
-            scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios.csv'),
+            scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.5)*10 +'.csv'),
             };
 
             var req = requestmodule.post(
@@ -418,7 +419,7 @@ app.post('/api/instruments/:instruments',function(request,response){
             response.type('application/json');
             response.send(body);
             }
-    }
+    //}
 });
 
 
@@ -451,14 +452,18 @@ function getHostName(url)
     }
 }
 
-function toCSV(datatowrite)
+function toCSV(datatowrite,shockvalue)
 {
-    fs.writeFile('data/predictivescenarios.csv', datatowrite, 'utf8', function (err) {
-  if (err) {
-    console.log('Some error occured - file either not saved or corrupted file saved.');
-  } else{
-    console.log('It\'s saved!');
-  }
+    var shock = shockvalue.toString().replace('.','');
+    //console.log(datatowrite);
+    fs.writeFile(path.join(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ shock +'.csv'), datatowrite, 'utf8', function (err) {
+    if (err) {
+        console.log(err);
+        console.log('Some error occured - file either not saved or corrupted file saved.');
+    } 
+    else {
+        console.log('It\'s saved!');
+    }
 });
 }
 
