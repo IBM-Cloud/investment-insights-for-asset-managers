@@ -151,37 +151,34 @@
                             <div class="serviceHeader">
                                 <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
                                 <i class="fa fa-university" aria-hidden="true"></i> Simulated Instrument Analytics
-
-                             <div class="marketScenariosBody">
+                            </div>
+                            <div class="marketScenariosBody">
                                 <h2 class="base--h2 widget--header-title">Analytics</h2>
                             </div>
-                              
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Company</th>
-                                                 <!--<th>InstrumentID</th>-->
-                                                <th>Quantity</th>
-                                                <th>Current Price</th>
-                                                <th>Stressed Price</th>
-                                                <th>Profit/Loss</th>
-                                
-                                            </tr>
-                                            <tr>
-                                                <td>{{ holding.asset }}</td>
-                                                <td>{{ holding.companyName }}</td>
-                                                <!--<td>{{ holding.instrumentId }}-->
-                                                <td>{{ holding.quantity }}</td>
-                                                <td>{{ currentprice }}</td>
-                                                <td>{{ stressedprice }}</td>
-                                                <td>{{ difference }}%</td>
-
-                                                <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                        
-                                            </tr>
-                                        </table>                              
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Company</th>
+                                        <!--<th>InstrumentID</th>-->
+                                        <th>Quantity</th>
+                                        <th>Current Price</th>
+                                        <th>Stressed Price</th>
+                                        <th>Profit/Loss</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ holding.asset }}</td>
+                                        <td>{{ holding.companyName }}</td>
+                                        <!--<td>{{ holding.instrumentId }}-->
+                                        <td>{{ holding.quantity }}</td>
+                                        <td>{{ currentprice }}</td>
+                                        <td>{{ stressedprice }}</td>
+                                        <td>{{ difference }}%</td>
+                                        <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
+                                    </tr>
+                                </table>                              
                             </div>
                         </div>
-                    </div>
+                    </div><!-- ng-if="showMessage == false"  -->
                 </section>
             </div>
         </div>
