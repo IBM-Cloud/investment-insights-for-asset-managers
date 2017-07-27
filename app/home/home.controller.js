@@ -245,7 +245,6 @@
         };
 
 
-
     }
 
     homeController.$inject = ['$scope', 'authService', '$http'];
