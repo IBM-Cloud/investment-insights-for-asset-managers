@@ -6,5 +6,6 @@ applications:
   services:
     - fintrade-db
     - fintrade-discovery
-    - Investment-Portfolio-fintrade
-    - fintrade-simulated-instrument-analytics
+    - investment-portfolio-fintrade
+    - predictive-market-scenarios-fintrade
+    - simulated-instrument-analytics-fintrade

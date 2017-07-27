@@ -12,7 +12,7 @@
 
                             <div class="widget--header"><h2 class="base--h2 widget--header-title">Choose a portfolio</h2>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="portfolioButton()">View API</button>
+                                <button class="base--button widget--header-button" ng-click="portfolioButton()">View API Response</button>
                             </div>
                             <div ng-init="vm.initialSetup()">
                                 <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
@@ -31,7 +31,7 @@
                                                 <!--<td>{{ holding.instrumentId }}-->
                                                 <td>{{ holding.quantity }}</td>
                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                                <td class="discoverRun"><button class="base--button widget--header-button">Run Discovery</button></td>
+                                                <td class="discoverRun"><button class="base--button widget--header-button">Call Watson Discovery</button></td>
                                             </tr>
                                         </table>
 
@@ -58,14 +58,14 @@
 
                     <div class="newsArea">
                         <div class="serviceHeader">
-                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Discovery News
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Watson Discovery News
                         </div>
 
                         <div class="top-stories widget" >
                             <div class="widget--header">
                                 <h2 class="base--h2 widget--header-title">Top Stories</h2>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage == false">View API</button>
+                                <button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage == false">View API Response</button>
                             </div>
 
                             <span class="userMessage" ng-if="showMessage == true">
@@ -128,26 +128,36 @@
                         <button class="base--button widget--simulate-button"  ng-click="vm.simulate(holding.instrumentId)">Simulate for this Shock value</button>
                     </div>
 
-                    <div class="analyticsArea">
+
+
+                    <div ng-if="showMessage == false">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
-                                <img src="/assets/images/market_Scenarios.svg" alt="market Scenarios" data-pin-nopin="true">
-                                <span class="">Predictive Market-Scenarios Service</span>
-                                <!--<i class="fa fa-pie-chart" aria-hidden="true"></i> Predictive-Market-Scenarios Service-->
+                                <i class="fa fa-university" aria-hidden="true"></i> Predictive Market-Scenarios Service
+                            </div>
+                            
+                            <div class="marketScenariosBody">
+                                <h2 class="base--h2 widget--header-title">Scenarios</h2>
+                                <p class="base--p top-stories--description">
+                                    A CSV scenario generated based the portfolio selected. 
+                                </p>
+                                <a target="_self" ng-href="{{csv_link}}" class="downloadCSV">
+                                    <button class="base--button widget--header-button csv">Download CSV</button>
+                                </a>
                             </div>
                         </div>
 
                         <div class="instrumentAnalytics">
                             <div class="serviceHeader">
                                 <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
-                                <img src="/assets/images/instrument_Analytics.svg"
-                                     alt="price and analytics under stress"
-                                     data-pin-nopin="true"> <span
-                                    class="">Simulated Instrument Analytics</span>
-                                    <table id="portfolio">
+                                <i class="fa fa-university" aria-hidden="true"></i> Simulated Instrument Analytics
+
+                             <div class="marketScenariosBody">
+                                <h2 class="base--h2 widget--header-title">Analytics</h2>
+                            </div>
+                              
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Company</th>
+                                                <th>Name</th>https://github.com/IBM-Bluemix/finance-trade/pull/35/conflict?name=app%252Fhome%252Fhome.html&ancestor_oid=8d7cc46c751af9cbd24d514a6fcb506e2d5db2cf&base_oid=993830ba5f788d31ceeb06f422e6f7b69f7a4bc1&head_oid=25e974e740b25faf2264081c4425af3cc1663276<th>Company</th>
                                                  <!--<th>InstrumentID</th>-->
                                                 <th>Quantity</th>
                                                 <th>Current Price</th>
@@ -167,7 +177,7 @@
                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
                                         
                                             </tr>
-                                        </table>
+                                        </table>                              
                             </div>
                         </div>
                     </div>

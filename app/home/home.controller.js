@@ -15,9 +15,9 @@
         vm.login = login;
         $scope.oneAtATime = true;
         var mapping = [
-            {name: 'technology', file: '/data/technology_holdings.json'},
-            { name: 'pharmaceutical',file: '/data/pharma_holdings.json'},
-            { name: 'agriculture',file: '/data/agriculture_holdings.json'}
+            {name: 'technology', file: '/data/investmentPortfolio/holdings/technology_holdings.json'},
+            { name: 'pharmaceutical',file: '/data/investmentPortfolio/holdings/pharma_holdings.json'},
+            { name: 'agriculture',file: '/data/investmentPortfolio/holdings/agriculture_holdings.json'}
             ];
 
         //var holdingsArray = [];
@@ -39,7 +39,7 @@
             //Reading Portfolios JSON
             $http({
                 method: 'GET',
-                url: '/data/portfolios.json'
+                url: '/data/investmentPortfolio/portfolio/portfolios.json'
             }).then(function (result) {
                 $scope.portfolios = result.data.portfolios;
 
@@ -131,7 +131,7 @@
         var showMessage;
         var dateAndTime;
         $scope.showMessage = true
-        
+
         //When user selected a portfolio
         vm.toDiscovery = function(holding){
             $scope.holding = holding;
@@ -237,6 +237,10 @@
         $scope.portfolioButton = function() {
             window.location = "./api/portfolios";
         };
+
+        // ToDo - update the CSV based user selection
+        $scope.csv_link = './data/predictiveMarketScenarios/predictivescenarios.csv';
+
 
     }
 

@@ -312,12 +312,9 @@ app.get('/api/news',function(req,res){
 
 //--Discovery News POST returning 6 results--------------------
 app.post("/api/news/:company", function (req, res) {
-    //console.log(req.body.company);
-
     discovery.query({
         environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
         collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
-        // query: 'AMGEN INC, Apple Inc, Honeywell International Inc',
         query: req.body.company,
         count: 20,
         return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
@@ -341,7 +338,6 @@ app.post("/api/news/:company", function (req, res) {
             res.send(response);
         }
     });
-    //res.send(req.body.company);
 });
 
 
@@ -394,10 +390,11 @@ app.post('/api/generatepredictive',function(request,response){
     }*/
 });
 
+
 //-- Simulated Instrument Analysis Service POST-----
 app.post('/api/instruments/:instruments',function(request,response){
 
-    if(fs.existsSync('data/predictivescenarios.csv'))
+    if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
     {
             //console.log(request.params.instruments);
             var formData = {
