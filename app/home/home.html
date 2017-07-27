@@ -155,7 +155,7 @@
                             <div class="marketScenariosBody">
                                 <h2 class="base--h2 widget--header-title">Analytics</h2>
                             </div>
-                                <table>
+                                <table id="portfolio">
                                     <tr>
                                         <th>Name</th>
                                         <th>Company</th>
@@ -172,7 +172,8 @@
                                         <td>{{ holding.quantity }}</td>
                                         <td>{{ currentprice }}</td>
                                         <td>{{ stressedprice }}</td>
-                                        <td>{{ difference }}%</td>
+                                        <td ng-if="difference < 0" class="redsimulate">{{ difference }}%</td>
+                                        <td ng-if="difference > 0" class="green">{{ difference }}%</td>
                                         <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
                                     </tr>
                                 </table>                              

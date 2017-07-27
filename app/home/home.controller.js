@@ -135,6 +135,9 @@
         //When user selected a portfolio
         vm.toDiscovery = function(holding){
             $scope.holding = holding;
+            $scope.currentprice = "";
+            $scope.stressedprice = "";
+            $scope.difference="";
             //console.log($scope.holding);
             $http({
                 method: 'POST',
@@ -216,7 +219,7 @@
            var difference = parseFloat(valuesArray[1]) - parseFloat(valuesArray[0]);
            $scope.currentprice = valuesArray[0];
            $scope.stressedprice = valuesArray[1];
-           $scope.difference = (difference/100).toFixed(5);
+           $scope.difference = difference.toFixed(3);
            $scope.loading = false;
            $scope.$apply();
           

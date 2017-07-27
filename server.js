@@ -399,7 +399,7 @@ app.post('/api/instruments/:instruments',function(request,response){
             //console.log(request.params.instruments);
             var formData = {
             instruments: request.params.instruments || "CX_US037833CM07_USD",
-            scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
+            scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios.csv'),
             };
 
             var req = requestmodule.post(

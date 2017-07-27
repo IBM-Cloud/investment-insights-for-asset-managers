@@ -1656,6 +1656,14 @@ tr:nth-child(even) {
 .normal{
     color: #152935;
 }
+.green{
+    font-weight: bolder;
+    color: #19B50A;
+}
+.redsimulate{
+    font-weight: bolder;
+    color:#de6b6b
+}
 top-stories--list ng-scope:first-child{
     display: inline;
 }
