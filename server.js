@@ -16,6 +16,7 @@ var vcapLocal = null;
 // declare service variables
 var INVESTMENT_PORFOLIO_BASE_URL,INVESTMENT_PORFOLIO_USERNAME,INVESTMENT_PORFOLIO_PASSWORD;
 var DISCOVERY_USERNAME, DISCOVERY_PASSWORD;
+var SCENARIO_INSTRUMENTS_URI,SCENARIO_INSTRUMENTS_ACCESS_TOKEN;
 
 if (process.env.VCAP_SERVICES)
 {
@@ -37,6 +38,12 @@ if (process.env.VCAP_SERVICES)
         DISCOVERY_USERNAME = env['discovery'][0].credentials.username;
         DISCOVERY_PASSWORD = env['discovery'][0].credentials.password;
     }
+
+    if(env['fss-scenario-analytics-service'])
+        {
+            SCENARIO_INSTRUMENTS_URI = getHostName(env['fss-scenario-analytics-service'[0].credentials.uri]);
+            SCENARIO_INSTRUMENTS_ACCESS_TOKEN = env['fss-scenario-analytics-service'][0].credentials.accessToken;
+        }
     else {
         console.log('You must bind the Investment Portfolio service to this application');
     }
@@ -400,12 +407,12 @@ app.post('/api/instruments/:instruments',function(request,response){
 
             var req = requestmodule.post(
                 {
-                   url:'https://'+ process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI +'/api/v1/scenario/instruments',
+                   url:'https://'+ (SCENARIO_INSTRUMENTS_URI || process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI) +'/api/v1/scenario/instruments',
                    formData:formData
                 },requestCallback);
             //r._form = form;
             req.setHeader('enctype',"multipart/form-data");
-            req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
+            req.setHeader('x-ibm-access-token', SCENARIO_INSTRUMENTS_ACCESS_TOKEN ||process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
             
             function requestCallback(err, res, body) {
             //console.log("BODY"+body);

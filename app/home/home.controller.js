@@ -218,7 +218,7 @@
            $scope.stressedprice = valuesArray[1];
            $scope.difference = (difference/100).toFixed(5);
            $scope.loading = false;
-           $scope.$refresh();
+           $scope.$apply();
           
             });
            
