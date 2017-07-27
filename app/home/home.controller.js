@@ -131,6 +131,8 @@
         var showMessage;
         var dateAndTime;
         $scope.showMessage = true
+        $scope.simulateShock = true
+
 
         //When user selected a portfolio
         vm.toDiscovery = function(holding){
@@ -201,6 +203,8 @@
         vm.simulate = function(instrumentid)
         {
              $scope.loading = true;
+             $scope.simulateShock = false
+
            //var data =[{"instrument":"CX_US037833CM07_USD","scenario":"Base Scenario (0.0000)","values":[{"THEO/Price":"100.2544 USD","date":"2017/07/26"}]},{"instrument":"CX_US037833CM07_USD","scenario":"CONDITIONAL_1 (1.0000)","values":[{"THEO/Price":"100.2314 USD","date":"2017/07/26"}]}];
           
             //console.log(instrumentid);

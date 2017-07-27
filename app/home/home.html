@@ -10,10 +10,21 @@
                                 <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                             </div>
 
-                            <div class="widget--header"><h2 class="base--h2 widget--header-title">Choose a portfolio</h2>
+
+                           <div layout="row" layout-align="space-between center">
+                                <h4>Choose risk factor</h4>
+                                    <md-select ng-model="weapon" placeholder="Risk factors" class="md-no-underline">
+                                    <md-option value="axe">S&P 500</md-option>
+                                    <md-option value="sword">Gold Price</md-option>
+                                    <md-option value="wand">Euro / USD</md-option>
+                                    </md-select>
+                                </div>
+
+                            <div class="widget--header">
+                                <h4>Choose a portfolio</h4>
                                 <div class="widget--header-spacer"></div>
-                                <button class="base--button widget--header-button" ng-click="portfolioButton()">View API Response</button>
                             </div>
+                            
                             <div ng-init="vm.initialSetup()">
                                 <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
                                     <div uib-accordion-group class="panel-default" ng-repeat="portfolio in portfolios" is-open="status.open" ng-click="vm.getHoldings(portfolio)">
@@ -125,12 +136,12 @@
                     <!--Shock value calculated in controller-->
                     <div class="discoveryAnalytics" ng-if="showMessage == false">
                         <span class="discoveryAnalyticsMessage">Assumption made, <span class="redBold">({{shockvalue}}% fall)</span> to your portfolio based on the impacted news to your portfolio.</span>
-                        <button class="base--button widget--simulate-button"  ng-click="vm.simulate(holding.instrumentId)">Simulate for this shock value</button>
+                        <button class="base--button widget--simulate-button"  ng-click="vm.simulate(holding.instrumentId)">Run Simulation</button>
                     </div>
 
 
 
-                    <div ng-if="showMessage == false">
+                    <div ng-if="simulateShock == false">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
                                 <i class="fa fa-university" aria-hidden="true"></i> Predictive Market-Scenarios Service
@@ -193,6 +204,6 @@
 <!-- =========== User is not Authenticated ===========  -->
 <section ng-if="!vm.auth.isAuthenticated()" class="notAuthenticated">
     <br>
-    You are not logged in! Please <a ng-click="vm.auth.login()">log In</a> to continue.
+    You are not logged in! Please <a ng-click="vm.auth.login()">log in</a> to continue.
 </section>
 

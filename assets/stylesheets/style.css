@@ -1445,6 +1445,58 @@ section.notAuthenticated a:hover{
 /****************************- END Nav bar*/
 
 
+/****************************- Risk factor*/
+.bx--dropdown[data-value=''] .bx--dropdown-text {
+    color: #5a6872;
+}
+.bx--dropdown {
+    font-family: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    position: relative;
+    list-style: none;
+    display: block;
+    background-color: rgba(61, 112, 178, 0.1);
+    width: 100%;
+    cursor: pointer;
+    color: #152935;
+}
+.bx--dropdown-text {
+    padding-top: 0.8125rem;
+    padding-bottom: 0.8125rem;
+    padding-left: 1rem;
+    padding-right: 2.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid transparent;
+}
+.bx--dropdown__arrow {
+    fill: #3d70b2;
+    position: absolute;
+    right: 1rem;
+    top: 1.175rem;
+    width: 0.625rem;
+    height: 0.3125rem;
+    pointer-events: none;
+    transition: -webkit-transform 250ms ease-in-out;
+    transition: transform 250ms ease-in-out;
+    transition: transform 250ms ease-in-out, -webkit-transform 250ms ease-in-out;
+    -webkit-transform-origin: 50% 45%;
+    transform-origin: 50% 45%;
+}
+.bx--dropdown-link {
+    display: block;
+    color: currentColor;
+    text-decoration: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+}
+
+
+/****************************- END Risk factor**/
 
 
 /****************************- Investment Portfolio Widget*/
@@ -1629,7 +1681,7 @@ tr:nth-child(even) {
 }
 
 .widget--simulate-button {
-    background-color: transparent;
+    background: rgb(77, 124, 184);
     color: #fff;
     border-radius: 10rem;
     padding: .25em 2em;
@@ -1698,7 +1750,7 @@ span.userMessage.ng-scope p{
     float: right;
     border-radius: 3px;
     margin-top: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgb(17, 36, 48);
     background: rgba(17, 36, 48, 0.87);
@@ -1793,8 +1845,7 @@ span.userMessage.ng-scope p{
     margin-bottom: 10px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
-    min-height: 300px;
-    margin-top: 80px;
+    min-height: 250px;
     margin-bottom: 150px;
 }
 
