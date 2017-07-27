@@ -6,8 +6,8 @@ const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 var fs = require('fs');
-var multer  = require('multer')
-var upload = multer({ dest: 'tmp/' })
+//var multer  = require('multer')
+//var upload = multer({ dest: 'tmp/' })
 var FormData = require("form-data");
 var requestmodule = require('request');
 
@@ -16,6 +16,7 @@ var vcapLocal = null;
 // declare service variables
 var INVESTMENT_PORFOLIO_BASE_URL,INVESTMENT_PORFOLIO_USERNAME,INVESTMENT_PORFOLIO_PASSWORD;
 var DISCOVERY_USERNAME, DISCOVERY_PASSWORD;
+var SCENARIO_INSTRUMENTS_URI,SCENARIO_INSTRUMENTS_ACCESS_TOKEN;
 
 if (process.env.VCAP_SERVICES)
 {
@@ -37,6 +38,12 @@ if (process.env.VCAP_SERVICES)
         DISCOVERY_USERNAME = env['discovery'][0].credentials.username;
         DISCOVERY_PASSWORD = env['discovery'][0].credentials.password;
     }
+
+    if(env['fss-scenario-analytics-service'])
+        {
+            SCENARIO_INSTRUMENTS_URI = getHostName(env['fss-scenario-analytics-service'][0].credentials.uri);
+            SCENARIO_INSTRUMENTS_ACCESS_TOKEN = env['fss-scenario-analytics-service'][0].credentials.accessToken;
+        }
     else {
         console.log('You must bind the Investment Portfolio service to this application');
     }
@@ -338,8 +345,8 @@ app.post("/api/news/:company", function (req, res) {
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
 
-    if(!fs.existsSync('data/predictivescenarios.csv'))
-    {
+   // if(!fs.existsSync('data/predictivescenarios.csv'))
+    //{
     var req_body = JSON.stringify(request.body);
     //console.log(req_body);
     var options = {
@@ -374,42 +381,43 @@ app.post('/api/generatepredictive',function(request,response){
     });
     req.write(req_body);
     req.end();
-    }
+   /* }
   else
     {
         response.setHeader('Content-Type','application/json');
         response.type('application/json');
         response.send(JSON.stringify("{'error':'file exists'}"));
-    }
+    }*/
 });
 
 
 //-- Simulated Instrument Analysis Service POST-----
-app.post('/api/instruments',upload.single('scenario_file'),function(request,response){
+app.post('/api/instruments/:instruments',function(request,response){
 
     if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
     {
-        var formData = {
-        instruments: request.body.instruments,
-        scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios.csv'),
-        };
+            //console.log(request.params.instruments);
+            var formData = {
+            instruments: request.params.instruments || "CX_US037833CM07_USD",
+            scenario_file: fs.createReadStream(__dirname + '/data/predictivescenarios.csv'),
+            };
 
-        var req = requestmodule.post(
-            {
-                url:'https://'+ process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI +'/api/v1/scenario/instruments',
-                formData:formData
-            },requestCallback);
-        //r._form = form;
-        req.setHeader('enctype',"multipart/form-data");
-        req.setHeader('x-ibm-access-token', process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
-        
-        function requestCallback(err, res, body) {
-        console.log("BODY"+body);
-        console.log("RESPONSE:"+ JSON.stringify(res));
-        response.setHeader('Content-Type','application/json');
-        response.type('application/json');
-        response.send(body);
-        }
+            var req = requestmodule.post(
+                {
+                   url:'https://'+ (SCENARIO_INSTRUMENTS_URI || process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI) +'/api/v1/scenario/instruments',
+                   formData:formData
+                },requestCallback);
+            //r._form = form;
+            req.setHeader('enctype',"multipart/form-data");
+            req.setHeader('x-ibm-access-token', SCENARIO_INSTRUMENTS_ACCESS_TOKEN ||process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
+            
+            function requestCallback(err, res, body) {
+            //console.log("BODY"+body);
+            //console.log("RESPONSE:"+ JSON.stringify(res));
+            response.setHeader('Content-Type','application/json');
+            response.type('application/json');
+            response.send(body);
+            }
     }
 });
 

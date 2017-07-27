@@ -20,7 +20,7 @@
             { name: 'agriculture',file: '/data/investmentPortfolio/holdings/agriculture_holdings.json'}
             ];
 
-        var holdingsArray = [];
+        //var holdingsArray = [];
 
         // login function making a call to signin that comes from auth service and send the user profile to the profile that user is logged in with. If all good the storing user profile on local storage.
         function login() {
@@ -68,13 +68,13 @@
                                                 }, function (err) {
                                                     console.log("CREATE HOLDINGS FAILED", err);
                                                 });
-                                            holdingsArray.push(holdings.data.holdings);
+                                            //holdingsArray.push(holdings.data.holdings);
                                         }, function (err) {
                                         console.log(err);
                                     });
                                 }
                             );
-                            $scope.holdings = holdingsArray;
+                            //$scope.holdings = holdingsArray;
                             //console.log("HOLDINGS ARRAY:" + holdingsArray);
                         }, function (err) {
                             console.log("CREATE PORTFOLIOS FAILED", err);
@@ -133,11 +133,13 @@
         $scope.showMessage = true
 
         //When user selected a portfolio
-        vm.toDiscovery = function(company){
+        vm.toDiscovery = function(holding){
+            $scope.holding = holding;
+            //console.log($scope.holding);
             $http({
                 method: 'POST',
-                url: '/api/news/' + company,
-                data: {company: company}
+                url: '/api/news/' + holding.companyName,
+                data: {company: holding.companyName}
             }).then(function (result) {
                 if(result.config.data.company !== undefined){
                     $scope.newslist = result.data;
@@ -190,6 +192,44 @@
                 console.log(err);
             });
         };
+
+        vm.simulate = function(instrumentid)
+        {
+             $scope.loading = true;
+           //var data =[{"instrument":"CX_US037833CM07_USD","scenario":"Base Scenario (0.0000)","values":[{"THEO/Price":"100.2544 USD","date":"2017/07/26"}]},{"instrument":"CX_US037833CM07_USD","scenario":"CONDITIONAL_1 (1.0000)","values":[{"THEO/Price":"100.2314 USD","date":"2017/07/26"}]}];
+          
+            //console.log(instrumentid);
+            //alert($scope.holding.instrumentId);
+            //console.log($scope.holding.instrumentId);
+         $http({
+                method: 'POST',
+                url: '/api/instruments/'+$scope.holding.instrumentId
+            }).then(function(instruments){
+           // console.log(JSON.stringify(instruments));
+            var valuesArray = [];
+           angular.forEach(instruments.data,function(value, key) {
+               angular.forEach(value.values, function(v,k){
+                     valuesArray.push(v["THEO/Price"]);
+               });
+           });
+           //console.log(valuesArray[0]);
+           var difference = parseFloat(valuesArray[1]) - parseFloat(valuesArray[0]);
+           $scope.currentprice = valuesArray[0];
+           $scope.stressedprice = valuesArray[1];
+           $scope.difference = (difference/100).toFixed(5);
+           $scope.loading = false;
+           $scope.$apply();
+          
+            });
+           
+        }
+
+        $scope.dateAndTime = function(_date) { 
+            //console.log("date: ", _date);
+
+            //console.log(parseInt(_date));
+            return parseInt(_date); 
+        }
 
         $scope.discoveryNewsButton = function() {
             window.location = "./api/news";

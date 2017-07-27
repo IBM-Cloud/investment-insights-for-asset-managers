@@ -25,7 +25,7 @@
                                                 <th>Shares QTY</th>
                                                 <th>Discover</th>
                                             </tr>
-                                            <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding.companyName)">
+                                            <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding)">
                                                 <td>{{ holding.companyName }}</td>
                                                 <td>{{ holding.asset }}
                                                 <!--<td>{{ holding.instrumentId }}-->
@@ -125,6 +125,7 @@
                     <!--Shock value calculated in controller-->
                     <div class="discoveryAnalytics" ng-if="showMessage == false">
                         <span class="discoveryAnalyticsMessage">Assumption made, <span class="redBold">({{shockvalue}}% fall)</span> to your portfolio based on the impacted news to your portfolio.</span>
+                        <button class="base--button widget--simulate-button"  ng-click="vm.simulate(holding.instrumentId)">Simulate for this Shock value</button>
                     </div>
 
 
@@ -150,13 +151,34 @@
                             <div class="serviceHeader">
                                 <!--<i class="fa fa-bar-chart" aria-hidden="true"></i> Simulated Instrument Analytics-->
                                 <i class="fa fa-university" aria-hidden="true"></i> Simulated Instrument Analytics
-                            </div>
 
-
-                            <div class="marketScenariosBody">
+                             <div class="marketScenariosBody">
                                 <h2 class="base--h2 widget--header-title">Analytics</h2>
                             </div>
-                            
+                              
+                                            <tr>
+                                                <th>Name</th>https://github.com/IBM-Bluemix/finance-trade/pull/35/conflict?name=app%252Fhome%252Fhome.html&ancestor_oid=8d7cc46c751af9cbd24d514a6fcb506e2d5db2cf&base_oid=993830ba5f788d31ceeb06f422e6f7b69f7a4bc1&head_oid=25e974e740b25faf2264081c4425af3cc1663276<th>Company</th>
+                                                 <!--<th>InstrumentID</th>-->
+                                                <th>Quantity</th>
+                                                <th>Current Price</th>
+                                                <th>Stressed Price</th>
+                                                <th>Profit/Loss</th>
+                                
+                                            </tr>
+                                            <tr>
+                                                <td>{{ holding.asset }}</td>
+                                                <td>{{ holding.companyName }}</td>
+                                                <!--<td>{{ holding.instrumentId }}-->
+                                                <td>{{ holding.quantity }}</td>
+                                                <td>{{ currentprice }}</td>
+                                                <td>{{ stressedprice }}</td>
+                                                <td>{{ difference }}%</td>
+
+                                                <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
+                                        
+                                            </tr>
+                                        </table>                              
+                            </div>
                         </div>
                     </div>
                 </section>
