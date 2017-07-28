@@ -21,7 +21,6 @@
             ];
         $scope.riskfactors = [
             {id:1,name: "S&P 500"},
-            {id:2,name:"Gold Price"},
             {id:3,name:"Eur/USD"},
             {id:4,name:"NASDAQ Composite Index"},
             {id:5,name:"CAC 40 Index"},
@@ -33,7 +32,8 @@
             {id:11,name:"CAD/USD"},
             {id:12,name:"GBP/USD"},
             {id:13,name:"BrentCrude"},
-            {id:14,name:"WTI Curde"}
+            {id:14,name:"WTI Curde"},
+            {id:15,name:"Gold Price"}
         ];
         
         //var holdingsArray = [];
@@ -149,10 +149,10 @@
         $scope.showMessage = true
         $scope.simulateShock = true
 
-
+        var goldP = 'Gold Price'; // temp hard code
         //When user selected a portfolio
-        vm.toDiscovery = function(holding){
-            $scope.holding = holding;
+        vm.toDiscovery = function(){
+            //$scope.holding = holding;
             $scope.currentprice = "";
             $scope.stressedprice = "";
             $scope.difference = "";
@@ -160,8 +160,8 @@
             //console.log($scope.holding);
             $http({
                 method: 'POST',
-                url: '/api/news/' + holding.companyName,
-                data: {company: holding.companyName}
+                url: '/api/news/' + goldP,
+                data: {company: goldP}
             }).then(function (result) {
                 if(result.config.data.company !== undefined){
                     $scope.newslist = result.data;
