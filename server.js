@@ -284,7 +284,7 @@ app.get('/api/news',function(req,res){
     discovery.query({
         environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
         collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
-        query: 'Honeywell International Inc',
+        query: 'price of gold, gold forecast',
         count: 20,
         return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
         aggregations: [
@@ -335,6 +335,18 @@ app.post("/api/news/:company", function (req, res) {
         if (err) {
             console.log(err);
         } else {
+            console.log(response);
+            
+            var newResponse = [];
+            response.results.forEach(function(item) {
+                console.log(item);
+
+                if(item.host =="www.military.com" || item.host =="www.gamezone.com") {    
+                    return;
+                }
+                newResponse.push(item);
+            });
+            response.results = newResponse;
             res.send(response);
         }
     });

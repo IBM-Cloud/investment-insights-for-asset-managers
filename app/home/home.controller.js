@@ -32,7 +32,7 @@
             {id:11,name:"CAD/USD"},
             {id:12,name:"GBP/USD"},
             {id:13,name:"BrentCrude"},
-            {id:14,name:"WTI Curde"},
+            {id:14,name:"WTI Crude"},
             {id:15,name:"Gold Price"}
         ];
         
@@ -149,7 +149,7 @@
         $scope.showMessage = true
         $scope.simulateShock = true
 
-        var goldP = 'Gold Price'; // temp hard code
+        var goldP = 'price of gold, gold forecast'; // temp hard code
         //When user selected a portfolio
         vm.toDiscovery = function(){
             //$scope.holding = holding;
@@ -173,9 +173,20 @@
                     var neutralCount = 0;
                     var shockvalue = 0;
 
+                    if($scope.newslist.title == "This week's Deals with Gold brings plenty of discounts to Xbox One, 360"){
+                        console.log('catched');
+                    }
+
                     angular.forEach(result.data.results, function (item) {
+                        console.log(item.host);
+
+                        if(item.host =="www.military.com" || item.host =="www.gamezone.com"){
+                            
+                            return
+                        }
+
                         if(item.docSentiment.type == 'negative'){
-                            negativeCount++;
+                            negativeCount++;                            
 
                             // Setting shock values
                             if(negativeCount >= 1 && negativeCount <= 3){
@@ -185,14 +196,14 @@
                                 $scope.shockvalue = 1.5; 
                                 console.log($scope.shockvalue);
                             }
-                            if(negativeCount >= 7 && negativeCount <= 10){
-                                $scope.shockvalue = 2.5; 
-                            }
-                            if(negativeCount >= 10 && negativeCount <= 20){
-                                $scope.shockvalue = 3.5; 
-                            }
+                            // if(negativeCount >= 7 && negativeCount <= 10){
+                            //     $scope.shockvalue = 2.5; 
+                            // }
+                            // if(negativeCount >= 10 && negativeCount <= 20){
+                            //     $scope.shockvalue = 3.5; 
+                            // }
                             if(negativeCount > 21){
-                                $scope.shockvalue = 5.5; 
+                                $scope.shockvalue = 2.0; 
                             }
                         }
                         if(item.docSentiment.type == 'positive'){
