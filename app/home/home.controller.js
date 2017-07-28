@@ -61,7 +61,6 @@
 
                 if (result !== null && (result.data !== null || result.data !== '')) {
                     //console.log(replaceAll(JSON.stringify(result.data),"currentdate",currentISOTimestamp()));
-                    //Creating Porfolios
                     $http({
                         method: 'POST',
                         url: '/api/bulkportfolios',
@@ -96,7 +95,6 @@
                             console.log("CREATE PORTFOLIOS FAILED", err);
                         });
                 }
-                //return replaceAll(JSON.stringify(result.data),"currentdate",currentISOTimestamp());
             }, function (err) {
                 console.log(err);
             });
@@ -146,8 +144,8 @@
 
         var showMessage;
         var dateAndTime;
-        $scope.showMessage = true
-        $scope.simulateShock = true
+        $scope.showMessage = true;
+        $scope.simulateShock = true;
 
         var goldP = 'price of gold, gold forecast'; // temp hard code
         //When user selected a portfolio
@@ -173,15 +171,10 @@
                     var neutralCount = 0;
                     var shockvalue = 0;
 
-                    if($scope.newslist.title == "This week's Deals with Gold brings plenty of discounts to Xbox One, 360"){
-                        console.log('catched');
-                    }
-
                     angular.forEach(result.data.results, function (item) {
                         console.log(item.host);
 
                         if(item.host =="www.military.com" || item.host =="www.gamezone.com"){
-                            
                             return
                         }
 
