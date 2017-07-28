@@ -13,10 +13,8 @@
 
                            <div layout="row" layout-align="space-between center">
                                 <h4>Choose risk factor</h4>
-                                    <md-select ng-model="weapon" placeholder="Risk factors" class="md-no-underline">
-                                    <md-option value="axe">S&P 500</md-option>
-                                    <md-option value="sword">Gold Price</md-option>
-                                    <md-option value="wand">Euro / USD</md-option>
+                                    <md-select ng-model="risk" placeholder="Risk factors" ng-change="vm.riskfactorChanged()"class="md-no-underline">
+                                    <md-option ng-value="riskvalue" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
                                     </md-select>
                                 </div>
 
@@ -141,7 +139,7 @@
 
 
 
-                    <div ng-if="simulateShock == false">
+                    <div ng-if="showMessage == false">
                         <div class="marketScenarios">
                             <div class="serviceHeader">
                                 <i class="fa fa-university" aria-hidden="true"></i> Predictive Market-Scenarios Service
@@ -179,15 +177,15 @@
                                         <th>Stressed Price</th>
                                         <th>Profit/Loss</th>
                                     </tr>
-                                    <tr>
-                                        <td>{{ holding.asset }}</td>
-                                        <td>{{ holding.companyName }}</td>
+                                    <tr ng-repeat="simulation in portfoliosimulation">
+                                        <td>{{ simulation.asset }}</td>
+                                        <td>{{ simulation.company }}</td>
                                         <!--<td>{{ holding.instrumentId }}-->
-                                        <td>{{ holding.quantity }}</td>
-                                        <td>{{ currentprice }}</td>
-                                        <td>{{ stressedprice }}</td>
-                                        <td ng-if="difference < 0" class="redsimulate">{{ difference }}%</td>
-                                        <td ng-if="difference > 0" class="green">{{ difference }}%</td>
+                                        <td>{{ simulation.quantity }}</td>
+                                        <td>{{ simulation.currentprice }}</td>
+                                        <td>{{ simulation.stressedprice }}</td>
+                                        <td ng-if="simulation.pl < 0" class="redsimulate">{{ simulation.pl }}%</td>
+                                        <td ng-if="simulation.pl > 0" class="green">{{ simulation.pl }}%</td>
                                         <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
                                     </tr>
                                 </table>                              

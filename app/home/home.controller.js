@@ -19,7 +19,23 @@
             { name: 'pharmaceutical',file: '/data/investmentPortfolio/holdings/pharma_holdings.json'},
             { name: 'agriculture',file: '/data/investmentPortfolio/holdings/agriculture_holdings.json'}
             ];
-
+        $scope.riskfactors = [
+            {id:1,name: "S&P 500"},
+            {id:2,name:"Gold Price"},
+            {id:3,name:"Eur/USD"},
+            {id:4,name:"NASDAQ Composite Index"},
+            {id:5,name:"CAC 40 Index"},
+            {id:6,name:"NYSE MKT Composite Index"},
+            {id:7,name:"Nikkei 225 Index"},
+            {id:8,name:"Hang Seng Index"},
+            {id:9,name:"FTSE 100 Index"},
+            {id:10,name:"JPY/USD"},
+            {id:11,name:"CAD/USD"},
+            {id:12,name:"GBP/USD"},
+            {id:13,name:"BrentCrude"},
+            {id:14,name:"WTI Curde"}
+        ];
+        
         //var holdingsArray = [];
 
         // login function making a call to signin that comes from auth service and send the user profile to the profile that user is logged in with. If all good the storing user profile on local storage.
@@ -203,8 +219,13 @@
         vm.simulate = function(instrumentid)
         {
              $scope.loading = true;
-             $scope.simulateShock = false
-
+             $scope.simulateShock = false;
+             var instrumentslist = [];
+             angular.forEach($scope.holdings, function(value,key)
+            {
+                 instrumentslist.push(value.instrumentId);
+            });
+             //angular.forEach($scope.holdings, function)
            //var data =[{"instrument":"CX_US037833CM07_USD","scenario":"Base Scenario (0.0000)","values":[{"THEO/Price":"100.2544 USD","date":"2017/07/26"}]},{"instrument":"CX_US037833CM07_USD","scenario":"CONDITIONAL_1 (1.0000)","values":[{"THEO/Price":"100.2314 USD","date":"2017/07/26"}]}];
           
             //console.log(instrumentid);
@@ -212,20 +233,48 @@
             //console.log($scope.holding.instrumentId);
          $http({
                 method: 'POST',
-                url: '/api/instruments/'+$scope.holding.instrumentId+'/'+$scope.shockvalue
+                url: '/api/instruments/'+$scope.holding+'/'+$scope.shockvalue,
+                data:{instrumentslist}
             }).then(function(instruments){
-           // console.log(JSON.stringify(instruments));
-            var valuesArray = [];
+           console.log(JSON.stringify(instruments));
+            //var valuesArray = [];
+            var dict = {};
            angular.forEach(instruments.data,function(value, key) {
+               var keyName = value.instrument + value.scenario;
                angular.forEach(value.values, function(v,k){
-                     valuesArray.push(v["THEO/Price"]);
+                     //valuesArray.push(v["THEO/Price"]);
+                     /*dict.push({
+                        key: keyName,
+                        value: v["THEO/Price"]
+                    });*/
+                     dict[keyName] = v["THEO/Price"];
                });
            });
+            console.log(dict);
+            var portfolioSimulationArray = [];
+           angular.forEach($scope.holdings, function(value,key){
+                var currentPrice_value = value.instrumentId + "Base Scenario (0.0000)";
+                var stressedPrice_value = value.instrumentId + "CONDITIONAL_1 (1.0000)";
+                var difference = (parseFloat(dict[stressedPrice_value]) - parseFloat(dict[currentPrice_value])).toFixed(3);
+                portfolioSimulationArray.push({
+                    name: value.asset,
+                    company: value.companyName,
+                    currentprice: dict[currentPrice_value],
+                    stressedprice: dict[stressedPrice_value],
+                    quantity: value.quantity,
+                    pl: difference
+                }
+                );
+                //currentprice = valuesArray[0];
+                //$scope.stressedprice = valuesArray[1];
+                //$scope.difference = difference.toFixed(3);
+           });
            //console.log(valuesArray[0]);
-           var difference = parseFloat(valuesArray[1]) - parseFloat(valuesArray[0]);
+           /*var difference = parseFloat(valuesArray[1]) - parseFloat(valuesArray[0]);
            $scope.currentprice = valuesArray[0];
            $scope.stressedprice = valuesArray[1];
-           $scope.difference = difference.toFixed(3);
+           $scope.difference = difference.toFixed(3);*/
+           $scope.portfoliosimulation = portfolioSimulationArray;
            $scope.loading = false;
            $scope.simulateheading = true;
            //$scope.$apply();
@@ -233,6 +282,19 @@
             });
            
         }
+
+        vm.riskfactorChanged = function()
+        {
+           alert($scope.riskfactor.name);
+          
+        }
+
+        
+    $scope.localSelectChange = function() {
+         alert('$scope.selectedLocal: ' + $scope.riskfact.name);
+    }
+
+         console.log($scope.risk);
 
         $scope.dateAndTime = function(_date) { 
             //console.log("date: ", _date);

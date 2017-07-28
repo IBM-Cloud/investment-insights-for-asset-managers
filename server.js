@@ -397,9 +397,11 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
 
     //if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
     //{
-            console.log("SHOCK"+request.params.shockvalue);
+            //console.log("SHOCK"+request.params.shockvalue);
+            //console.log("SHOCK"+request.params.instruments);
+            console.log(request.body.instrumentslist.toString());
             var formData = {
-            instruments: request.params.instruments || "CX_US037833CM07_USD",
+            instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
             scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.5)*10 +'.csv'),
             };
 
