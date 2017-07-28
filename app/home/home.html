@@ -16,7 +16,8 @@
                                         <md-option ng-value="riskvalue" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
                                     </md-select>
                                 </div>
-                                <button class="base--button widget--header-button csv">Call Watson Discovery</button>
+                                {{riskvalue}}
+                                <button class="base--button widget--header-button csv" ng-click="vm.toDiscovery()">Call Watson Discovery</button>
                             </div>
                         </div>
 
@@ -35,7 +36,7 @@
 
                                     <span class="userMessage" ng-if="showMessage == true">
                                 <p>
-                                    Choose a portfolio to view Discovery
+                                    Choose a risk factor to view Discovery
                                 </p>
                             </span>
                                     <span ng-if="showMessage == false">
@@ -89,7 +90,7 @@
 
                         <!--Shock value calculated in controller-->
                         <div class="discoveryAnalytics" ng-if="showMessage == false">
-                            <span class="discoveryAnalyticsMessage">Assumption made, <span class="redBold">({{shockvalue}}% fall)</span> to your portfolio based on the impacted news to your portfolio.</span>
+                            <span class="discoveryAnalyticsMessage">Scenario for <span class="redBold">({{shockvalue}}% fall)</span> in gold price.</span>
                         </div>
                     </div>
 
