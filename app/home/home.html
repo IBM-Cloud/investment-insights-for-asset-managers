@@ -104,32 +104,6 @@
                             </div>
 
                             <div ng-init="vm.initialSetup()">
-                                <uib-accordion ng-model="oneAtATime" close-others="oneAtATime">
-                                    <div uib-accordion-group class="panel-default">
-                                        <table id="portfolio">
-                                            <tr>
-                                                <th>Company</th>
-                                                <th>Asset</th>
-                                                <!--<th>InstrumentID</th>-->
-                                                <th>Shares QTY</th>
-                                            </tr>
-
-                                            <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding)">
-                                                <td>{{ holding.companyName }}</td>
-                                                <td>{{ holding.asset }}
-                                                    <td>{{ holding.instrumentId }}
-                                                <td>{{ holding.quantity }}</td>
-                                                <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                                <!--<td class="discoverRun"><button class="base--button widget--header-button">Call Watson Discovery</button></td>-->
-                                            </tr>
-                                        </table>
-
-                                        <uib-accordion-heading>
-                                            <p style="margin-bottom: 0;">{{portfolio.name | titleCase }} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></p>
-                                        </uib-accordion-heading>
-                                    </div>
-                                    <br><br>
-
 
                                     <div ng-cloak >
                                         <md-content>
@@ -158,7 +132,6 @@
                                             </md-tabs>
                                         </md-content>
                                     </div>
-                                </uib-accordion>
 
                             </div>
                             <div class="loadingspinner" ng-show="loading"> </div>

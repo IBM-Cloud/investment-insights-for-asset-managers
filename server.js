@@ -339,8 +339,7 @@ app.post("/api/news/:company", function (req, res) {
             
             var newResponse = [];
             response.results.forEach(function(item) {
-                console.log(item);
-
+                //console.log(item);
                 if(item.host =="www.military.com" || item.host =="www.gamezone.com") {    
                     return;
                 }
