@@ -11,10 +11,10 @@
 			"instrumentId": "CX_US037833BY53_USD",
 			"companyName": "Apple Inc"
 		}, {
-			"asset": "HON 2.25 02/22/28",
+			"asset": "GOOGL 3.625 05/19/21",
 			"quantity": 20,
-			"instrumentId": "CX_XS1366026919_EUR",
-			"companyName": "Honeywell International Inc"
+			"instrumentId": "CX_US02079KAA51_USD",
+			"companyName": "Alphabet Inc"
 		}
 	]
 }

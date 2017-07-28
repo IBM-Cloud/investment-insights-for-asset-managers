@@ -1,18 +1,18 @@
 {
 	"holdings": [{
-		"asset": "PFE 4.125 12/15/46",
-		"quantity": 10,
-		"instrumentId": "CX_US717081ED10_USD",
-		"companyName": "Pfizer Inc"
-	}, {
-		"asset": "TEVA 2.2 07/21/21",
+		"asset": "MPC 3.625 09/15/24",
 		"quantity": 30,
-		"instrumentId": "CX_US88167AAC53_USD",
-		"companyName": "Teva Pharmaceutical Industries Ltd"
+		"instrumentId": "CX_US56585AAG76_USD",
+		"companyName": "Marathon Petroleum"
 	}, {
-		"asset": "VRX 5.875 05/15/23",
+		"asset": "XOM 3.567 03/06/45",
 		"quantity": 50,
-		"instrumentId": "CX_USC96729AB14_USD",
-		"companyName": "Valeant Pharmaceuticals Intl Inc"
+		"instrumentId": "CX_US30231GAN25_USD",
+		"companyName": "Exxon Mobil"
+	}, {
+		"asset": "EPD 4.45 02/15/43",
+		"quantity": 10,
+		"instrumentId": "CX_US29379VAY92_USD",
+		"companyName": "Enterprise Products Partners"
 	}]
 }
