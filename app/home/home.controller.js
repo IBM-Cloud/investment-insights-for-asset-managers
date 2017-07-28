@@ -216,7 +216,7 @@
             });
         };
 
-        vm.simulate = function(instrumentid)
+        vm.simulate = function()
         {
              $scope.loading = true;
              $scope.simulateShock = false;
@@ -283,18 +283,11 @@
            
         }
 
-        vm.riskfactorChanged = function()
+        $scope.riskfactorChanged = function()
         {
-           alert($scope.riskfactor.name);
+           alert($scope.riskvalue);
           
         }
-
-        
-    $scope.localSelectChange = function() {
-         alert('$scope.selectedLocal: ' + $scope.riskfact.name);
-    }
-
-         console.log($scope.risk);
 
         $scope.dateAndTime = function(_date) { 
             //console.log("date: ", _date);
