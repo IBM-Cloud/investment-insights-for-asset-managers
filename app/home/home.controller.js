@@ -236,7 +236,7 @@
                 url: '/api/instruments/'+$scope.holding+'/'+$scope.shockvalue,
                 data:{instrumentslist}
             }).then(function(instruments){
-           console.log(JSON.stringify(instruments));
+           //console.log(JSON.stringify(instruments));
             //var valuesArray = [];
             var dict = {};
            angular.forEach(instruments.data,function(value, key) {
@@ -250,7 +250,7 @@
                      dict[keyName] = v["THEO/Price"];
                });
            });
-            console.log(dict);
+            //console.log(dict);
             var portfolioSimulationArray = [];
            angular.forEach($scope.holdings, function(value,key){
                 var currentPrice_value = value.instrumentId + "Base Scenario (0.0000)";
