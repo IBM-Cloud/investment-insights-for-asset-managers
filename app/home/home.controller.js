@@ -16,8 +16,8 @@
         $scope.oneAtATime = true;
         var mapping = [
             {name: 'technology', file: '/data/investmentPortfolio/holdings/technology_holdings.json'},
-            { name: 'pharmaceutical',file: '/data/investmentPortfolio/holdings/pharma_holdings.json'},
-            { name: 'agriculture',file: '/data/investmentPortfolio/holdings/agriculture_holdings.json'}
+            { name: 'oil',file: '/data/investmentPortfolio/holdings/pharma_holdings.json'},
+            { name: 'mining',file: '/data/investmentPortfolio/holdings/agriculture_holdings.json'}
             ];
         $scope.riskfactors = [
             {id:1,name: "S&P 500"},
@@ -112,13 +112,13 @@
                     //alert("technology");
                     returnHoldings("technology");
                     break;
-                case 'pharmaceutical': {
+                case 'oil': {
                     //alert("pharmaceutical");
-                    returnHoldings("pharmaceutical");
+                    returnHoldings("oil");
                     break;
                 }
-                case 'agriculture':{
-                    returnHoldings("agriculture");
+                case 'mining':{
+                    returnHoldings("mining");
                     break;
                 }
             }

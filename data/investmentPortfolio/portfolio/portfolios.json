@@ -8,12 +8,12 @@
 		}, {
 			"closed": "false",
 			"data": {},
-			"name": "pharmaceutical",
+			"name": "oil",
 			"timestamp": "currentdate"
 		}, {
 			"closed": "false",
 			"data": {},
-			"name": "agriculture",
+			"name": "mining",
 			"timestamp": "currentdate"
 		}
 	]
