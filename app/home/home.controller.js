@@ -16,8 +16,8 @@
         $scope.oneAtATime = true;
         var mapping = [
             {name: 'technology', file: '/data/investmentPortfolio/holdings/technology_holdings.json'},
-            { name: 'oil',file: '/data/investmentPortfolio/holdings/pharma_holdings.json'},
-            { name: 'mining',file: '/data/investmentPortfolio/holdings/agriculture_holdings.json'}
+            { name: 'oil',file: '/data/investmentPortfolio/holdings/oil_holdings.json'},
+            { name: 'mining',file: '/data/investmentPortfolio/holdings/mining_holdings.json'}
             ];
         $scope.riskfactors = [
             {id:1,name: "S&P 500"},
@@ -50,7 +50,6 @@
             });
         }
 
-        // portfolio function
         vm.initialSetup = function () {
             //Reading Portfolios JSON
             $http({
@@ -172,7 +171,7 @@
                     var shockvalue = 0;
 
                     angular.forEach(result.data.results, function (item) {
-                        console.log(item.host);
+                       // console.log(item.host);
 
                         if(item.host =="www.military.com" || item.host =="www.gamezone.com"){
                             return

@@ -335,7 +335,7 @@ app.post("/api/news/:company", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            console.log(response);
+            //console.log(response);
             
             var newResponse = [];
             response.results.forEach(function(item) {
