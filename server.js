@@ -337,6 +337,7 @@ app.post("/api/news/:company", function (req, res) {
         } else {
             //console.log(response);
             
+            // skip the loop for each news element where if host == gamezone and military
             var newResponse = [];
             response.results.forEach(function(item) {
                 //console.log(item);
@@ -350,7 +351,6 @@ app.post("/api/news/:company", function (req, res) {
         }
     });
 });
-
 
 
 //--Predictive Market Scenarios Service POST-----------

@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app', ['auth0.auth0', 'ui.router', 'ngMaterial','ngAnimate', 'ui.bootstrap'])
+        .module('app', ['auth0.auth0', 'ui.router', 'ngMaterial', 'ngAnimate', 'ui.bootstrap'])
         .config(config);
 
     config.$inject = [

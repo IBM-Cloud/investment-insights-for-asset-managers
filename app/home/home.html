@@ -12,7 +12,8 @@
                                 </div>
                                 <div layout="row" layout-align="space-between center">
                                     <h4>Choose risk factor</h4>
-                                    <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline" placeholder="Select a risk factor">
+                                    <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline"
+                                        placeholder="Select a risk factor">
                                         <md-option ng-value="$index" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
                                     </md-select>
                                 </div>
@@ -26,7 +27,7 @@
                                     <i class="fa fa-newspaper-o" aria-hidden="true"></i> Watson Discovery News
                                 </div>
 
-                                <div class="top-stories widget" >
+                                <div class="top-stories widget">
                                     <div class="widget--header">
                                         <h2 class="base--h2 widget--header-title">Top Stories</h2>
                                         <div class="widget--header-spacer"></div>
@@ -40,35 +41,31 @@
                             </span>
                                 </div>
 
-                                <div class="top-stories widget" >
+                                <div class="top-stories widget">
                                     <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 1">
 
                                         <div class="story" ng-repeat="items in news">
                                             <div class="story--date">{{dateAndTime(items.yyyymmdd)}}</div>
 
-                                            <a class="story--title base--a results--a"
-                                               href="{{items.url}}"
-                                               target="_blank"
-                                               title="{{items.title}}"
-                                               rel="noopener noreferrer">{{items.title}}</a>
+                                            <a class="story--title base--a results--a" href="{{items.url}}" target="_blank" title="{{items.title}}" rel="noopener noreferrer">{{items.title}}</a>
                                             <div class="story--source-and-score">
                                                 <span class="base--p story--source">{{items.host}}</span>
                                                 <span class="story--source-score-divider"> | </span>
                                                 <span class="story--score base--p">
                                             <span>Score:</span> {{items.score}}
-                                        </span>
+                                                </span>
                                                 <span class="story--source-score-divider"> | </span>
                                                 <span class="story--score base--p">
                                             <span>Sentiment:</span>
-                                                    <!--Checking the value where if negative or not-->
-                                            <span ng-if="items.docSentiment.type === 'negative'" class="red">
+                                                <!--Checking the value where if negative or not-->
+                                                <span ng-if="items.docSentiment.type === 'negative'" class="red">
                                                 <strong>{{items.docSentiment.type}}</strong>
                                             </span>
 
-                                            <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
+                                                <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
                                                 <strong>{{items.docSentiment.type}}</strong>
                                             </span>
-                                        </span>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +82,7 @@
 
                         <!--Shock value calculated in controller-->
                         <div class="discoveryAnalytics" ng-if="showMessage == false">
-                            <span class="discoveryAnalyticsMessage">Scenario for <span class="redBold">({{shockvalue}}% fall)</span> in gold price.</span>
+                            <span class="discoveryAnalyticsMessage">Scenario for <span class="redBold">({{shockvalue}}% fall)</span>                            in gold price.</span>
                         </div>
                     </div>
 
@@ -104,39 +101,39 @@
 
                             <div ng-init="vm.initialSetup()">
 
-                                    <div ng-cloak >
-                                        <md-content>
-                                            <md-tabs md-dynamic-height md-border-bottom md-selected="data.selectedIndex" flex>
-                                                <md-tab ng-repeat="portfolio in portfolios" label="{{portfolio.name}}" md-on-select="vm.getHoldings(portfolio)">
-                                                    <md-content class="md-padding" >
-                                                        <table id="portfolio" >
-                                                            <tr>
-                                                                <th>Company</th>
-                                                                <th>Asset</th>
-                                                                <!--<th>InstrumentID</th>-->
-                                                                <th>Shares QTY</th>
-                                                                <!--<th>Discover</th>-->
-                                                            </tr>
-                                                            <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding)">
-                                                                <td>{{ holding.companyName }}</td>
-                                                                <td>{{ holding.asset }}
-                                                                    <!--<td>{{ holding.instrumentId }}-->
+                                <div ng-cloak>
+                                    <md-content>
+                                        <md-tabs md-dynamic-height md-border-bottom md-selected="data.selectedIndex" flex>
+                                            <md-tab ng-repeat="portfolio in portfolios" label="{{portfolio.name}}" md-on-select="vm.getHoldings(portfolio)">
+                                                <md-content class="md-padding">
+                                                    <table id="portfolio">
+                                                        <tr>
+                                                            <th>Company</th>
+                                                            <th>Asset</th>
+                                                            <!--<th>InstrumentID</th>-->
+                                                            <th>Shares QTY</th>
+                                                            <!--<th>Discover</th>-->
+                                                        </tr>
+                                                        <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding)">
+                                                            <td>{{ holding.companyName }}</td>
+                                                            <td>{{ holding.asset }}
+                                                                <!--<td>{{ holding.instrumentId }}-->
                                                                 <td>{{ holding.quantity }}</td>
                                                                 <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
                                                                 <!--<td class="discoverRun"><button class="base--button widget--header-button">Call Watson Discovery</button></td>-->
-                                                            </tr>
-                                                        </table>
-                                                    </md-content>
-                                                </md-tab>
-                                            </md-tabs>
-                                        </md-content>
-                                    </div>
+                                                        </tr>
+                                                    </table>
+                                                </md-content>
+                                            </md-tab>
+                                        </md-tabs>
+                                    </md-content>
+                                </div>
 
                             </div>
                             <div class="loadingspinner" ng-show="loading"> </div>
                             <br>
 
-                            <button class="base--button widget--header-button csv"  ng-click="vm.simulate()">Run Simulation</button>
+                            <button class="base--button widget--header-button csv" ng-click="vm.simulate()">Run Simulation</button>
                         </div>
 
                         <div class="newsArea" ng-if="simulateShock == false">
@@ -149,34 +146,34 @@
                                     Projected impact on your holding resulting from a {{shockvalue}}% change in the risk factor
                                 </p>
                             </div>
-                                <table id="portfolio">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Company</th>
-                                        <!--<th>InstrumentID</th>-->
-                                        <th>Quantity</th>
-                                        <th>Current Price</th>
-                                        <th>Stressed Price</th>
-                                        <th>Profit/Loss</th>
-                                    </tr>
-                                    <tr ng-repeat="simulation in portfoliosimulation">
-                                        <td>{{ simulation.name }}</td>
-                                        <td>{{ simulation.company }}</td>
-                                        <!--<td>{{ holding.instrumentId }}-->
-                                        <td>{{ simulation.quantity }}</td>
-                                        <td>{{ simulation.currentprice }}</td>
-                                        <td>{{ simulation.stressedprice }}</td>
-                                        <td ng-if="simulation.pl < 0" class="redsimulate">{{ simulation.pl }}%</td>
-                                        <td ng-if="simulation.pl > 0" class="green">{{ simulation.pl }}%</td>
-                                        <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                    </tr>
-                                </table>
-                            </div>
+                            <table id="portfolio">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Company</th>
+                                    <!--<th>InstrumentID</th>-->
+                                    <th>Quantity</th>
+                                    <th>Current Price</th>
+                                    <th>Stressed Price</th>
+                                    <th>Profit/Loss</th>
+                                </tr>
+                                <tr ng-repeat="simulation in portfoliosimulation">
+                                    <td>{{ simulation.name }}</td>
+                                    <td>{{ simulation.company }}</td>
+                                    <!--<td>{{ holding.instrumentId }}-->
+                                    <td>{{ simulation.quantity }}</td>
+                                    <td>{{ simulation.currentprice }}</td>
+                                    <td>{{ simulation.stressedprice }}</td>
+                                    <td ng-if="simulation.pl < 0" class="redsimulate">{{ simulation.pl }}%</td>
+                                    <td ng-if="simulation.pl > 0" class="green">{{ simulation.pl }}%</td>
+                                    <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
+                                </tr>
+                            </table>
                         </div>
                     </div>
-
-                </section>
             </div>
+
+            </section>
+        </div>
         </div>
     </section>
 </section>
@@ -184,7 +181,5 @@
 
 <!-- =========== User is not Authenticated ===========  -->
 <section ng-if="!vm.auth.isAuthenticated()" class="notAuthenticated">
-    <br>
-    You are not logged in! Please <a ng-click="vm.auth.login()">log in</a> to continue.
+    <br> You are not logged in! Please <a ng-click="vm.auth.login()">log in</a> to continue.
 </section>
-
