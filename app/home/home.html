@@ -12,11 +12,10 @@
                                 </div>
                                 <div layout="row" layout-align="space-between center">
                                     <h4>Choose risk factor</h4>
-                                    <md-select ng-model="risk" placeholder="Risk factors" ng-change="riskfactorChanged()" class="md-no-underline">
-                                        <md-option ng-value="riskvalue" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
+                                    <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline" placeholder="Select a risk factor">
+                                        <md-option ng-value="$index" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
                                     </md-select>
                                 </div>
-                                {{riskvalue}}
                                 <button class="base--button widget--header-button csv" ng-click="vm.toDiscovery()">Call Watson Discovery</button>
                             </div>
                         </div>

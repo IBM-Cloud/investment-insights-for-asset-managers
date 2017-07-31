@@ -19,22 +19,24 @@
             { name: 'oil',file: '/data/investmentPortfolio/holdings/oil_holdings.json'},
             { name: 'mining',file: '/data/investmentPortfolio/holdings/mining_holdings.json'}
             ];
+        //$scope.selected = { id: 14, name: 'Gold Price' };
         $scope.riskfactors = [
-            {id:1,name: "S&P 500"},
-            {id:3,name:"Eur/USD"},
-            {id:4,name:"NASDAQ Composite Index"},
-            {id:5,name:"CAC 40 Index"},
-            {id:6,name:"NYSE MKT Composite Index"},
-            {id:7,name:"Nikkei 225 Index"},
-            {id:8,name:"Hang Seng Index"},
-            {id:9,name:"FTSE 100 Index"},
-            {id:10,name:"JPY/USD"},
-            {id:11,name:"CAD/USD"},
-            {id:12,name:"GBP/USD"},
-            {id:13,name:"BrentCrude"},
-            {id:14,name:"WTI Crude"},
-            {id:15,name:"Gold Price"}
+            {id:"CX_EQI_SPDJ_USA500_BMK_USD_LargeCap_Price",name: "S&P 500"},
+            {id:"CX_FXC_EUR_USD_Spot",name:"Eur/USD"},
+            {id:"CX_EQI_NASD_USAComposite_BMK_USD_LargeCap_Price",name:"NASDAQ Composite Index"},
+            {id:"CX_EQI_NYSE_CAC40_BMK_EUR_LargeCap_Price",name:"CAC 40 Index"},
+            {id:"CX_EQI_NYSE_USA_BMK_USD_LargeCap_Price",name:"NYSE MKT Composite Index"},
+            {id:"CX_EQI_NIKK_Asia_BMK_JPY_LargeCap_Price",name:"Nikkei 225 Index"},
+            {id:"CX_EQI_HSNG_Asia_BMK_HKD_LargeCap_Price",name:"Hang Seng Index"},
+            {id:"CX_EQI_FTSE_UK_BMK_GBP_LargeCap_Price",name:"FTSE 100 Index"},
+            {id:"CX_FXC_JPY_USD_Spot",name:"JPY/USD"},
+            {id:"CX_FXC_CAD_USD_Spot",name:"CAD/USD"},
+            {id:"CX_FXC_GBP_USD_Spot",name:"GBP/USD"},
+            {id:"CX_COS_EN_BrentCrude_IFEU",name:"BrentCrude"},
+            {id:"CX_COS_EN_WTICrude_IFEU",name:"WTI Crude"},
+            {id:"CX_COS_ME_Gold_XCEC",name:"Gold Price",search:"price of gold, gold forecast"}
         ];
+        
         
         //var holdingsArray = [];
 
@@ -150,6 +152,7 @@
         //When user selected a portfolio
         vm.toDiscovery = function(){
             //$scope.holding = holding;
+            console.log("SEARCH:"+ $scope.selectedRiskFactor.search);
             $scope.currentprice = "";
             $scope.stressedprice = "";
             $scope.difference = "";
@@ -157,8 +160,8 @@
             //console.log($scope.holding);
             $http({
                 method: 'POST',
-                url: '/api/news/' + goldP,
-                data: {company: goldP}
+                url: '/api/news/' + $scope.selectedRiskFactor.search,
+                data: {company: $scope.selectedRiskFactor.search}
             }).then(function (result) {
                 if(result.config.data.company !== undefined){
                     $scope.newslist = result.data;
@@ -286,10 +289,10 @@
            
         }
 
-        $scope.riskfactorChanged = function()
+        $scope.riskfactorChanged = function(selectedValue)
         {
-           alert($scope.riskvalue);
-          
+           //alert(selectedValue.id);
+          $scope.selectedRiskFactor = selectedValue;
         }
 
         $scope.dateAndTime = function(_date) { 
