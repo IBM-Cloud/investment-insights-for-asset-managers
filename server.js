@@ -68,8 +68,6 @@ if (appEnv.isLocal) {
 //--Discovery service setup--------------------
 var discovery_usernameLocal =  process.env.DISCOVERY_USERNAME;
 var discovery_passwordLocal = process.env.DISCOVERY_PASSWORD;
-var discovery_environment_id = process.env.DISCOVERY_environment_id;
-var discovery_collection_id = process.env.DISCOVERY_collection_id;
 
 
 // Temp api credentials - this service will be removed
@@ -281,8 +279,8 @@ app.get("/api/holdings/:portfolioname",function(request,response){
 //--Discovery News POST returning 20 results--------------------
 app.post("/api/news/:company", function (req, res) {
     discovery.query({
-        environment_id: discovery_environment_id || system,
-        collection_id: discovery_collection_id || system,
+        environment_id: "system",
+        collection_id: "news",
         query: req.body.company,
         count: 20,
         return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
@@ -323,8 +321,8 @@ app.post("/api/news/:company", function (req, res) {
 //--Discovery News GET--------------------
 app.get("/api/news", function (req, res) {
     discovery.query({
-        environment_id: discovery_environment_id || system,
-        collection_id: discovery_collection_id || system,
+        environment_id: "system",
+        collection_id: "news",
         query: "S&P 500",
         count: 20,
         aggregations: [
