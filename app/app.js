@@ -24,15 +24,15 @@
             .state('home', {
                 url: '/',
                 controller: 'HomeController',
-                templateUrl: 'app/home/home.html',
+                templateUrl: '/home/home.html',
                 controllerAs: 'vm'
             })
             .state('callback', {
-                url: '/callback',
+                url: '/',
                 controller: 'CallbackController',
-                templateUrl: 'app/callback/callback.html',
+                templateUrl: '/callback/callback.html',
                 controllerAs: 'vm'
-            });;
+            });
 
         // Initialization for the angular-auth0 library
         angularAuth0Provider.init({
@@ -41,14 +41,14 @@
             responseType: 'token id_token',
             audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
             // redirectUri: AUTH0_CALLBACK_URL,
-            redirectUri: location.href + 'callback',
+            redirectUri: location.href + 'app/callback',
             scope: 'openid',
             prompt: 'none'
         });
 
         // console.log($urlRouterProvider);
 
-        $urlRouterProvider.otherwise('/');
+        //$urlRouterProvider.otherwise('/');
 
         $locationProvider.hashPrefix('');
 

@@ -1,0 +1,18 @@
+{
+	"holdings": [{
+		"asset": "NEM 3.5 03/15/22",
+		"quantity": 50,
+		"instrumentId": "CX_US651639AN69_USD",
+		"companyName": "Newmont Mining"
+	}, {
+		"asset": "ABX 5.25 04/01/42",
+		"quantity": 30,
+		"instrumentId": "CX_US067901AH18_USD",
+		"companyName": "Barrick Gold Corp"
+	}, {
+		"asset": "CNX 5.875 03/15/22",
+		"quantity": 10,
+		"instrumentId": "CX_US20854PAL31_USD",
+		"companyName": "CONSOL Energy"
+	}]
+}

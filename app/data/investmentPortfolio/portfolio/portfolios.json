@@ -1,0 +1,20 @@
+{
+	"portfolios": [
+		{
+			"closed": "false",
+			"data": {},
+			"name": "technology",
+			"timestamp": "currentdate"
+		}, {
+			"closed": "false",
+			"data": {},
+			"name": "oil",
+			"timestamp": "currentdate"
+		}, {
+			"closed": "false",
+			"data": {},
+			"name": "mining",
+			"timestamp": "currentdate"
+		}
+	]
+}

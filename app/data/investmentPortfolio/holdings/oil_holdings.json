@@ -1,0 +1,18 @@
+{
+	"holdings": [{
+		"asset": "MPC 3.625 09/15/24",
+		"quantity": 30,
+		"instrumentId": "CX_US56585AAG76_USD",
+		"companyName": "Marathon Petroleum"
+	}, {
+		"asset": "XOM 3.567 03/06/45",
+		"quantity": 50,
+		"instrumentId": "CX_US30231GAN25_USD",
+		"companyName": "Exxon Mobil"
+	}, {
+		"asset": "EPD 4.45 02/15/43",
+		"quantity": 10,
+		"instrumentId": "CX_US29379VAY92_USD",
+		"companyName": "Enterprise Products Partners"
+	}]
+}
