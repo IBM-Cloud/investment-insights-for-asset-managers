@@ -153,6 +153,7 @@
         var goldP = 'price of gold, gold forecast'; // temp hard code
         //When user selected a portfolio
         vm.toDiscovery = function () {
+            $scope.newselectedRiskFactor = $scope.selectedRiskFactor.name;
             $scope.loading = true;
             //$scope.holding = holding;
             //console.log("SEARCH:" + $scope.selectedRiskFactor.search);

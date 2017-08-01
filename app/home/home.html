@@ -84,11 +84,11 @@
                         <div class="discoveryAnalytics" ng-if="showMessage == false">
 
                             <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
-                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ selectedRiskFactor.name }}
+                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
                             </span>
 
                             <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
-                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> {{ selectedRiskFactor.name }}
+                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> {{ newselectedRiskFactor }}
                             </span>                            
                         </div>
                     </div>
@@ -151,12 +151,12 @@
                                 <h2 class="base--h2 widget--header-title">Analytics</h2>
                                 <p class="base--p top-stories--description" ng-show="simulateheading">
                                     <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
-                                        Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ selectedRiskFactor.name }}
+                                        Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ newselectedRiskFactor }}
                                     </span>
                                     
 
                                     <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
-                                        Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ selectedRiskFactor.name }}
+                                        Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ newselectedRiskFactor }}
                                     </span>   
                                 </p>
                             </div>
