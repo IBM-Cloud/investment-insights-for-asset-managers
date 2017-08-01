@@ -21,20 +21,22 @@
         ];
         //$scope.selected = { id: 14, name: 'Gold Price' };
         $scope.riskfactors = [
-            { id: "CX_EQI_SPDJ_USA500_BMK_USD_LargeCap_Price", name: "S&P 500" },
-            { id: "CX_FXC_EUR_USD_Spot", name: "Eur/USD" },
-            { id: "CX_EQI_NASD_USAComposite_BMK_USD_LargeCap_Price", name: "NASDAQ Composite Index" },
-            { id: "CX_EQI_NYSE_CAC40_BMK_EUR_LargeCap_Price", name: "CAC 40 Index" },
-            { id: "CX_EQI_NYSE_USA_BMK_USD_LargeCap_Price", name: "NYSE MKT Composite Index" },
-            { id: "CX_EQI_NIKK_Asia_BMK_JPY_LargeCap_Price", name: "Nikkei 225 Index" },
-            { id: "CX_EQI_HSNG_Asia_BMK_HKD_LargeCap_Price", name: "Hang Seng Index" },
+            { id: "CX_EQI_SPDJ_USA500_BMK_USD_LargeCap_Price", name: "S&P 500", search: "S&P 500" },
+            { id: "CX_COS_ME_Gold_XCEC", name: "Gold Price", search: "price of gold, gold forecast" },
+            { id: "CX_COS_EN_BrentCrude_IFEU", name: "Brent Crude Oil",search:"spot price of Brent Crude Oil" },
+            { id: "CX_COS_EN_WTICrude_IFEU", name: "WTI Crude Oil", search:"spot price of WTI Crude Oil" },
+            { id: "CX_FXC_EUR_USD_Spot", name: "Eur/USD", search: "EUR USD FX rate" },
+            { id: "CX_EQI_NASD_USAComposite_BMK_USD_LargeCap_Price", name: "NASDAQ Composite Index", search: "NASDAQ Composite index" },
+            { id: "CX_EQI_NYSE_CAC40_BMK_EUR_LargeCap_Price", name: "CAC 40 Index",search:"CAC 40 Index"  },
+            { id: "CX_EQI_NYSE_USA_BMK_USD_LargeCap_Price", name: "NYSE MKT Composite Index",search:"NYSE MKT Composite Index" },
+            { id: "CX_EQI_NIKK_Asia_BMK_JPY_LargeCap_Price", name: "Nikkei 225 Index",search:"Nikkei 225 Index" },
+            { id: "CX_EQI_HSNG_Asia_BMK_HKD_LargeCap_Price", name: "Hang Seng Index",search:"Hang Seng Index" },
             { id: "CX_EQI_FTSE_UK_BMK_GBP_LargeCap_Price", name: "FTSE 100 Index" },
-            { id: "CX_FXC_JPY_USD_Spot", name: "JPY/USD" },
-            { id: "CX_FXC_CAD_USD_Spot", name: "CAD/USD" },
-            { id: "CX_FXC_GBP_USD_Spot", name: "GBP/USD" },
-            { id: "CX_COS_EN_BrentCrude_IFEU", name: "BrentCrude" },
-            { id: "CX_COS_EN_WTICrude_IFEU", name: "WTI Crude" },
-            { id: "CX_COS_ME_Gold_XCEC", name: "Gold Price", search: "price of gold, gold forecast" }
+            { id: "CX_FXC_JPY_USD_Spot", name: "JPY/USD",search:"JPY USD FX rate" },
+            { id: "CX_FXC_CAD_USD_Spot", name: "CAD/USD",search:"CAD USD FX rate" },
+            { id: "CX_FXC_GBP_USD_Spot", name: "GBP/USD",search:"GBP USD FX rate" }
+
+            
         ];
 
 
@@ -151,8 +153,9 @@
         var goldP = 'price of gold, gold forecast'; // temp hard code
         //When user selected a portfolio
         vm.toDiscovery = function () {
+            $scope.loading = true;
             //$scope.holding = holding;
-            console.log("SEARCH:" + $scope.selectedRiskFactor.search);
+            //console.log("SEARCH:" + $scope.selectedRiskFactor.search);
             $scope.currentprice = "";
             $scope.stressedprice = "";
             $scope.difference = "";
@@ -212,6 +215,7 @@
                     $scope.negativeCount = negativeCount;
                     $scope.positiveCount = positiveCount;
                     $scope.neutralCount = neutralCount;
+                    $scope.loading = false;
 
                 } else {
                     //console.log('Please select a portfolio company');
@@ -246,11 +250,6 @@
                 angular.forEach(instruments.data, function (value, key) {
                     var keyName = value.instrument + value.scenario;
                     angular.forEach(value.values, function (v, k) {
-                        //valuesArray.push(v["THEO/Price"]);
-                        /*dict.push({
-                           key: keyName,
-                           value: v["THEO/Price"]
-                       });*/
                         dict[keyName] = v["THEO/Price"];
                     });
                 });
@@ -269,16 +268,22 @@
                         pl: difference
                     }
                     );
-                    //currentprice = valuesArray[0];
-                    //$scope.stressedprice = valuesArray[1];
-                    //$scope.difference = difference.toFixed(3);
                 });
-                //console.log(valuesArray[0]);
-                /*var difference = parseFloat(valuesArray[1]) - parseFloat(valuesArray[0]);
-                $scope.currentprice = valuesArray[0];
-                $scope.stressedprice = valuesArray[1];
-                $scope.difference = difference.toFixed(3);*/
                 $scope.portfoliosimulation = portfolioSimulationArray;
+                //CP - Current Price ; SP - Stressed Price; pl - Profile Loss
+                var totalCP = 0.0,totalSP = 0.0,totalPL = 0.0;
+                angular.forEach(portfolioSimulationArray, function(value,key){
+                        totalCP = totalCP + (parseFloat(value.currentprice) * value.quantity);
+                        totalSP = totalSP + (parseFloat(value.stressedprice) * value.quantity);
+                        totalPL = totalPL + parseFloat(value.pl);
+
+                });
+                $scope.totalcp = parseFloat(totalCP).toFixed(3);
+                $scope.totalsp = parseFloat(totalSP).toFixed(3);
+                $scope.totalpl = parseFloat(totalPL/(portfolioSimulationArray.length)).toFixed(3);
+                //console.log(totalPL);
+                //console.log(portfolioSimulationArray.length);
+                //console.log($scope.totalpl);
                 $scope.loading = false;
                 $scope.simulateheading = true;
                 //$scope.$apply();

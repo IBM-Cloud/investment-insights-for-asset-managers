@@ -376,7 +376,7 @@ app.post('/api/generatepredictive',function(request,response){
     // Set up the request
  var req = http.request(options, function (res) {
         var chunks = [];
-        console.log("Options:"+options);
+        //console.log("Options:"+options);
 
         res.on("data", function (chunk) {
             chunks.push(chunk);
@@ -410,7 +410,7 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
     //{
             //console.log("SHOCK"+request.params.shockvalue);
             //console.log("SHOCK"+request.params.instruments);
-            console.log(request.body.instrumentslist.toString());
+            //console.log(request.body.instrumentslist.toString());
             var formData = {
             instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
             scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.5)*10 +'.csv'),

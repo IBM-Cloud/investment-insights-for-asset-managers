@@ -167,6 +167,15 @@
                                     <td ng-if="simulation.pl > 0" class="green">{{ simulation.pl }}%</td>
                                     <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
                                 </tr>
+                                <tr class="portfoliototal">
+                                    <td>Portfolio Total</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{ totalcp }} USD</td>
+                                    <td>{{ totalsp }} USD</td>
+                                    <td ng-if="totalpl < 0" class="redsimulate">{{ totalpl }}%</td>
+                                    <td ng-if="totalpl > 0" class="green">{{ totalpl }}%</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
