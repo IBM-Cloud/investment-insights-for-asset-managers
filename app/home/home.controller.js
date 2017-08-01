@@ -258,7 +258,7 @@
                 angular.forEach($scope.holdings, function (value, key) {
                     var currentPrice_value = value.instrumentId + "Base Scenario (0.0000)";
                     var stressedPrice_value = value.instrumentId + "CONDITIONAL_1 (1.0000)";
-                    var difference = (parseFloat(dict[stressedPrice_value]) - parseFloat(dict[currentPrice_value])).toFixed(3);
+                    var difference = (((parseFloat(dict[stressedPrice_value]) / parseFloat(dict[currentPrice_value]))-1)*100).toFixed(3);
                     portfolioSimulationArray.push({
                         name: value.asset,
                         company: value.companyName,
@@ -280,7 +280,7 @@
                 });
                 $scope.totalcp = parseFloat(totalCP).toFixed(3);
                 $scope.totalsp = parseFloat(totalSP).toFixed(3);
-                $scope.totalpl = parseFloat(totalPL/(portfolioSimulationArray.length)).toFixed(3);
+                $scope.totalpl = (((parseFloat(totalSP)/parseFloat(totalCP))-1)*100).toFixed(3);
                 //console.log(totalPL);
                 //console.log(portfolioSimulationArray.length);
                 //console.log($scope.totalpl);
