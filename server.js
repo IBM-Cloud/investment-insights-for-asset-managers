@@ -90,6 +90,7 @@ var discovery = new DiscoveryV1({
 
 //--Setting up the middle ware--------------------
 app.use('/', express.static(__dirname +  '/'));
+// app.use('/', express.static(__dirname +  '/assets'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(upload.single());
@@ -286,6 +287,47 @@ app.post("/api/news/:company", function (req, res) {
         query: req.body.company,
         count: 20,
         return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
+        aggregations: [
+            "term(docSentiment.type,count:3)",
+            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
+            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
+            "term(enrichedTitle.concepts.text)",
+            "term(blekko.basedomain).term(docSentiment.type:positive)",
+            "term(docSentiment.type)",
+            "min(docSentiment.score)",
+            "max(docSentiment.score)",
+            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
+        ],
+        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
+        sort: "-_score"
+    }, function(err, response) {
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(response);
+            
+            // skip the loop for each news element where if host == gamezone and military
+            var newResponse = [];
+            response.results.forEach(function(item) {
+                //console.log(item);
+                if(item.host =="www.military.com" || item.host =="www.gamezone.com") {    
+                    return;
+                }
+                newResponse.push(item);
+            });
+            response.results = newResponse;
+            res.send(response);
+        }
+    });
+});
+
+//--Discovery News GET--------------------
+app.get("/api/news", function (req, res) {
+    discovery.query({
+        environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
+        collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
+        query: "S&P 500",
+        count: 20,
         aggregations: [
             "term(docSentiment.type,count:3)",
             "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",

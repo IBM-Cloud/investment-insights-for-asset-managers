@@ -23,7 +23,7 @@
         $scope.riskfactors = [
             { id: "CX_EQI_SPDJ_USA500_BMK_USD_LargeCap_Price", name: "S&P 500", search: "S&P 500" },
             { id: "CX_COS_ME_Gold_XCEC", name: "Gold Price", search: "price of gold, gold forecast" },
-            { id: "CX_COS_EN_BrentCrude_IFEU", name: "Brent Crude Oil",search:"spot price of Brent Crude Oil" },
+            { id: "CX_COS_EN_BrentCrude_IFEU", name: "Brent Crude Oil", search:"spot price brent oil" },
             { id: "CX_COS_EN_WTICrude_IFEU", name: "WTI Crude Oil", search:"spot price of WTI Crude Oil" },
             { id: "CX_FXC_EUR_USD_Spot", name: "Eur/USD", search: "EUR USD FX rate" },
             { id: "CX_EQI_NASD_USAComposite_BMK_USD_LargeCap_Price", name: "NASDAQ Composite Index", search: "NASDAQ Composite index" },
