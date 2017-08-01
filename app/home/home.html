@@ -82,11 +82,18 @@
 
                         <!--Shock value calculated in controller-->
                         <div class="discoveryAnalytics" ng-if="showMessage == false">
-                            <span class="discoveryAnalyticsMessage">Scenario for <span class="redBold">({{shockvalue}}% fall)</span>                            in gold price.</span>
+
+                            <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
+                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ selectedRiskFactor.name }}
+                            </span>
+
+                            <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
+                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> {{ selectedRiskFactor.name }}
+                            </span>                            
                         </div>
                     </div>
 
-
+  
 
                     <div class="rightPanel">
                         <div class="newsArea">
@@ -143,7 +150,14 @@
                             <div class="marketScenariosBody">
                                 <h2 class="base--h2 widget--header-title">Analytics</h2>
                                 <p class="base--p top-stories--description" ng-show="simulateheading">
-                                    Projected impact on your holding resulting from a {{shockvalue}}% change in the risk factor
+                                    <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
+                                        Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ selectedRiskFactor.name }}
+                                    </span>
+                                    
+
+                                    <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
+                                        Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ selectedRiskFactor.name }}
+                                    </span>   
                                 </p>
                             </div>
                             <table id="portfolio">
