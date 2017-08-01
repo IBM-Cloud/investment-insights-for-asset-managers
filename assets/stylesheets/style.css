@@ -1713,6 +1713,20 @@ span.userMessage.ng-scope p{
     color: #de6b6b;
 }
 
+.greenBold{
+    font-weight: bold;
+    font-size: 20px;
+    color: #aaf9e6;
+}
+.redBoldHead{
+    font-weight: bold;
+    color: #de6b6b;
+}
+
+.greenBoldHead{
+    font-weight: bold;
+    color: #238070;
+}
 
 .sentimentsFound{
     display: flex;

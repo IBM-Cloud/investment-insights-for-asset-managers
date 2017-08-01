@@ -278,39 +278,7 @@ app.get("/api/holdings/:portfolioname",function(request,response){
     req.end();
 });
 
-
-//--Discovery News GET--------------------
-app.get('/api/news',function(req,res){
-    discovery.query({
-        environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',
-        collection_id: 'f4f53ecc-4307-4c54-b8e0-018df036e12d',
-        query: 'price of gold, gold forecast',
-        count: 20,
-        return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
-        aggregations: [
-            "term(docSentiment.type,count:3)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
-            "term(enrichedTitle.concepts.text)",
-            "term(blekko.basedomain).term(docSentiment.type:positive)",
-            "term(docSentiment.type)",
-            "min(docSentiment.score)",
-            "max(docSentiment.score)",
-            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
-        ],
-        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
-        sort: "-_score"
-    }, function(err, response) {
-        if (err) {
-            console.error(err);
-        } else {
-            var docSentiment2 = JSON.stringify(response.results, null, 2);
-            res.json(response);
-        }
-    });
-});
-
-//--Discovery News POST returning 6 results--------------------
+//--Discovery News POST returning 20 results--------------------
 app.post("/api/news/:company", function (req, res) {
     discovery.query({
         environment_id: '6da0267e-7fa2-46ff-9086-f093dcff3961',

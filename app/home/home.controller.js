@@ -174,35 +174,20 @@
                     var negativeCount = 0;
                     var positiveCount = 0;
                     var neutralCount = 0;
+                    var totalPositiveCount_NegativeCount = 0;
                     var shockvalue = 0;
-
+                    var shockType;
                     angular.forEach(result.data.results, function (item) {
-                        // console.log(item.host);
 
-                        if (item.host == "www.military.com" || item.host == "www.gamezone.com") {
-                            return
-                        }
+                        //console.log(item.host);
+                        // if (item.host == "www.military.com" || item.host == "www.gamezone.com") {
+                        //     console.log('Found');
+                        //      return
+                        // }
 
+                        // Adding counter to negative, positive, neutral values for $scope
                         if (item.docSentiment.type == 'negative') {
                             negativeCount++;
-
-                            // Setting shock values
-                            if (negativeCount >= 1 && negativeCount <= 3) {
-                                $scope.shockvalue = 0.5;
-                            }
-                            if (negativeCount >= 4 && negativeCount <= 6) {
-                                $scope.shockvalue = 1.5;
-                                console.log($scope.shockvalue);
-                            }
-                            // if(negativeCount >= 7 && negativeCount <= 10){
-                            //     $scope.shockvalue = 2.5; 
-                            // }
-                            // if(negativeCount >= 10 && negativeCount <= 20){
-                            //     $scope.shockvalue = 3.5; 
-                            // }
-                            if (negativeCount > 21) {
-                                $scope.shockvalue = 2.0;
-                            }
                         }
                         if (item.docSentiment.type == 'positive') {
                             positiveCount++;
@@ -210,6 +195,31 @@
                         if (item.docSentiment.type == 'neutral') {
                             neutralCount++;
                         }
+
+                        // Check if negative sentiments are > then positive sentiments and set shockType values to fall or rise
+                        if(negativeCount >= positiveCount){
+                            totalPositiveCount_NegativeCount = negativeCount - positiveCount;
+                            $scope.shockType = 'fall';
+                        }else{
+                            totalPositiveCount_NegativeCount =  positiveCount - negativeCount;
+                            $scope.shockType = 'rise';
+                        }
+                        //console.log(totalPositiveCount_NegativeCount + ' by ' + shockType);
+
+                        // Setting shock values
+                        if (totalPositiveCount_NegativeCount >= 1 && totalPositiveCount_NegativeCount <= 3) {
+                            $scope.shockvalue = 0.7;
+                        }
+                        if (totalPositiveCount_NegativeCount >= 4 && totalPositiveCount_NegativeCount <= 6) {
+                            $scope.shockvalue = 0.9;
+                        }
+                        if(totalPositiveCount_NegativeCount >= 7 && totalPositiveCount_NegativeCount <= 10){
+                            $scope.shockvalue = 1.1; 
+                        }
+                        if (totalPositiveCount_NegativeCount > 10) {
+                            $scope.shockvalue = 1.3;
+                        }
+
                     });
                     $scope.csv_link = './data/predictiveMarketScenarios/predictivescenarios' + ($scope.shockvalue * 10) + '.csv';
                     $scope.negativeCount = negativeCount;
