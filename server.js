@@ -360,7 +360,7 @@ app.post('/api/generatepredictive',function(request,response){
     //{
     var req_body = JSON.stringify(request.body);
     //console.log(request.body.market_change.shock);
-    const shock_value = request.body.market_change.shock || 1.5;
+    const shock_value = request.body.market_change.shock || 1.1;
     var options = {
         "method": "POST",
         "hostname": process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
@@ -408,12 +408,9 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
 
     //if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
     //{
-            //console.log("SHOCK"+request.params.shockvalue);
-            //console.log("SHOCK"+request.params.instruments);
-            //console.log(request.body.instrumentslist.toString());
             var formData = {
             instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
-            scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.5)*10 +'.csv'),
+            scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.1)*10 +'.csv'),
             };
 
             var req = requestmodule.post(
@@ -467,9 +464,9 @@ function getHostName(url)
 
 function toCSV(datatowrite,shockvalue)
 {
-    var shock = shockvalue.toString().replace('.','');
+    //var shock = shockvalue.toString().replace('.','');
     //console.log(datatowrite);
-    fs.writeFile(path.join(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ shock +'.csv'), datatowrite, 'utf8', function (err) {
+    fs.writeFile(path.join(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (shockvalue * 10) +'.csv'), datatowrite, 'utf8', function (err) {
     if (err) {
         console.log(err);
         console.log('Some error occured - file either not saved or corrupted file saved.');
