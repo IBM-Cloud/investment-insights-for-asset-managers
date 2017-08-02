@@ -168,12 +168,14 @@
                     $scope.newslist = result.data;
                     $scope.showMessage = false;
 
+
                     // Total docSentiment (negative, positive and neutral)
                     var negativeCount = 0;
                     var positiveCount = 0;
                     var neutralCount = 0;
                     var totalPositiveCount_NegativeCount = 0;
                     var shockType;
+                    var resultsCounter = 0;
                      
                     angular.forEach(result.data.results, function (item) {
 
@@ -212,7 +214,10 @@
                             $scope.shockvalue = 1.3;
                         }
 
+                        resultsCounter++;
                     });
+
+                    $scope.resultsCounterOut = resultsCounter;
                     $scope.csv_link = './data/predictiveMarketScenarios/predictivescenarios' + ($scope.shockvalue * 10) + '.csv';
                     $scope.negativeCount = negativeCount;
                     $scope.positiveCount = positiveCount;
