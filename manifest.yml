@@ -4,7 +4,6 @@ applications:
   random-route: true
   memory: 256M
   services:
-    - fintrade-db
     - fintrade-discovery
     - investment-portfolio-fintrade
     - predictive-market-scenarios-fintrade

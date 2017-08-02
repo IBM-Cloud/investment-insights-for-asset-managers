@@ -58,12 +58,6 @@ The app comes with a toolchain you can use to deploy the solution with few click
    cf login -a https://api.ng.bluemix.net
    ```
 
-1. Create a Cloudant service in Bluemix
-
-   ```
-   cf create-service cloudantNoSQLDB Lite fintrade-db
-   ```
-
 1. Push the app to Bluemix
 
    ```
@@ -77,12 +71,6 @@ And voila! You now have your very own finance application running on Bluemix.
 1. If you do not already have a Bluemix account, [sign up here][bluemix_reg_url]
 
 1. If you have not already, [download Node.js][download_node_url] and install it on your local machine.
-
-1. Create a Cloudant service in Bluemix
-
-   ```
-   cf create-service cloudantNoSQLDB Lite fintrade-db
-   ```
 
 1. In the checkout directory, copy the file ```vcap-local.template.json``` to ```vcap-local.json```. Edit ```vcap-local.json``` and update the credentials for the Cloudant. You can retrieve the service credentials from the Bluemix console.
 
