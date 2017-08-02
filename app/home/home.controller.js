@@ -187,13 +187,13 @@
                         // }
 
                         // Adding counter to negative, positive, neutral values for $scope
-                        if (item.docSentiment.type == 'negative') {
+                        if (item.enriched_text.sentiment.document.label == 'negative') {
                             negativeCount++;
                         }
-                        if (item.docSentiment.type == 'positive') {
+                        if (item.enriched_text.sentiment.document.label == 'positive') {
                             positiveCount++;
                         }
-                        if (item.docSentiment.type == 'neutral') {
+                        if (item.enriched_text.sentiment.document.label == 'neutral') {
                             neutralCount++;
                         }
 
