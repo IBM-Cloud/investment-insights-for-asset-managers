@@ -337,12 +337,9 @@ app.get("/api/news", function (req, res) {
 
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
-
-   // if(!fs.existsSync('data/predictivescenarios.csv'))
-    //{
     var req_body = JSON.stringify(request.body);
-    //console.log(request.body.market_change.shock);
-    const risk_factor = request.body.market_change.risk_factor;
+    console.log(request.body);
+    const risk_factor = request.body.market_change.risk_factor || "CX_COS_ME_Gold_XCEC";
     const shock_value = request.body.market_change.shock || 1.1;
     var options = {
         "method": "POST",
@@ -367,33 +364,23 @@ app.post('/api/generatepredictive',function(request,response){
 
         res.on("end", function () {
             var body = Buffer.concat(chunks);
-            //console.log(body.toString());
-            //response.setHeader('Content-Type','application/json');
-            //response.type('application/json');
-            response.send(toCSV(body.toString(),shock_value));
-            //toCSV(body.toString());
+            response.send(toCSV(body.toString(),risk_factor,shock_value));
+            
         });
     });
     req.write(req_body);
     req.end();
-   /* }
-  else
-    {
-        response.setHeader('Content-Type','application/json');
-        response.type('application/json');
-        response.send(JSON.stringify("{'error':'file exists'}"));
-    }*/
 });
 
 
 //-- Simulated Instrument Analysis Service POST-----
-app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
+app.post('/api/instruments/:riskfactor/:shockvalue',function(request,response){
 
-    //if(fs.existsSync('data/predictiveMarketScenarios/predictivescenarios.csv'))
-    //{
+            const risk_factor = request.params.riskfactor || "CX_COS_ME_Gold_XCEC";
+            const predictive_url = risk_factor + (request.params.shockvalue || 1.1)*10;
             var formData = {
             instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
-            scenario_file: fs.createReadStream(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.1)*10 +'.csv'),
+            scenario_file: fs.createReadStream(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ predictive_url +'.csv'),
             };
 
             var req = requestmodule.post(
@@ -404,7 +391,13 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
             //r._form = form;
             req.setHeader('enctype',"multipart/form-data");
             req.setHeader('x-ibm-access-token', SCENARIO_INSTRUMENTS_ACCESS_TOKEN ||process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
-            
+            if(risk_factor !== "CX_COS_ME_Gold_XCEC")
+                {
+                    fs.unlink(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ predictive_url +'.csv', (err) => {
+                        if (err) throw err;
+                        console.log('successfully deleted');
+                    });
+                }
             function requestCallback(err, res, body) {
             //console.log("BODY"+body);
             //console.log("RESPONSE:"+ JSON.stringify(res));
@@ -412,7 +405,6 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
             response.type('application/json');
             response.send(body);
             }
-    //}
 });
 
 
@@ -445,11 +437,11 @@ function getHostName(url)
     }
 }
 
-function toCSV(datatowrite,shockvalue)
+function toCSV(datatowrite,riskfactor,shockvalue)
 {
     //var shock = shockvalue.toString().replace('.','');
     //console.log(datatowrite);
-    fs.writeFile(path.join(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ (shockvalue * 10) +'.csv'), datatowrite, 'utf8', function (err) {
+    fs.writeFile(path.join(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ riskfactor + (shockvalue * 10) +'.csv'), datatowrite, 'utf8', function (err) {
     if (err) {
         console.log(err);
         console.log('Some error occured - file either not saved or corrupted file saved.');
