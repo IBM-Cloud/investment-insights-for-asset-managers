@@ -78,11 +78,9 @@ var discovery = new DiscoveryV1({
 });
 
 //--Setting up the middle ware--------------------
-app.use('/', express.static(__dirname +  '/app'));
-//TODO:Remove once node_modules issue fixed.
-app.use('/node_modules', express.static(__dirname +  '/node_modules'));
-//app.use('/app/callback', express.static(__dirname +  '/app/callback'));
-// app.use('/', express.static(__dirname +  '/assets'));
+app.use('/', express.static(__dirname + '/app'));
+//TODO:Remove
+app.use('/node_modules',express.static(__dirname + '/node_modules'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(upload.single());
@@ -395,7 +393,7 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
     //{
             var formData = {
             instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
-            scenario_file: fs.createReadStream(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.1)*10 +'.csv'),
+            scenario_file: fs.createReadStream(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ (request.params.shockvalue || 1.1)*10 +'.csv'),
             };
 
             var req = requestmodule.post(
@@ -451,7 +449,7 @@ function toCSV(datatowrite,shockvalue)
 {
     //var shock = shockvalue.toString().replace('.','');
     //console.log(datatowrite);
-    fs.writeFile(path.join(__dirname + '/data/predictiveMarketScenarios/predictivescenarios'+ (shockvalue * 10) +'.csv'), datatowrite, 'utf8', function (err) {
+    fs.writeFile(path.join(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ (shockvalue * 10) +'.csv'), datatowrite, 'utf8', function (err) {
     if (err) {
         console.log(err);
         console.log('Some error occured - file either not saved or corrupted file saved.');
