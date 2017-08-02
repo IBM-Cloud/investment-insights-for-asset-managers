@@ -71,21 +71,11 @@ var discovery_passwordLocal = process.env.DISCOVERY_PASSWORD;
 var discovery_environment_id = process.env.DISCOVERY_environment_id;
 var discovery_collection_id = process.env.DISCOVERY_collection_id;
 
-
-// Temp api credentials - this service will be removed
 var discovery = new DiscoveryV1({
-    // username: discovery_usernameLocal || DISCOVERY_USERNAME,
-    // password: discovery_passwordLocal || DISCOVERY_PASSWORD,
-    username: 'bde04da9-aac0-4c8f-83e5-93cf5c68535a',
-    password: 'DarQsrwRjyOR',
-    version_date: '2017-07-19'
+    username: discovery_usernameLocal || DISCOVERY_USERNAME,
+    password: discovery_passwordLocal || DISCOVERY_PASSWORD,
+    version_date: '2017-08-01'
 });
-
-// console.log('Before environment_id ');
-// discovery.getEnvironment(('{environment_id}'), function(error, data) {
-//     console.log(JSON.stringify(data, null, 2));
-// });
-// console.log('After environment_id ');
 
 //--Setting up the middle ware--------------------
 app.use('/', express.static(__dirname +  '/app'));
@@ -284,23 +274,14 @@ app.get("/api/holdings/:portfolioname",function(request,response){
 //--Discovery News POST returning 20 results--------------------
 app.post("/api/news/:company", function (req, res) {
     discovery.query({
-        environment_id: discovery_environment_id || "system",
-        collection_id: discovery_collection_id || "news",
+        environment_id: "system",
+        collection_id: "news",
         query: req.body.company,
         count: 20,
-        return: "title,enrichedTitle.text,url,host,docSentiment,totalTransactions,yyyymmdd",
-        aggregations: [
-            "term(docSentiment.type,count:3)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
-            "term(enrichedTitle.concepts.text)",
-            "term(blekko.basedomain).term(docSentiment.type:positive)",
-            "term(docSentiment.type)",
-            "min(docSentiment.score)",
-            "max(docSentiment.score)",
-            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
-        ],
-        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
+        count: 20,
+        return: "score,url,host,text,publication_date,enriched_text.sentiment,title",
+        aggregations: [""],
+        filter: "",
         sort: "-_score"
     }, function(err, response) {
         if (err) {
@@ -326,22 +307,13 @@ app.post("/api/news/:company", function (req, res) {
 //--Discovery News GET--------------------
 app.get("/api/news", function (req, res) {
     discovery.query({
-        environment_id: discovery_environment_id || "system",
-        collection_id: discovery_collection_id || "news",
+        environment_id: "system",
+        collection_id: "news",
         query: "S&P 500",
         count: 20,
-        aggregations: [
-            "term(docSentiment.type,count:3)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)",
-            "nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)",
-            "term(enrichedTitle.concepts.text)",
-            "term(blekko.basedomain).term(docSentiment.type:positive)",
-            "term(docSentiment.type)",
-            "min(docSentiment.score)",
-            "max(docSentiment.score)",
-            "filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type:positive)"
-        ],
-        filter: "blekko.hostrank>20,blekko.chrondate>1495234800,blekko.chrondate<1500505200",
+        return: "score,url,host,text,publication_date,enriched_text.sentiment,title",
+        aggregations: [""],
+        filter: "",
         sort: "-_score"
     }, function(err, response) {
         if (err) {

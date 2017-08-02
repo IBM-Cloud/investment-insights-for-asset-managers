@@ -45,26 +45,26 @@
                                     <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 1">
 
                                         <div class="story" ng-repeat="items in news">
-                                            <div class="story--date">{{dateAndTime(items.yyyymmdd)}}</div>
+                                            <div class="story--date">{{items.publication_date}}</div>
 
                                             <a class="story--title base--a results--a" href="{{items.url}}" target="_blank" title="{{items.title}}" rel="noopener noreferrer">{{items.title}}</a>
                                             <div class="story--source-and-score">
                                                 <span class="base--p story--source">{{items.host}}</span>
                                                 <span class="story--source-score-divider"> | </span>
                                                 <span class="story--score base--p">
-                                            <span>Score:</span> {{items.score}}
+                                                    <span>Overall score:</span> {{items.score}}
                                                 </span>
                                                 <span class="story--source-score-divider"> | </span>
                                                 <span class="story--score base--p">
-                                            <span>Sentiment:</span>
-                                                <!--Checking the value where if negative or not-->
-                                                <span ng-if="items.docSentiment.type === 'negative'" class="red">
-                                                <strong>{{items.docSentiment.type}}</strong>
-                                            </span>
+                                                    <span>Sentiment:</span>
+                                                    <!--Checking the value where if negative or not-->
+                                                    <span ng-if="items.enriched_text.sentiment.document.label === 'negative'" class="red">
+                                                        <strong>{{items.enriched_text.sentiment.document.label}} ({{items.enriched_text.sentiment.document.score}})</strong>
+                                                    </span>
 
-                                                <span ng-if="items.docSentiment.type !== 'negative'" class="normal">
-                                                <strong>{{items.docSentiment.type}}</strong>
-                                            </span>
+                                                    <span ng-if="items.enriched_text.sentiment.document.label !== 'negative'" class="normal">
+                                                        <strong>{{items.enriched_text.sentiment.document.label}} ({{items.enriched_text.sentiment.document.score}})</strong>
+                                                    </span>
                                                 </span>
                                             </div>
                                         </div>
@@ -84,16 +84,16 @@
                         <div class="discoveryAnalytics" ng-if="showMessage == false">
 
                             <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
-                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
+                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span>                            in {{ newselectedRiskFactor }}
                             </span>
 
                             <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
-                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> {{ newselectedRiskFactor }}
-                            </span>                            
+                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span>                            {{ newselectedRiskFactor }}
+                            </span>
                         </div>
                     </div>
 
-  
+
 
                     <div class="rightPanel" ng-if="showMessage == false">
                         <div class="newsArea">
@@ -151,13 +151,13 @@
                                 <h2 class="base--h2 widget--header-title">Analytics</h2>
                                 <p class="base--p top-stories--description" ng-show="simulateheading">
                                     <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
-                                        Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ newselectedRiskFactor }}
+                                        Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span>                                    change in {{ newselectedRiskFactor }}
                                     </span>
-                                    
+
 
                                     <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
-                                        Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span> change in {{ newselectedRiskFactor }}
-                                    </span>   
+                                        Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span>                                    change in {{ newselectedRiskFactor }}
+                                    </span>
                                 </p>
                             </div>
                             <table id="portfolio">
