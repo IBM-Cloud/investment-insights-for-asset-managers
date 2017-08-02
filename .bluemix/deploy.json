@@ -21,6 +21,10 @@
       "description": "The branch name to deploy",
       "type": "string",
       "pattern": "\\S"
+    },
+    "app-hostname": {
+      "description": "The hostname of the application. Make sure it is unique.",
+      "type": "string"
     }
   },
   "required": [
@@ -33,6 +37,23 @@
       "type": "validator",
       "url": "/devops/setup/bm-helper/helper.html"
     },
+
+    {
+      "type": "table",
+      "columnCount": 1,
+      "widths": ["100%"],
+      "items": [{
+        "type": "label",
+        "title": "Enter the hostname of the web application. Make sure it is unique. Leave it empty to use a random route."
+      }]
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Web App Hostname",
+      "key": "app-hostname"
+    },
+
     {
       "type": "table",
       "columnCount": 3,

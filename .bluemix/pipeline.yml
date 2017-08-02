@@ -21,6 +21,9 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: CF_APP_HOSTNAME
+    value: ${CF_APP_HOSTNAME}
   jobs:
   - name: Deploy
     type: deployer
