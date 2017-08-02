@@ -173,15 +173,9 @@
                     var positiveCount = 0;
                     var neutralCount = 0;
                     var totalPositiveCount_NegativeCount = 0;
-                    var shockvalue = 0;
                     var shockType;
+                     
                     angular.forEach(result.data.results, function (item) {
-
-                        //console.log(item.host);
-                        // if (item.host == "www.military.com" || item.host == "www.gamezone.com") {
-                        //     console.log('Found');
-                        //      return
-                        // }
 
                         // Adding counter to negative, positive, neutral values for $scope
                         if (item.enriched_text.sentiment.document.label == 'negative') {

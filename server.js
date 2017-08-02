@@ -6,6 +6,8 @@ const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 var fs = require('fs');
+var _ = require('lodash');
+
 //var multer  = require('multer')
 //var upload = multer({ dest: 'tmp/' })
 var FormData = require("form-data");
