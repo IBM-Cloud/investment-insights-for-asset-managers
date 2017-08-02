@@ -239,74 +239,76 @@
             $scope.simulateShock = false;
             if($scope.selectedRiskFactor.id !== "CX_COS_ME_Gold_XCEC")
                 {
-                   var requestBody ="{'market_change': {'risk_factor':"+$scope.selectedRiskFactor.id +",'shock':"+ $scope.shockvalue +"}}";
+                   var requestBody ='{"market_change": {"risk_factor":'+'"'+$scope.selectedRiskFactor.id +'","shock":'+ $scope.shockvalue +'}}';
+                   //console.log("REQUESTBODY:" + requestBody);
                     $http({
                         method: 'POST',
                         url: '/api/generatepredictive',
                         data: requestBody
                     }).then(function (response) {
-                         console.log(response);
-                 });
+                         //console.log(response);
+                         runSimulation();
+                  });
+           }
+                else{
+                    runSimulation();
                 }
             
-            var instrumentslist = [];
-            angular.forEach($scope.holdings, function (value, key) {
-                instrumentslist.push(value.instrumentId);
-            });
-            //angular.forEach($scope.holdings, function)
-            //var data =[{"instrument":"CX_US037833CM07_USD","scenario":"Base Scenario (0.0000)","values":[{"THEO/Price":"100.2544 USD","date":"2017/07/26"}]},{"instrument":"CX_US037833CM07_USD","scenario":"CONDITIONAL_1 (1.0000)","values":[{"THEO/Price":"100.2314 USD","date":"2017/07/26"}]}];
+  }
+        function runSimulation()
+        {
+               var instrumentslist = [];
+                        angular.forEach($scope.holdings, function (value, key) {
+                            instrumentslist.push(value.instrumentId);
+                        });
+    
+                        $http({
+                            method: 'POST',
+                            url: '/api/instruments/' + $scope.selectedRiskFactor.id + '/' + $scope.shockvalue,
+                            data: { instrumentslist }
+                        }).then(function (instruments) {
+                            //console.log(JSON.stringify(instruments));
+                            //var valuesArray = [];
+                            var dict = {};
+                            angular.forEach(instruments.data, function (value, key) {
+                                var keyName = value.instrument + value.scenario;
+                                angular.forEach(value.values, function (v, k) {
+                                    dict[keyName] = v["THEO/Price"];
+                                });
+                            });
+                            //console.log(dict);
+                            var portfolioSimulationArray = [];
+                            angular.forEach($scope.holdings, function (value, key) {
+                                var currentPrice_value = value.instrumentId + "Base Scenario (0.0000)";
+                                var stressedPrice_value = value.instrumentId + "CONDITIONAL_1 (1.0000)";
+                                var difference = (((parseFloat(dict[stressedPrice_value]) / parseFloat(dict[currentPrice_value]))-1)*100).toFixed(3);
+                                portfolioSimulationArray.push({
+                                    name: value.asset,
+                                    company: value.companyName,
+                                    currentprice: dict[currentPrice_value],
+                                    stressedprice: dict[stressedPrice_value],
+                                    quantity: value.quantity,
+                                    pl: difference
+                                }
+                                );
+                            });
+                            $scope.portfoliosimulation = portfolioSimulationArray;
+                            //CP - Current Price ; SP - Stressed Price; pl - Profile Loss
+                            var totalCP = 0.0,totalSP = 0.0,totalPL = 0.0;
+                            angular.forEach(portfolioSimulationArray, function(value,key){
+                                    totalCP = totalCP + (parseFloat(value.currentprice) * value.quantity);
+                                    totalSP = totalSP + (parseFloat(value.stressedprice) * value.quantity);
+                                    totalPL = totalPL + parseFloat(value.pl);
 
-            //console.log(instrumentid);
-            //alert($scope.holding.instrumentId);
-            //console.log($scope.holding.instrumentId);
-            $http({
-                method: 'POST',
-                url: '/api/instruments/' + $scope.holding + '/' + $scope.shockvalue,
-                data: { instrumentslist }
-            }).then(function (instruments) {
-                //console.log(JSON.stringify(instruments));
-                //var valuesArray = [];
-                var dict = {};
-                angular.forEach(instruments.data, function (value, key) {
-                    var keyName = value.instrument + value.scenario;
-                    angular.forEach(value.values, function (v, k) {
-                        dict[keyName] = v["THEO/Price"];
-                    });
-                });
-                //console.log(dict);
-                var portfolioSimulationArray = [];
-                angular.forEach($scope.holdings, function (value, key) {
-                    var currentPrice_value = value.instrumentId + "Base Scenario (0.0000)";
-                    var stressedPrice_value = value.instrumentId + "CONDITIONAL_1 (1.0000)";
-                    var difference = (((parseFloat(dict[stressedPrice_value]) / parseFloat(dict[currentPrice_value]))-1)*100).toFixed(3);
-                    portfolioSimulationArray.push({
-                        name: value.asset,
-                        company: value.companyName,
-                        currentprice: dict[currentPrice_value],
-                        stressedprice: dict[stressedPrice_value],
-                        quantity: value.quantity,
-                        pl: difference
-                    }
-                    );
-                });
-                $scope.portfoliosimulation = portfolioSimulationArray;
-                //CP - Current Price ; SP - Stressed Price; pl - Profile Loss
-                var totalCP = 0.0,totalSP = 0.0,totalPL = 0.0;
-                angular.forEach(portfolioSimulationArray, function(value,key){
-                        totalCP = totalCP + (parseFloat(value.currentprice) * value.quantity);
-                        totalSP = totalSP + (parseFloat(value.stressedprice) * value.quantity);
-                        totalPL = totalPL + parseFloat(value.pl);
+                            });
+                            $scope.totalcp = parseFloat(totalCP).toFixed(3);
+                            $scope.totalsp = parseFloat(totalSP).toFixed(3);
+                            $scope.totalpl = (((parseFloat(totalSP)/parseFloat(totalCP))-1)*100).toFixed(3);
+                            $scope.loading = false;
+                            $scope.simulateheading = true;
+                            //$scope.$apply();
 
-                });
-                $scope.totalcp = parseFloat(totalCP).toFixed(3);
-                $scope.totalsp = parseFloat(totalSP).toFixed(3);
-                $scope.totalpl = (((parseFloat(totalSP)/parseFloat(totalCP))-1)*100).toFixed(3);
-                $scope.loading = false;
-                $scope.simulateheading = true;
-                //$scope.$apply();
-
-            });
-
+                        });
         }
 
         $scope.riskfactorChanged = function (selectedValue) {
