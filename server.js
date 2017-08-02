@@ -372,6 +372,7 @@ app.post('/api/generatepredictive',function(request,response){
     //{
     var req_body = JSON.stringify(request.body);
     //console.log(request.body.market_change.shock);
+    const risk_factor = request.body.market_change.risk_factor;
     const shock_value = request.body.market_change.shock || 1.1;
     var options = {
         "method": "POST",

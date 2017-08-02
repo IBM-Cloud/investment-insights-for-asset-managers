@@ -35,11 +35,8 @@
             { id: "CX_FXC_JPY_USD_Spot", name: "JPY/USD",search:"JPY USD FX rate" },
             { id: "CX_FXC_CAD_USD_Spot", name: "CAD/USD",search:"CAD USD FX rate" },
             { id: "CX_FXC_GBP_USD_Spot", name: "GBP/USD",search:"GBP USD FX rate" }
-
             
         ];
-
-
         //var holdingsArray = [];
 
         // login function making a call to signin that comes from auth service and send the user profile to the profile that user is logged in with. If all good the storing user profile on local storage.
@@ -240,6 +237,18 @@
         vm.simulate = function () {
             $scope.loading = true;
             $scope.simulateShock = false;
+            if($scope.selectedRiskFactor.id !== "CX_COS_ME_Gold_XCEC")
+                {
+                   var requestBody ="{'market_change': {'risk_factor':"+$scope.selectedRiskFactor.id +",'shock':"+ $scope.shockvalue +"}}";
+                    $http({
+                        method: 'POST',
+                        url: '/api/generatepredictive',
+                        data: requestBody
+                    }).then(function (response) {
+                         console.log(response);
+                 });
+                }
+            
             var instrumentslist = [];
             angular.forEach($scope.holdings, function (value, key) {
                 instrumentslist.push(value.instrumentId);
@@ -292,9 +301,6 @@
                 $scope.totalcp = parseFloat(totalCP).toFixed(3);
                 $scope.totalsp = parseFloat(totalSP).toFixed(3);
                 $scope.totalpl = (((parseFloat(totalSP)/parseFloat(totalCP))-1)*100).toFixed(3);
-                //console.log(totalPL);
-                //console.log(portfolioSimulationArray.length);
-                //console.log($scope.totalpl);
                 $scope.loading = false;
                 $scope.simulateheading = true;
                 //$scope.$apply();
