@@ -78,17 +78,9 @@ var discovery = new DiscoveryV1({
 });
 
 //--Setting up the middle ware--------------------
-<<<<<<< HEAD
-app.use('/', express.static(__dirname +  '/app'));
-//TODO:Remove once node_modules issue fixed.
-app.use('/node_modules', express.static(__dirname +  '/node_modules'));
-//app.use('/app/callback', express.static(__dirname +  '/app/callback'));
-// app.use('/', express.static(__dirname +  '/assets'));
-=======
 app.use('/', express.static(__dirname + '/app'));
 //TODO:Remove
 app.use('/node_modules',express.static(__dirname + '/node_modules'));
->>>>>>> 3046b7e908eae8f97fc27b718ccd0bbbc25f5912
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(upload.single());

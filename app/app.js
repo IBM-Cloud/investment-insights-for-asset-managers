@@ -28,7 +28,7 @@
                 controllerAs: 'vm'
             })
             .state('callback', {
-                url: '/',
+                url: '/app/callback',
                 controller: 'CallbackController',
                 templateUrl: '/callback/callback.html',
                 controllerAs: 'vm'
