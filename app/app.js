@@ -24,13 +24,13 @@
             .state('home', {
                 url: '/',
                 controller: 'HomeController',
-                templateUrl: 'app/home/home.html',
+                templateUrl: '/home/home.html',
                 controllerAs: 'vm'
             })
             .state('callback', {
-                url: '/callback',
+                url: '/app/callback',
                 controller: 'CallbackController',
-                templateUrl: 'app/callback/callback.html',
+                templateUrl: '/callback/callback.html',
                 controllerAs: 'vm'
             });;
 
@@ -41,7 +41,7 @@
             responseType: 'token id_token',
             audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
             // redirectUri: AUTH0_CALLBACK_URL,
-            redirectUri: location.href + 'callback',
+            redirectUri: location.href + 'app/callback',
             scope: 'openid',
             prompt: 'none'
         });

@@ -8,7 +8,7 @@
     
   function navbar() {
     return {
-      templateUrl: 'app/navbar/navbar.html',
+      templateUrl: 'navbar/navbar.html',
       controller: navbarController,
       controllerAs: 'vm'
     }

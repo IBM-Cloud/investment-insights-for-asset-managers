@@ -88,7 +88,10 @@ var discovery = new DiscoveryV1({
 // console.log('After environment_id ');
 
 //--Setting up the middle ware--------------------
-app.use('/', express.static(__dirname +  '/'));
+app.use('/', express.static(__dirname +  '/app'));
+//TODO:Remove once node_modules issue fixed.
+app.use('/node_modules', express.static(__dirname +  '/node_modules'));
+//app.use('/app/callback', express.static(__dirname +  '/app/callback'));
 // app.use('/', express.static(__dirname +  '/assets'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -444,7 +447,7 @@ app.post('/api/instruments/:instruments/:shockvalue',function(request,response){
 
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/app/index.html'));
 });
 
 

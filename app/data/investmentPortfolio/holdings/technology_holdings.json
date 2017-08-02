@@ -1,0 +1,20 @@
+{
+	"holdings": [{
+		"asset": "AMGN 4.1 06/15/21",
+		"quantity": 10,
+		"instrumentId": "CX_US031162BG42_USD",
+		"companyName": "Amgen Inc"
+	},
+		{
+			"asset": "AAPL 3.25 02/23/26",
+			"quantity": 30,
+			"instrumentId": "CX_US037833BY53_USD",
+			"companyName": "Apple Inc"
+		}, {
+			"asset": "GOOGL 3.625 05/19/21",
+			"quantity": 20,
+			"instrumentId": "CX_US02079KAA51_USD",
+			"companyName": "Alphabet Inc"
+		}
+	]
+}
