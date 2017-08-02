@@ -28,11 +28,11 @@
                 controllerAs: 'vm'
             })
             .state('callback', {
-                url: '/app/callback',
+                url: '/',
                 controller: 'CallbackController',
                 templateUrl: '/callback/callback.html',
                 controllerAs: 'vm'
-            });;
+            });
 
         // Initialization for the angular-auth0 library
         angularAuth0Provider.init({
@@ -48,7 +48,7 @@
 
         // console.log($urlRouterProvider);
 
-        $urlRouterProvider.otherwise('/');
+        //$urlRouterProvider.otherwise('/');
 
         $locationProvider.hashPrefix('');
 
