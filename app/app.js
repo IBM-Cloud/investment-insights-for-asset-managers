@@ -34,7 +34,7 @@
                 controllerAs: 'vm'
             })
             .state('guest',{
-                url: '/authorize',
+                url: '/guest',
                 controller: 'HomeController',
                 templateUrl: '/home/home.html',
                 controllerAs: 'vm'

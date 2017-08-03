@@ -52,20 +52,18 @@
       return new Date().getTime() < expiresAt;
     }
 
-    function handleguest(){
+    function isGuest(){
       //console.log(window.location);
-      if(window.location.pathname == "/authorize")
-        {
+      if(window.location.pathname == "/guest")
          return true;
-        }
       else
         return false;
 
     }
 
-    function isguest(clientevent)
+    function handleGuest(clientevent)
     {
-      if(clientevent.target.innerText == "Continue as Guest")
+      if(clientevent.target.id == "guest")
         {
          $state.go('guest');
          return true;
@@ -78,8 +76,8 @@
       login: login,
       handleAuthentication: handleAuthentication,
       logout: logout,
-      handleguest: handleguest,
-      isguest:isguest,
+      handleGuest: handleGuest,
+      isGuest: isGuest,
       isAuthenticated: isAuthenticated
     }
   }

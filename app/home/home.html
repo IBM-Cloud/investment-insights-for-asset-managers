@@ -1,5 +1,5 @@
 <!-- =========== User is Authenticated ===========  -->
-<section class="isAuthenticated" ng-if="vm.auth.isAuthenticated() || vm.auth.handleguest()">
+<section class="isAuthenticated" ng-if="vm.auth.isAuthenticated() || vm.auth.isGuest()">
     <section class="healthLayout">
         <div class="benefitkit">
             <div class="benefitdata">
@@ -202,9 +202,6 @@
 
 
 <!-- =========== User is not Authenticated ===========  -->
-<section ng-if="!vm.auth.isAuthenticated()" class="notAuthenticated">
-    <br> You are not logged in! Please <a ng-click="vm.auth.login()">log in</a>.
-</section>
-<section class="notAuthenticated">
-    <a ng-click="vm.auth.isguest($event)">Continue as Guest</a>
+<section ng-if="!vm.auth.isAuthenticated()" ng-hide="vm.auth.isGuest()" class="notAuthenticated">
+    <br> You are not logged in! Please <a ng-click="vm.auth.login()">log in</a> OR <a id="guest" ng-click="vm.auth.handleGuest($event)">continue as guest</a>
 </section>
