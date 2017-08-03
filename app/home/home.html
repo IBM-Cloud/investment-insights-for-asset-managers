@@ -1,16 +1,23 @@
 <!-- =========== User is Authenticated ===========  -->
 <section class="isAuthenticated" ng-if="vm.auth.isAuthenticated() || vm.auth.isGuest()">
-    <section class="healthLayout">
-        <div class="benefitkit">
-            <div class="benefitdata">
+    <section>
+        <div>
+            <div>
                 <section class="dashbaordPanel">
+                    <div>
+                      FinTrade uses the financial services to analyze a stock portfolio in regards to various risk factors.
+                      Risk factors include things like currency fluctuations or changes in the price of oil and gold.
+                    </div>
+
                     <span class="steppingArea">
                         <h4>Step 1. Select a portfolio</h4>
                     </span>
 
                     <div class="insidePanel">
                         <div class="serviceHeader">
-                            Info on this section
+                          The first step involves selecting a portfolio to use with the risk simulation.
+                          The following table shows the available portfolios.
+                          They are maintained in the <a href="https://console.bluemix.net/catalog/services/fss-portfolio-service" target="_blank">Investment Portfolio</a> service.
                         </div>
 
                         <div class="widget--header">
@@ -63,31 +70,31 @@
                     <div class="insidePanel" ng-if="displayDiscoveryPanel == true">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
-                                Info on this section
+                              To understand how the selected portfolio reacts to market trends,
+                              you need to select one risk factor.
+
+                              It can be one directly linked to the assets in the selected portfolio.
+                              But you can also select a risk factor not directly connected to the stocks in the portfolio.
                             </div>
                             <div layout="row" layout-align="space-between center">
                                 <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline"
                                     placeholder="Select a risk factor">
                                     <md-option ng-value="$index" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
                                 </md-select>
-                                <button class="base--button widget--header-button csv" ng-click="vm.toDiscovery()">Call Watson Discovery</button>
+                                <button ng-disabled="selectedRiskFactor == null" class="base--button widget--header-button csv" ng-click="vm.toDiscovery()">Call Watson Discovery</button>
                             </div>
                         </div>
                     </div>
 
                     <span class="steppingArea" ng-if="showMessage == false">
-                        <h4>Step 3. View articles related to XXX </h4>
+                        <h4>Step 3. View articles related to {{selectedRiskFactor.name}}</h4>
                     </span>
                     <div class="insidePanel" ng-if="showMessage == false">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
-                                Find the most recent and relevant news articles that impact your portfolio.
-                            </div>
-
-                            <div class="top-stories widget">
-                                <span ng-if="showMessage == false">
-                                    <p class="base--p top-stories--description">Showing <strong>{{resultsCounterOut}}</strong> of {{newslist.matching_results}} matching documents</p>
-                                </span>
+                              In this step, FinTrade used <a href="https://console.bluemix.net/catalog/services/discovery" target="_blank">Watson Discovery</a> service to find recent and relevant news about our risk factor.
+                              <br/>
+                              The following list shows <strong>{{resultsCounterOut}}</strong> of {{newslist.matching_results}} matching documents.
                             </div>
 
                             <div class="top-stories widget">
@@ -134,7 +141,8 @@
 
                     <div class="insidePanel" ng-if="showMessage == false">
                         <div class="serviceHeader">
-                            Info on this section
+                          The shock value is derived from the analysis of the articles retrieved by the Watson Discovery service,
+                          by looking at the sentiment analysis of individual news items.
                         </div>
                         <span class="" ng-if="shockType == 'fall'">
                                 Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
@@ -148,17 +156,20 @@
                     </div>
 
                     <span class="steppingArea" ng-if="simulateShock == false">
-                        <h4>Step 5. Run simulated analytics on selected portfolio and shock value </h4>
+                        <h4>Step 5. Review simulation results</h4>
                     </span>
                     <div class="insidePanel" ng-if="simulateShock == false">
                         <div class="serviceHeader">
-                                <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
-                                            Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span>                                change in {{ newselectedRiskFactor }}
-                                </span>
-
-                                <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
-                                            Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span>                                change in {{ newselectedRiskFactor }}
-                                </span>
+                            Using the <a href="https://console.bluemix.net/catalog/services/fss-predictive-scenario-analytics-service" target="_blank">Predictive Market Scenarios</a>
+                            and the <a href="https://console.bluemix.net/catalog/services/fss-scenario-analytics-service" target="_blank">Simulated Instrument Analytics service</a>, FinTrade computes a
+                            <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
+                              projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span>
+                              change in {{ newselectedRiskFactor }}
+                            </span>
+                            <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
+                              projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span>
+                              change in {{ newselectedRiskFactor }}
+                            </span>
                         </div>
                         <table id="portfolio">
                             <tr>
