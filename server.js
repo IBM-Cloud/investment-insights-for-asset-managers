@@ -19,6 +19,7 @@ var vcapLocal = null;
 var INVESTMENT_PORFOLIO_BASE_URL,INVESTMENT_PORFOLIO_USERNAME,INVESTMENT_PORFOLIO_PASSWORD;
 var DISCOVERY_USERNAME, DISCOVERY_PASSWORD;
 var SCENARIO_INSTRUMENTS_URI,SCENARIO_INSTRUMENTS_ACCESS_TOKEN;
+var PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN,PREDICTIVE_MARKET_SCENARIOS_URI;
 
 if (process.env.VCAP_SERVICES)
 {
@@ -47,8 +48,14 @@ if (process.env.VCAP_SERVICES)
             SCENARIO_INSTRUMENTS_ACCESS_TOKEN = env['fss-scenario-analytics-service'][0].credentials.accessToken;
         }
     else {
-        console.log('You must bind the Investment Portfolio service to this application');
+        console.log('You must bind the Scenario Analytics service to this application');
     }
+
+    if(env['fss-predictive-scenario-analytics-service'])
+        {
+           PREDICTIVE_MARKET_SCENARIOS_URI = getHostName(env['fss-predictive-scenario-analytics-service'][0].credentials.uri);
+           PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN = env['fss-predictive-scenario-analytics-service'][0].credentials.accessToken;
+        }
 }
 
 //--Config--------------------
@@ -340,18 +347,18 @@ app.get("/api/news", function (req, res) {
 //--Predictive Market Scenarios Service POST-----------
 app.post('/api/generatepredictive',function(request,response){
     var req_body = JSON.stringify(request.body);
-    console.log(request.body);
+    //console.log(request.body);
     const risk_factor = request.body.market_change.risk_factor || "CX_COS_ME_Gold_XCEC";
     const shock_value = request.body.market_change.shock || 1.1;
     var options = {
         "method": "POST",
-        "hostname": process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
+        "hostname": PREDICTIVE_MARKET_SCENARIOS_URI || process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
         "port": null,
         "path": "/api/v1/scenario/generate_predictive",
         "headers": {
             "accept": "application/json",
             "content-type": "application/json",
-            "X-IBM-Access-Token": process.env.PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN
+            "X-IBM-Access-Token": PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN || process.env.PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN
         }
     };
 
