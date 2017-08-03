@@ -1352,7 +1352,7 @@ footer {
     width: 100%;
     position: relative;
     border-radius: 3px;
-    margin-bottom: 30px;
+    margin-bottom: 80px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
     }
@@ -1369,9 +1369,11 @@ footer {
     color: #909090;
     font-size: 14px;
     font-weight: bold;
-
+    margin-bottom: 10px;
 }
-
+.steppingArea h4{
+    color: #6b6969;
+}
 
 
 
@@ -1427,7 +1429,10 @@ section.notAuthenticated a:hover{
     text-decoration: none;
 }
 .md-toolbar-tools{
-    background: radial-gradient(#0f212e, #152935) rgba(61,112,178,0.1);}
+    background: radial-gradient(#0f212e, #152935) rgba(61,112,178,0.1);
+    padding-left: 15%;
+    padding-right: 15%;
+}
 /****************************- END Nav bar*/
 
 
@@ -1846,7 +1851,11 @@ button.base--button.widget--header-button.rise {
 /*************************END*************/
 
 @media only screen and (max-width: 800px) {
-
+    .md-toolbar-tools{
+        background: radial-gradient(#0f212e, #152935) rgba(61,112,178,0.1);
+        padding-left: 3%;
+        padding-right: 3%;
+    }
     .analyticsArea {
         margin-top: 30px;
         width: 100%;

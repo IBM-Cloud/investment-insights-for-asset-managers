@@ -4,13 +4,16 @@
         <div class="benefitkit">
             <div class="benefitdata">
                 <section class="dashbaordPanel">
+                    <span class="steppingArea">
+                        <h4>Step 1. Select a portfolio</h4>
+                    </span>
+
                     <div class="insidePanel">
                         <div class="serviceHeader">
                             <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
                         </div>
 
                         <div class="widget--header">
-                            <h4>Choose a portfolio</h4>
                             <div class="widget--header-spacer"></div>
                         </div>
 
@@ -53,23 +56,28 @@
                         <br>
                     </div>
 
+                    <span class="steppingArea" ng-if="displayDiscoveryPanel == true">
+                        <h4>Step 2. Select a risk factor to get news articles on</h4>
+                    </span>
+
                     <div class="insidePanel" ng-if="displayDiscoveryPanel == true">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
                                 <i class="fa fa-money" aria-hidden="true"></i> Risk factors
                             </div>
                             <div layout="row" layout-align="space-between center">
-                                <h4>Choose risk factor</h4>
                                 <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline"
                                     placeholder="Select a risk factor">
                                     <md-option ng-value="$index" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
                                 </md-select>
+                                <button class="base--button widget--header-button csv" ng-click="vm.toDiscovery()">Call Watson Discovery</button>
                             </div>
-                            <button class="base--button widget--header-button csv" ng-click="vm.toDiscovery()">Call Watson Discovery</button>
                         </div>
                     </div>
 
-
+                    <span class="steppingArea" ng-if="showMessage == false">
+                        <h4>Step 3. View related news articles </h4>
+                    </span>
                     <div class="insidePanel" ng-if="showMessage == false">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
@@ -128,7 +136,12 @@
                         </div>
                     </div>
 
-
+                    <span class="steppingArea" ng-if="shockType == 'fall'">
+                        <h4>Step 4. Run simulated analytics on selected portfolio and shock value </h4>
+                    </span>
+                    <span class="steppingArea" ng-if="shockType == 'rise'">
+                        <h4>Step 4. Run simulated analytics on selected portfolio and shock value </h4>
+                    </span>
                     <!--Shock value calculated in controller-->
                     <div class="shockAndAnalytics">
                         <span class="discoveryAnalytics" ng-if="shockType == 'fall'">
