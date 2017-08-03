@@ -10,7 +10,7 @@
 
                     <div class="insidePanel">
                         <div class="serviceHeader">
-                            <i class="fa fa-university" aria-hidden="true"></i> Investment Portfolio
+                            Info on this section
                         </div>
 
                         <div class="widget--header">
@@ -34,7 +34,7 @@
                                                         <th>Shares QTY</th>
                                                         <!--<th>Discover</th>-->
                                                     </tr>
-                                                    
+
                                                     <tr ng-repeat="holding in holdings" ng-click="vm.toDiscovery(holding)">
                                                         <td>{{ holding.companyName }}</td>
                                                         <td>{{ holding.asset }}
@@ -57,13 +57,13 @@
                     </div>
 
                     <span class="steppingArea" ng-if="displayDiscoveryPanel == true">
-                        <h4>Step 2. Select a risk factor to get news articles on</h4>
+                        <h4>Step 2. Select a risk factor</h4>
                     </span>
 
                     <div class="insidePanel" ng-if="displayDiscoveryPanel == true">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
-                                <i class="fa fa-money" aria-hidden="true"></i> Risk factors
+                                Info on this section
                             </div>
                             <div layout="row" layout-align="space-between center">
                                 <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline"
@@ -76,26 +76,18 @@
                     </div>
 
                     <span class="steppingArea" ng-if="showMessage == false">
-                        <h4>Step 3. View related news articles </h4>
+                        <h4>Step 3. View articles related to XXX </h4>
                     </span>
                     <div class="insidePanel" ng-if="showMessage == false">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
-                                <i class="fa fa-newspaper-o" aria-hidden="true"></i> Watson Discovery News
+                                Find the most recent and relevant news articles that impact your portfolio.
                             </div>
 
                             <div class="top-stories widget">
-                                <div class="widget--header">
-                                    <h2 class="base--h2 widget--header-title">Top Stories</h2>
-                                    <div class="widget--header-spacer"></div>
-                                    <!--<button class="base--button widget--header-button" ng-click="discoveryNewsButton()" ng-if="showMessage == false">View API Response</button>-->
-                                </div>
-
-
                                 <span ng-if="showMessage == false">
-                                <p class="base--p top-stories--description">Find the most recent and relevant news articles that impact your portfolio.<br>
-                                Showing <strong>{{resultsCounterOut}}</strong> of {{newslist.matching_results}} matching documents</p>
-                            </span>
+                                    <p class="base--p top-stories--description">Showing <strong>{{resultsCounterOut}}</strong> of {{newslist.matching_results}} matching documents</p>
+                                </span>
                             </div>
 
                             <div class="top-stories widget">
@@ -136,74 +128,68 @@
                         </div>
                     </div>
 
-                    <span class="steppingArea" ng-if="shockType == 'fall'">
-                        <h4>Step 4. Run simulated analytics on selected portfolio and shock value </h4>
+                    <span class="steppingArea" ng-if="showMessage == false">
+                        <h4>Step 4. Shock value </h4>
                     </span>
-                    <span class="steppingArea" ng-if="shockType == 'rise'">
-                        <h4>Step 4. Run simulated analytics on selected portfolio and shock value </h4>
-                    </span>
-                    <!--Shock value calculated in controller-->
-                    <div class="shockAndAnalytics">
-                        <span class="discoveryAnalytics" ng-if="shockType == 'fall'">
-                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span>
-                                in {{ newselectedRiskFactor }}
-                                <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
-                        </span>
 
-                        <span class="discoveryAnalytics" ng-if="shockType == 'rise'">
-                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span>                        
-                                {{ newselectedRiskFactor }} 
-                                <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
-                        </span>
-
-                        <div class="insidePanel" ng-if="simulateShock == false">
-                            <div class="marketScenariosBody">
-                                <h2 class="base--h2 widget--header-title">Simulated Analytics</h2>
-                                <p class="base--p top-stories--description" ng-show="simulateheading">
-                                    <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
-                                            Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span>                                change in {{ newselectedRiskFactor }}
-                                    </span>
-
-
-                                    <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
-                                            Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span>                                change in {{ newselectedRiskFactor }}
-                                    </span>
-                                </p>
-                            </div>
-                            <table id="portfolio">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Company</th>
-                                    <!--<th>InstrumentID</th>-->
-                                    <th>Quantity</th>
-                                    <th>Current Price</th>
-                                    <th>Stressed Price</th>
-                                    <th>Profit/Loss</th>
-                                </tr>
-                                <tr ng-repeat="simulation in portfoliosimulation">
-                                    <td>{{ simulation.name }}</td>
-                                    <td>{{ simulation.company }}</td>
-                                    <!--<td>{{ holding.instrumentId }}-->
-                                    <td>{{ simulation.quantity }}</td>
-                                    <td>{{ simulation.currentprice }}</td>
-                                    <td>{{ simulation.stressedprice }}</td>
-                                    <td ng-if="simulation.pl < 0" class="redsimulate">{{ simulation.pl }}%</td>
-                                    <td ng-if="simulation.pl > 0" class="green">{{ simulation.pl }}%</td>
-                                    <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
-                                </tr>
-                                <tr class="portfoliototal">
-                                    <td>Portfolio Total</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>{{ totalcp }} USD</td>
-                                    <td>{{ totalsp }} USD</td>
-                                    <td ng-if="totalpl < 0" class="redsimulate">{{ totalpl }}%</td>
-                                    <td ng-if="totalpl > 0" class="green">{{ totalpl }}%</td>
-                                </tr>
-                            </table>
+                    <div class="insidePanel" ng-if="showMessage == false">
+                        <div class="serviceHeader">
+                            Info on this section
                         </div>
+                        <span class="" ng-if="shockType == 'fall'">
+                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
+                        <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
+                        </span>
+
+                        <span class="" ng-if="shockType == 'rise'">
+                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
+                        <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
+                        </span>
                     </div>
-                
+
+                    <span class="steppingArea" ng-if="simulateShock == false">
+                        <h4>Step 5. Run simulated analytics on selected portfolio and shock value </h4>
+                    </span>
+                    <div class="insidePanel" ng-if="simulateShock == false">
+                        <div class="serviceHeader">
+                                <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
+                                            Projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span>                                change in {{ newselectedRiskFactor }}
+                                </span>
+
+                                <span class="discoveryAnalyticsMessage" ng-if="shockType == 'rise'">
+                                            Projected impact on your holding resulting from a <span class="greenBoldHead">({{shockvalue}}% {{shockType}})</span>                                change in {{ newselectedRiskFactor }}
+                                </span>
+                        </div>
+                        <table id="portfolio">
+                            <tr>
+                                <th>Company</th>
+                                <th>Asset</th>
+                                <th>Shares QTY</th>
+                                <th>Current Price</th>
+                                <th>Stressed Price</th>
+                                <th>Profit/Loss</th>
+                            </tr>
+                            <tr ng-repeat="simulation in portfoliosimulation">
+                                 <td>{{ simulation.company }}</td>
+                                <td>{{ simulation.name }}</td>
+                                <td>{{ simulation.quantity }}</td>
+                                <td>{{ simulation.currentprice }}</td>
+                                <td>{{ simulation.stressedprice }}</td>
+                                <td ng-if="simulation.pl < 0" class="redsimulate">{{ simulation.pl }}%</td>
+                                <td ng-if="simulation.pl > 0" class="green">{{ simulation.pl }}%</td>
+                                <!--<td><button ng-model="holding.companyName" ng-click="toDiscovery($company)" value="{{holding.companyName}}">Select</button></td>-->
+                            </tr>
+                            <tr class="portfoliototal">
+                                <td>Portfolio Total</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ totalcp }} USD</td>
+                                <td>{{ totalsp }} USD</td>
+                                <td ng-if="totalpl < 0" class="redsimulate">{{ totalpl }}%</td>
+                                <td ng-if="totalpl > 0" class="green">{{ totalpl }}%</td>
+                            </tr>
+                        </table>
+                    </div>
 
                 </section>
             </div>
