@@ -99,11 +99,13 @@
                 console.log(err);
             });
         };
-
+        
+        
         // Holdings Function
         vm.getHoldings = function (portfolio) {
             $scope.holdings = "";
             $scope.loading = true;
+            $scope.displayDiscoveryPanel = true;
 
             switch (portfolio.name) {
                 case 'technology':

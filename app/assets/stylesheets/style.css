@@ -1337,41 +1337,22 @@ footer {
 }
 
 .dashbaordPanel {
-    padding: 15px;
     padding-top: 50px;
     min-height: 800px;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
-.userProfile {
-    width: 100%;
-    float: left;
-    border-radius: 3px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 1rem 2rem 1rem;
-    border: 1px solid rgba(61, 112, 178, 0.25);
-}
-.leftPanel{
-    width: 50%;
-    margin-right: 5%;
-    float: left;
-}
-
-.rightPanel{
-    width: 45%;
-    float: left;
-}
 
 .riskArea {
     margin-top: 50px;
 }
 
-.newsArea {
+.insidePanel {
     width: 100%;
-    float: left;
+    position: relative;
     border-radius: 3px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgba(61, 112, 178, 0.25);
     }
@@ -1391,9 +1372,7 @@ footer {
 
 }
 
-aside.insidePanel {
-    padding: 10px;
-}
+
 
 
 
@@ -1465,6 +1444,7 @@ table, th , td  {
     border-collapse: collapse;
     padding: 5px;
  }
+
 table tr:nth-child(odd) {
    background-color: #f1f1f1;
  }
@@ -1498,7 +1478,7 @@ tr:nth-child(even) {
 #portfolio td, #portfolio th {
     border: 1px solid #ddd;
     padding: 5px !important;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #portfolio tr:nth-child(even){background-color: #f2f2f2;}
@@ -1689,17 +1669,17 @@ span.userMessage.ng-scope p{
 
 /*discoveryAnalytics*/
 .discoveryAnalytics{
-    display: flex;
     width: 100%;
-    float: right;
-    border-radius: 3px;
-    margin-top: 10px;
-    margin-bottom: 200px;
+    float: left;
     padding: 1rem 2rem 1rem;
     border: 1px solid rgb(17, 36, 48);
     background: rgba(17, 36, 48, 0.87);
     font-size: 18px;
     color: white;
+}
+.shockAndAnalytics{
+    height: 80%;
+    margin-bottom: 20px;
 }
 
 .discoveryAnalyticsMessage {
@@ -1814,13 +1794,21 @@ span.userMessage.ng-scope p{
 }
 .marketScenariosBody{
     margin-top: 20px; 
+    float: left;
 }
 button.base--button.widget--header-button.csv {
     background-color: #132632;
     color: white;
 }
-.downloadCSV{
-    border: 0;
+button.base--button.widget--header-button.fall {
+    background: #de6b6b;
+    color: white;
+    float: right;
+}
+button.base--button.widget--header-button.rise {
+    background: #aaf9e6;
+    color: #30404b;
+    float: right;
 }
 /****************************END - Predictive Market-Scenarios Widget*/
 
@@ -1858,18 +1846,6 @@ button.base--button.widget--header-button.csv {
 /*************************END*************/
 
 @media only screen and (max-width: 800px) {
-    .userProfile {
-        width: 100%;
-        margin-right: 0%;
-    }
-
-    .newsArea {
-        width: 100%;
-        margin-right: 0%;
-        text-align: left;
-        margin-bottom: 65px;
-    }
-
 
     .analyticsArea {
         margin-top: 30px;
@@ -1877,7 +1853,12 @@ button.base--button.widget--header-button.csv {
         margin-right: 0%;
         height: auto;
     }
-
+    .dashbaordPanel{
+        padding-top: 30px;
+        min-height: 800px;
+        margin-left: 3%;
+        margin-right: 3%;
+    }
     .marketScenarios {
         width: 100%;
         border-right: 0;
@@ -2031,16 +2012,9 @@ button.base--button.widget--header-button.csv {
         width: 320px;
         min-width: 320px;
     }
-    .leftPanel {
-         width: 100%;
-         margin-right: 5%;
-         float: left;
-     }
+
      .discoveryAnalytics{
          margin-bottom: 20px;
-     }
-     .rightPanel {
-         width: 100%;
      }
      .md-tab{
              padding: 12px 12px;
