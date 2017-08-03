@@ -32,6 +32,12 @@
                 controller: 'CallbackController',
                 templateUrl: '/callback/callback.html',
                 controllerAs: 'vm'
+            })
+            .state('guest',{
+                url: '/authorize',
+                controller: 'HomeController',
+                templateUrl: '/home/home.html',
+                controllerAs: 'vm'
             });
 
         // Initialization for the angular-auth0 library
