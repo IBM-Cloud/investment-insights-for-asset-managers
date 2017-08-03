@@ -52,10 +52,34 @@
       return new Date().getTime() < expiresAt;
     }
 
+    function handleguest(){
+      //console.log(window.location);
+      if(window.location.pathname == "/authorize")
+        {
+         return true;
+        }
+      else
+        return false;
+
+    }
+
+    function isguest(clientevent)
+    {
+      if(clientevent.target.innerText == "Continue as Guest")
+        {
+         $state.go('guest');
+         return true;
+        }
+      else
+        return false;
+    }
+
     return {
       login: login,
       handleAuthentication: handleAuthentication,
       logout: logout,
+      handleguest: handleguest,
+      isguest:isguest,
       isAuthenticated: isAuthenticated
     }
   }
