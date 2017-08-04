@@ -81,7 +81,7 @@
                         </div>
                     </div>
 
-                    <span class="steppingArea" ng-if="showMessage == false">
+                    <span class="steppingArea" id="discovery" ng-if="showMessage == false">
                         <h4>Step 3. View articles related to {{selectedRiskFactor.name}}</h4>
                     </span>
                     <div class="insidePanel" ng-if="showMessage == false">
@@ -146,7 +146,7 @@
                         </div>
                     </div>
 
-                    <span class="steppingArea" ng-if="simulateShock == false">
+                    <span class="steppingArea" id="simulate" ng-if="simulateShock == false">
                         <h4>Step 5. Review simulation results</h4>
                     </span>
                     <div class="insidePanel" ng-if="simulateShock == false">

@@ -9,7 +9,7 @@
             };
         });
 
-    function homeController($scope, authService, $http, $location) {
+    function homeController($scope, authService, $http, $location, $anchorScroll) {
         var vm = this;
         vm.auth = authService;
         vm.login = login;
@@ -225,11 +225,15 @@
                     $scope.positiveCount = positiveCount;
                     $scope.neutralCount = neutralCount;
                     $scope.loading = false;
-
+                   
                 } else {
                     //console.log('Please select a portfolio company');
                     $scope.showMessage = true;
                 }
+                //To scroll to the bottom of the div
+                $location.hash('discovery');
+                // call $anchorScroll()
+                $anchorScroll();
             }, function (err) {
                 console.log(err);
             });
@@ -310,6 +314,10 @@
                             //$scope.$apply();
 
                         });
+                        //To scroll to the bottom of the div
+                        $location.hash('simulate');
+                        // call $anchorScroll()
+                         $anchorScroll();
         }
 
         $scope.riskfactorChanged = function (selectedValue) {
@@ -334,5 +342,5 @@
 
     }
 
-    homeController.$inject = ['$scope', 'authService', '$http'];
+    homeController.$inject = ['$scope', 'authService', '$http','$location', '$anchorScroll'];
 })();
