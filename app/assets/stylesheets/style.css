@@ -491,7 +491,7 @@ top-stories--list ng-scope:first-child{
 .greenBold{
     font-weight: bold;
     font-size: 20px;
-    color: #aaf9e6;
+    color: #4bb60c;
 }
 .redBoldHead{
     font-weight: bold;
@@ -525,8 +525,8 @@ top-stories--list ng-scope:first-child{
     border-bottom: none;
     border-radius: 15px;
     font-weight: normal;
-    background: #aaf9e6;
-    color: #238070;
+    background: #4bb60c;
+    color: #ffffff;
 }
 
 .neutralCount{
@@ -553,8 +553,8 @@ button.base--button.widget--header-button.fall {
     float: right;
 }
 button.base--button.widget--header-button.rise {
-    background: #aaf9e6;
-    color: #30404b;
+    background: #4bb60c;
+    color: #ffffff;
     float: right;
 }
 /****************************END - Predictive Market-Scenarios Widget*/
