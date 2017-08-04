@@ -157,11 +157,6 @@ button:disabled {
 
 /*.loadingspinner { border:1px solid #ddd; padding:10px; margin:20px 5px; width:40px;}*/
 /**************TABLE***************/
-a {
-    text-decoration: none;
-    color: #152935;;
-}
-
 .logoImage {
     height: 25px;
 }
@@ -250,6 +245,8 @@ footer {
 
 a {
     cursor: pointer;
+    text-decoration: none;
+    color: #3d70b2;
 }
 
 footer a {
