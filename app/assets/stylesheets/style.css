@@ -1338,15 +1338,10 @@ footer {
 
 .dashbaordPanel {
     padding-top: 50px;
-    min-height: 800px;
+    /*min-height: 800px;*/
     margin-left: 15%;
     margin-right: 15%;
-    margin-bottom: 80px;
-}
-
-
-.riskArea {
-    margin-top: 50px;
+    padding-bottom: 40px;
 }
 
 .insidePanel {
