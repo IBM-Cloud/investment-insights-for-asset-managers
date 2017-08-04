@@ -71,7 +71,7 @@
                               It can be one directly linked to the assets in the selected portfolio.
                               But you can also select a risk factor not directly connected to the stocks in the portfolio.
                             </div>
-                            <div layout="row" layout-align="space-between center">
+                            <div layout="row" layout-wrap layout-align="space-between center">
                                 <md-select name="myModel" ng-change="riskfactorChanged(riskfactors[selected])" ng-model="selected" ng-required="true" class="md-no-underline"
                                     placeholder="Select a risk factor">
                                     <md-option ng-value="$index" ng-repeat="riskfactor in riskfactors">{{ riskfactor.name }}</md-option>
@@ -139,15 +139,11 @@
                           The shock value is derived from the analysis of the articles retrieved by the Watson Discovery service,
                           by looking at the sentiment analysis of individual news items.
                         </div>
-                        <span class="" ng-if="shockType == 'fall'">
-                                Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
-                        <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
-                        </span>
-
-                        <span class="" ng-if="shockType == 'rise'">
-                                Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}
-                        <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
-                        </span>
+                        <div layout="row" layout-wrap layout-align="space-between center">
+                          <div ng-if="shockType == 'fall'">Scenario for <span class="redBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}</div>
+                          <div ng-if="shockType == 'rise'">Scenario for <span class="greenBold">({{shockvalue}}% {{shockType}})</span> in {{ newselectedRiskFactor }}</div>
+                          <button class="base--button widget--header-button {{shockType}}" ng-click="vm.simulate()">Run Simulation</button>
+                        </div>
                     </div>
 
                     <span class="steppingArea" ng-if="simulateShock == false">
