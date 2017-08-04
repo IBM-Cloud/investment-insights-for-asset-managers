@@ -57,10 +57,20 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 ## Running the app on Bluemix
 
-1. If you do not already have a Bluemix account, [sign up here][bluemix_reg_url]
+1. If you do not already have a Bluemix account, [sign up here][bluemix_signup_url]
 
 1. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
 
+1. Use this command to display or specify the URL of the API endpoint of Bluemix.
+
+    ```
+    cf api https://api.ng.bluemix.net
+    ```
+1. Connect to Bluemix in the command line tool and follow the prompts to log in
+
+   ```
+   cf login -a https://api.ng.bluemix.net
+   ```
 1. Clone the app to your local environment from your terminal using the following command:
 
    ```
@@ -69,27 +79,66 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. `cd` into this newly created directory
 
-1. Connect to Bluemix in the command line tool and follow the prompts to log in
+1. Navigate to manifest.yml file and change the NAME "fintrade" to an unique name of your choice. The new name is your APP_NAME in the commands below.
+
+1. Follow the above step for SERVICES as well.
+
+
+1. Create services required for this app
+  
+   ```
+   cf create-service discovery lite <Discovery_Service_Name> 
+   ```
+   _Discovery Service Name as mentioned in manifest.yml above_
 
    ```
-   cf login -a https://api.ng.bluemix.net
+   cf create-service fss-portfolio-service fss-portfolio-service-free-plan <Portfolio_Service_Name as in manifest.yml>
+   ```
+   
+   ```
+   cf create-service fss-predictive-scenario-analytics-service fss-predictive-scenario-analytics-service-free-plan <Predictive_Scenario_Name as in manifest.yml>
+   ```
+   ```
+   cf create-service fss-scenario-analytics-service  fss-scenario-analytics-service-free-plan <Scenario_Analytics_Name as in manifest.yml>
    ```
 
-1. Push the app to Bluemix
+1. Push the app to Bluemix 
 
    ```
    cf push
    ```
+ _This command uses the manifest.yml file in your directory to CREATE the app and BIND the services to the app_
 
 And voila! You now have your very own finance application running on Bluemix.
 
 ## Run the app locally
 
-1. If you do not already have a Bluemix account, [sign up here][bluemix_reg_url]
+1. If you do not already have a Bluemix account, [sign up here][bluemix_signup_url]
 
-1. If you have not already, [download Node.js][download_node_url] and install it on your local machine.
+2. If you have not already, [download Node.js][download_node_url] and install it on your local machine.
 
-1. In the checkout directory, copy the file ```vcap-local.template.json``` to ```vcap-local.json```. Edit ```vcap-local.json``` and update the credentials for the services used by the app. You can retrieve the service credentials from the Bluemix console.
+3. In the checkout directory, create a file ```.env``` and paste the below snippet
+
+	```
+	INVESTMENT_PORFOLIO_BASE_URL=investment-portfolio.mybluemix.net
+	INVESTMENT_PORFOLIO_USERNAME=
+	INVESTMENT_PORFOLIO_PASSWORD=
+	
+	DISCOVERY_USERNAME=
+	DISCOVERY_PASSWORD=
+	
+	PREDICTIVE_MARKET_SCENARIOS_URI=fss-analytics.mybluemix.net
+	PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN=
+		
+	SIMULATED_INSTRUMENT_ANALYSIS_URI=fss-analytics.mybluemix.net
+	SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN=
+	```
+1. For credentials and access tokens, run this command
+    
+    ```
+    cf env APP_NAME
+    ```
+
 
 1. Run
 
@@ -112,7 +161,7 @@ If you find a bug, please report it via the [Issues section][issues_url] or even
 The primary source of debugging information for your Bluemix app is the logs. To see them, run the following command using the Cloud Foundry CLI:
 
    ```
-   $ cf logs fintrade --recent
+   $ cf logs APP_NAME --recent
    ```
 
 For more detailed information on troubleshooting your application, see the [Troubleshooting section](https://www.ng.bluemix.net/docs/troubleshoot/tr.html) in the Bluemix documentation.
