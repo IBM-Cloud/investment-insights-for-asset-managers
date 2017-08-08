@@ -5,11 +5,10 @@ const cfenv = require('cfenv');
 const http = require('https');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
-var fs = require('fs');
-var _ = require('lodash');
+const fs = require('fs');
+const _ = require('lodash');
+var dateFormat = require('dateformat');
 
-//var multer  = require('multer')
-//var upload = multer({ dest: 'tmp/' })
 var FormData = require("form-data");
 var requestmodule = require('request');
 
@@ -27,8 +26,6 @@ if (process.env.VCAP_SERVICES)
 
     // Find the service
     if (env['fss-portfolio-service']) {
-        //console.log("URL " + getHostName(env['fss-portfolio-service'][0].credentials.url));
-        // console.log("userid "+ env['fss-portfolio-service'][0].credentials.writer.userid);
         INVESTMENT_PORFOLIO_BASE_URL = getHostName(env['fss-portfolio-service'][0].credentials.url);
         INVESTMENT_PORFOLIO_USERNAME = env['fss-portfolio-service'][0].credentials.writer.userid;
         INVESTMENT_PORFOLIO_PASSWORD = env['fss-portfolio-service'][0].credentials.writer.password;
@@ -278,8 +275,15 @@ app.get("/api/holdings/:portfolioname",function(request,response){
     req.end();
 });
 
+
 //--Discovery News POST returning 20 results--------------------
 app.post("/api/news/:company", function (req, res) {
+    
+    // Getting date from Angular radio buttons
+    var getDay = req.body.daysDate;
+    var newDate = Date.now('dd:mm:yyyy') + getDay *24*3600*1000; // days ago in milliseconds
+    var filterDay = dateFormat(newDate, "yyyy-mm-dd");
+
     discovery.query({
         environment_id: "system",
         collection_id: "news",
@@ -288,8 +292,8 @@ app.post("/api/news/:company", function (req, res) {
         count: 20,
         return: "score,url,host,text,publication_date,enriched_text.sentiment,title",
         aggregations: [""],
-        filter: "",
-        sort: "-_score"
+        filter: "publication_date > " + filterDay,
+        sort: "-_sort"
     }, function(err, response) {
         if (err) {
             console.log(err);
@@ -311,6 +315,12 @@ app.post("/api/news/:company", function (req, res) {
     });
 });
 
+
+// Getting date from Angular radio buttons
+var getDay = -1;
+var newDate = Date.now('dd:mm:yyyy') + getDay *24*3600*1000; // days ago in milliseconds
+var filterDay = dateFormat(newDate, "yyyy-mm-dd");
+
 //--Discovery News GET--------------------
 app.get("/api/news", function (req, res) {
     discovery.query({
@@ -320,18 +330,16 @@ app.get("/api/news", function (req, res) {
         count: 20,
         return: "score,url,host,text,publication_date,enriched_text.sentiment,title",
         aggregations: [""],
-        filter: "",
-        sort: "-_score"
+        filter: "publication_date > " + filterDay,
+        sort: ""
     }, function(err, response) {
         if (err) {
             console.log(err);
         } else {
-            //console.log(response);
-            
+
             // skip the loop for each news element where if host == gamezone and military
             var newResponse = [];
             response.results.forEach(function(item) {
-                //console.log(item);
                 if(item.host =="www.military.com" || item.host =="www.gamezone.com") {    
                     return;
                 }
@@ -381,41 +389,37 @@ app.post('/api/generatepredictive',function(request,response){
     req.end();
 });
 
-
 //-- Simulated Instrument Analysis Service POST-----
 app.post('/api/instruments/:riskfactor/:shockvalue',function(request,response){
+    const risk_factor = request.params.riskfactor || "CX_COS_ME_Gold_XCEC";
+    const predictive_url = risk_factor + (request.params.shockvalue || 1.1)*10;
+    var formData = {
+    instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
+    scenario_file: fs.createReadStream(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ predictive_url +'.csv'),
+    };
 
-            const risk_factor = request.params.riskfactor || "CX_COS_ME_Gold_XCEC";
-            const predictive_url = risk_factor + (request.params.shockvalue || 1.1)*10;
-            var formData = {
-            instruments: request.body.instrumentslist.toString() || "CX_US037833CM07_USD",
-            scenario_file: fs.createReadStream(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ predictive_url +'.csv'),
-            };
-
-            var req = requestmodule.post(
-                {
-                   url:'https://'+ (SCENARIO_INSTRUMENTS_URI || process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI) +'/api/v1/scenario/instruments',
-                   formData:formData
-                },requestCallback);
-            //r._form = form;
-            req.setHeader('enctype',"multipart/form-data");
-            req.setHeader('x-ibm-access-token', SCENARIO_INSTRUMENTS_ACCESS_TOKEN ||process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
-            if(risk_factor !== "CX_COS_ME_Gold_XCEC")
-                {
-                    fs.unlink(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ predictive_url +'.csv', (err) => {
-                        if (err) throw err;
-                        console.log('successfully deleted');
-                    });
-                }
-            function requestCallback(err, res, body) {
-            //console.log("BODY"+body);
-            //console.log("RESPONSE:"+ JSON.stringify(res));
-            response.setHeader('Content-Type','application/json');
-            response.type('application/json');
-            response.send(body);
-            }
+    var req = requestmodule.post({
+        url:'https://'+ (SCENARIO_INSTRUMENTS_URI || process.env.SIMULATED_INSTRUMENT_ANALYSIS_URI) +'/api/v1/scenario/instruments',
+        formData:formData
+        },requestCallback);
+    //r._form = form;
+    req.setHeader('enctype',"multipart/form-data");
+    req.setHeader('x-ibm-access-token', SCENARIO_INSTRUMENTS_ACCESS_TOKEN ||process.env.SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN);
+    if(risk_factor !== "CX_COS_ME_Gold_XCEC")
+        {
+            fs.unlink(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ predictive_url +'.csv', (err) => {
+                if (err) throw err;
+                console.log('successfully deleted');
+            });
+        }
+    function requestCallback(err, res, body) {
+    //console.log("BODY"+body);
+    //console.log("RESPONSE:"+ JSON.stringify(res));
+    response.setHeader('Content-Type','application/json');
+    response.type('application/json');
+    response.send(body);
+    }
 });
-
 
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
@@ -446,19 +450,16 @@ function getHostName(url)
     }
 }
 
-function toCSV(datatowrite,riskfactor,shockvalue)
-{
-    //var shock = shockvalue.toString().replace('.','');
-    //console.log(datatowrite);
+function toCSV(datatowrite,riskfactor,shockvalue){
     fs.writeFile(path.join(__dirname + '/app/data/predictiveMarketScenarios/predictivescenarios'+ riskfactor + (shockvalue * 10) +'.csv'), datatowrite, 'utf8', function (err) {
-    if (err) {
-        console.log(err);
-        console.log('Some error occured - file either not saved or corrupted file saved.');
-    } 
-    else {
-        console.log('It\'s saved!');
-    }
-});
+        if (err) {
+            console.log(err);
+            console.log('Some error occured - file either not saved or corrupted file saved.');
+        } 
+        else {
+            console.log('It\'s saved!');
+        }   
+    });
 }
 
 //--launch--------------------

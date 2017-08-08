@@ -148,10 +148,17 @@
         var dateAndTime;
         $scope.showMessage = true;
         $scope.simulateShock = true;
+    
+        
+        $scope.formatDate = function(dateNews){
+            dateOut = new Date(dateNews);
+            return dateOut;
+        };
 
         var goldP = 'price of gold, gold forecast'; // temp hard code
         //When user selected a portfolio
-        vm.toDiscovery = function () {
+        vm.toDiscovery = function (daysSelected) {
+
             $scope.newselectedRiskFactor = $scope.selectedRiskFactor.name;
             $scope.loading = true;
             //$scope.holding = holding;
@@ -164,7 +171,8 @@
             $http({
                 method: 'POST',
                 url: '/api/news/' + $scope.selectedRiskFactor.search,
-                data: { company: $scope.selectedRiskFactor.search }
+                data: { company: $scope.selectedRiskFactor.search, 
+                        daysDate: daysSelected }
             }).then(function (result) {
                 if (result.config.data.company !== undefined) {
                     $scope.newslist = result.data;
@@ -178,8 +186,10 @@
                     var totalPositiveCount_NegativeCount = 0;
                     var shockType;
                     var resultsCounter = 0;
-                     
+                    var dateNews;
+
                     angular.forEach(result.data.results, function (item) {
+
 
                         // Adding counter to negative, positive, neutral values for $scope
                         if (item.enriched_text.sentiment.document.label == 'negative') {

@@ -359,6 +359,48 @@ md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
 
 
 /****************************- Discovery News Widget*/
+
+input[type="radio"]:checked+label.buttons-group--button {
+    background-color: #132632;
+    color: #ffffff;
+}
+.base--radio:checked+.buttons-group--button {
+    background-color: #9855d4;
+    color: #fff;
+}
+.buttons-group {
+    text-align: right;
+    width: 100%;
+    min-height: 35px;
+}
+.base--radio, input[type=radio] {
+    display: none;
+}
+
+.buttons-group--button {
+    color: #122532;
+    border: 1px solid #122532;
+    padding: 5px 20px;
+    font-size: 12px;
+}
+
+.buttons-group--button_first {
+    border-radius: 10rem 0rem 0rem 10rem;
+    border-left-width: 1px;
+    border-right: none;
+}
+.buttons-group-items{
+    display: inline-block; 
+    margin-left: -3px;
+}
+
+.buttons-group--button_last {
+    border-radius: 0rem 10rem 10rem 0rem;
+    border-left: none;
+}
+
+
+
 .story {
     margin-bottom: 2.5rem;
 }
@@ -570,6 +612,17 @@ button.base--button.widget--header-button.rise {
 /*************************END*************/
 
 @media only screen and (max-width: 800px) {
+    .buttons-group {
+        text-align: center;
+        width: 100%;
+        min-height: 30px;
+    }
+    .buttons-group--button {
+        color: #122532;
+        border: 1px solid #122532;
+        padding: 5px 7px;
+        font-size: 10px;
+    }
     .md-toolbar-tools{
         background: radial-gradient(#0f212e, #152935) rgba(61,112,178,0.1);
         padding-left: 3%;

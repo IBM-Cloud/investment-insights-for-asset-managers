@@ -93,10 +93,32 @@
                             </div>
 
                             <div class="top-stories widget">
+
+                                <div class="buttons-group">
+                                    <div class="buttons-group-items">
+                                        <input type="radio" class="base--radio buttons-group--radio" checked="checked" id="rb-1" name="radio-buttons" value="1" ng-click="vm.toDiscovery(-1)">
+                                        <label class="base--inline-label base--button buttons-group--button buttons-group--button_first" for="rb-1" style="width: 100%;">24 Hours</label>
+                                    </div>
+                                    <div class="buttons-group-items">
+                                        <input type="radio" class="base--radio buttons-group--radio" id="rb-2" name="radio-buttons" value="2" ng-click="vm.toDiscovery(-2)">
+                                        <label class="base--inline-label base--button buttons-group--button" for="rb-2" style="width: 100%;">48 Hours</label>
+                                    </div>
+                                    <div class="buttons-group-items">
+                                        <input type="radio" class="base--radio buttons-group--radio" id="rb-3" name="radio-buttons" value="7Days" ng-click="vm.toDiscovery(-7)">
+                                        <label class="base--inline-label base--button buttons-group--button" for="rb-3" style="width: 100%;">7 Days</label>
+                                    </div>
+                                    <div class="buttons-group-items">
+                                        <input type="radio" class="base--radio buttons-group--radio" id="rb-4" name="radio-buttons" value="28Days" ng-click="vm.toDiscovery(-28)">
+                                        <label class="base--inline-label base--button buttons-group--button buttons-group--button_last" for="rb-4" style="width: 100%;">28 Days</label>
+                                    </div>
+                                </div>
+                                    
+
                                 <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 1">
 
                                     <div class="story" ng-repeat="items in news">
-                                        <div class="story--date">{{items.publication_date}}</div>
+                                        <div class="story--date" ng-bind="formatDate(items.publication_date) |  date:'dd/MM/yyyy'" ></div>
+
                                         <a class="story--title base--a results--a" href="{{items.url}}" target="_blank" title="{{items.title}}" rel="noopener noreferrer">{{items.title}}</a>
                                         <div class="story--source-and-score">
                                             <span class="base--p story--source">{{items.host}}</span>
