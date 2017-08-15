@@ -13,10 +13,10 @@ echo "Using prefix: $PREFIX"
 ################################################################
 # Create services
 ################################################################
-cf create-service discovery lite ${PREFIX}fintrade-discovery
-cf create-service fss-portfolio-service fss-portfolio-service-free-plan ${PREFIX}investment-portfolio-fintrade
-cf create-service fss-predictive-scenario-analytics-service fss-predictive-scenario-analytics-service-free-plan ${PREFIX}predictive-market-scenarios-fintrade
-cf create-service fss-scenario-analytics-service fss-scenario-analytics-service-free-plan ${PREFIX}simulated-instrument-analytics-fintrade
+cf create-service discovery lite ${PREFIX}discovery-investment-insights-for-asset-managers
+cf create-service fss-portfolio-service fss-portfolio-service-free-plan ${PREFIX}investment-portfolio-investment-insights-for-asset-managers
+cf create-service fss-predictive-scenario-analytics-service fss-predictive-scenario-analytics-service-free-plan ${PREFIX}predictive-market-scenarios-investment-insights-for-asset-managers
+cf create-service fss-scenario-analytics-service fss-scenario-analytics-service-free-plan ${PREFIX}simulated-instrument-analytics-investment-insights-for-asset-managers
 
 
 ################################################################

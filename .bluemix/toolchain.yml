@@ -1,20 +1,20 @@
 version: '2'
 template:
-  name: "Finance Trade"
-  description: "FinTrade is a modern finance portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio."
+  name: "Investment Insights for Asset Managers"
+  description: "Investment insights for asset managers is a modern finance portfolio manager that provides real-time insight into how news all around the world can impact the investment to any given portfolio."
   required:
     - build
     - repo
 
 toolchain:
-  name: 'finance-trade-{{timestamp}}'
+  name: 'investment-insights-for-asset-managers-{{timestamp}}'
 
 services:
   repo:
     service_id: githubpublic
     parameters:
-      repo_name: 'finance-trade'
-      repo_url: 'https://github.com/IBM-Bluemix/finance-trade'
+      repo_name: 'investment-insights-for-asset-managers'
+      repo_url: 'https://github.com/IBM-Bluemix/investment-insights-for-asset-managers'
       type: fork
       has_issues: false
   build:
@@ -30,7 +30,7 @@ services:
         env:
           REPO: repo
           REPO_BRANCH: '{{form.pipeline.parameters.app-branch-name}}'
-          CF_APP_NAME: 'fintrade'
+          CF_APP_NAME: 'investment-insights-for-asset-managers'
           CF_APP_HOSTNAME: '{{form.pipeline.parameters.app-hostname}}'
           SPACE_NAME: '{{form.pipeline.parameters.app-space}}'
           ORG_NAME: '{{form.pipeline.parameters.app-organization}}'

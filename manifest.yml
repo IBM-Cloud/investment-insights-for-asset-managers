@@ -1,10 +1,10 @@
 ---
 applications:
-- name: fintrade
+- name: investment-insights-for-asset-managers
   random-route: true
   memory: 256M
   services:
-    - fintrade-discovery
-    - investment-portfolio-fintrade
-    - predictive-market-scenarios-fintrade
-    - simulated-instrument-analytics-fintrade
+    - discovery-investment-insights-for-asset-managers
+    - investment-portfolio-investment-insights-for-asset-managers
+    - predictive-market-scenarios-investment-insights-for-asset-managers
+    - simulated-instrument-analytics-investment-insights-for-asset-managers

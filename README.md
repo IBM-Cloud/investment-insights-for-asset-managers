@@ -1,9 +1,9 @@
-# Finance Trade
+# Investment Insights for Asset Managers
 
 [![Build Status](https://travis-ci.org/IBM-Bluemix/finance-trade.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/finance-trade)
 ![Bluemix Deployments](https://deployment-tracker.mybluemix.net/stats/e13ee7de3df5bc6cf89950a82ef7a248/badge.svg)
 
-FinTrade is a Node.js application that uses IBM Financial services and Watson services.  
+Investment Insights for Asset Managers is a Node.js application that uses IBM Financial services and Watson services.  
 
 The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact the investment to any given portfolio.
 
@@ -79,22 +79,22 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. `cd` into this newly created directory
 
-1. Navigate to manifest.yml file and change the NAME "fintrade" to an unique name of your choice. The new name is your APP_NAME in the commands below.
+1. Navigate to manifest.yml file and change the NAME "investment-insights-for-sset-managers" to an unique name of your choice. The new name is your APP_NAME in the commands below.
 
 1. Follow the above step for SERVICES as well.
 
 
 1. Create services required for this app
-  
+
    ```
-   cf create-service discovery lite <Discovery_Service_Name> 
+   cf create-service discovery lite <Discovery_Service_Name>
    ```
    _Discovery Service Name as mentioned in manifest.yml above_
 
    ```
    cf create-service fss-portfolio-service fss-portfolio-service-free-plan <Portfolio_Service_Name as in manifest.yml>
    ```
-   
+
    ```
    cf create-service fss-predictive-scenario-analytics-service fss-predictive-scenario-analytics-service-free-plan <Predictive_Scenario_Name as in manifest.yml>
    ```
@@ -102,7 +102,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
    cf create-service fss-scenario-analytics-service  fss-scenario-analytics-service-free-plan <Scenario_Analytics_Name as in manifest.yml>
    ```
 
-1. Push the app to Bluemix 
+1. Push the app to Bluemix
 
    ```
    cf push
@@ -123,18 +123,18 @@ And voila! You now have your very own finance application running on Bluemix.
 	INVESTMENT_PORFOLIO_BASE_URL=investment-portfolio.mybluemix.net
 	INVESTMENT_PORFOLIO_USERNAME=
 	INVESTMENT_PORFOLIO_PASSWORD=
-	
+
 	DISCOVERY_USERNAME=
 	DISCOVERY_PASSWORD=
-	
+
 	PREDICTIVE_MARKET_SCENARIOS_URI=fss-analytics.mybluemix.net
 	PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN=
-		
+
 	SIMULATED_INSTRUMENT_ANALYSIS_URI=fss-analytics.mybluemix.net
 	SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN=
 	```
 1. For credentials and access tokens, run this command
-    
+
     ```
     cf env APP_NAME
     ```

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Finance Trade",
+  "title": "Investment Insights for Asset Managers",
   "description": "",
   "longDescription": "The Delivery Pipeline automates the continuous deployment of the app.",
   "type": "object",

@@ -5,7 +5,7 @@
             <div>
                 <section class="dashbaordPanel">
                     <div>
-                      FinTrade uses the financial services to analyze a stock portfolio in regards to various risk factors.
+                      Investment Insights for Asset Managers uses the financial services to analyze a stock portfolio in regards to various risk factors.
                       Risk factors include things like currency fluctuations or changes in the price of oil and gold.
                     </div>
 
@@ -87,7 +87,7 @@
                     <div class="insidePanel" ng-if="showMessage == false">
                         <div class="portfolioArea">
                             <div class="serviceHeader">
-                              In this step, FinTrade used <a href="https://console.bluemix.net/catalog/services/discovery" target="_blank">Watson Discovery</a> service to find recent and relevant news about our risk factor.
+                              In this step, Investment Insights for Asset Managers used <a href="https://console.bluemix.net/catalog/services/discovery" target="_blank">Watson Discovery</a> service to find recent and relevant news about our risk factor.
                               <br/>
                               The following list shows <strong>{{resultsCounterOut}}</strong> of {{newslist.matching_results}} matching documents.
                             </div>
@@ -112,7 +112,7 @@
                                         <label class="base--inline-label base--button buttons-group--button buttons-group--button_last" for="rb-4" style="width: 100%;">28 Days</label>
                                     </div>
                                 </div>
-                                    
+
 
                                 <div class="top-stories--list" ng-repeat="news in newslist" ng-if="$index == 1">
 
@@ -174,7 +174,7 @@
                     <div class="insidePanel" ng-if="simulateShock == false">
                         <div class="serviceHeader">
                             Using the <a href="https://console.bluemix.net/catalog/services/fss-predictive-scenario-analytics-service" target="_blank">Predictive Market Scenarios</a>
-                            and the <a href="https://console.bluemix.net/catalog/services/fss-scenario-analytics-service" target="_blank">Simulated Instrument Analytics services</a>, FinTrade computes a
+                            and the <a href="https://console.bluemix.net/catalog/services/fss-scenario-analytics-service" target="_blank">Simulated Instrument Analytics services</a>, Investment insights for asset managers computes a
                             <span class="discoveryAnalyticsMessage" ng-if="shockType == 'fall'">
                               projected impact on your holding resulting from a <span class="redBoldHead">({{shockvalue}}% {{shockType}})</span>
                               change in {{ newselectedRiskFactor }}

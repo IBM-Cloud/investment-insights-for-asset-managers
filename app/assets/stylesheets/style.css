@@ -171,7 +171,15 @@ button:disabled {
     border-bottom: none;
     padding-bottom: 1px;
     font-weight: 700;
-    font-size: 21px;
+    font-size: 20px;
+}
+.light {
+    text-decoration: none;
+    color: #FFFFFF;
+    border-bottom: none;
+    padding-bottom: 1px;
+    font-weight: 200;
+    font-size: 14px;
 }
 
 footer {
@@ -260,7 +268,8 @@ footer a:hover {
 }
 section.notAuthenticated{
     padding: 50px;
-    margin: 30px;
+    margin-left: 15%;
+    margin-right: 15%;
     background: #e4e4e4;
     border-radius: 3px;
     font-size: 16px;
@@ -390,7 +399,7 @@ input[type="radio"]:checked+label.buttons-group--button {
     border-right: none;
 }
 .buttons-group-items{
-    display: inline-block; 
+    display: inline-block;
     margin-left: -3px;
 }
 
