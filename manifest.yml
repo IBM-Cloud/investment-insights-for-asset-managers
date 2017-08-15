@@ -4,7 +4,7 @@ applications:
   random-route: true
   memory: 256M
   services:
-    - discovery-investment-insights-for-asset-managers
-    - investment-portfolio-investment-insights-for-asset-managers
-    - predictive-market-scenarios-investment-insights-for-asset-managers
-    - simulated-instrument-analytics-investment-insights-for-asset-managers
+    - discovery
+    - investment-portfolio
+    - predictive-market-scenarios
+    - simulated-instrument-analytics
