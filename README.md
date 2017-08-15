@@ -1,6 +1,6 @@
 # Investment Insights for Asset Managers
 
-[![Build Status](https://travis-ci.org/IBM-Bluemix/finance-trade.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/finance-trade)
+[![Build Status](https://api.travis-ci.org/IBM-Bluemix/investment-insights-for-asset-managers.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/investment-insights-for-asset-manager)
 ![Bluemix Deployments](https://deployment-tracker.mybluemix.net/stats/e13ee7de3df5bc6cf89950a82ef7a248/badge.svg)
 
 Investment Insights for Asset Managers is a Node.js application that uses IBM Financial services and Watson services.  
@@ -35,7 +35,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. Click ***Deploy to Bluemix*** to start the Bluemix DevOps wizard:
 
-   [![Deploy To Bluemix](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/finance-trade&branch=master)
+   [![Deploy To Bluemix](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/investment-insights-for-asset-managers&branch=master)
 
 1. Select the **GitHub** box.
 
@@ -74,7 +74,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
 1. Clone the app to your local environment from your terminal using the following command:
 
    ```
-   git clone https://github.com/IBM-Bluemix/finance-trade.git
+   git clone https://github.com/IBM-Bluemix/investment-insights-for-asset-managers.git
    ```
 
 1. `cd` into this newly created directory
@@ -109,7 +109,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
    ```
  _This command uses the manifest.yml file in your directory to CREATE the app and BIND the services to the app_
 
-And voila! You now have your very own finance application running on Bluemix.
+And voila! You now have your very own application running on Bluemix.
 
 ## Run the app locally
 
