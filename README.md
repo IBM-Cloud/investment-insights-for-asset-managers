@@ -3,13 +3,13 @@
 [![Build Status](https://api.travis-ci.org/IBM-Bluemix/investment-insights-for-asset-managers.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/investment-insights-for-asset-manager)
 ![Bluemix Deployments](https://deployment-tracker.mybluemix.net/stats/e13ee7de3df5bc6cf89950a82ef7a248/badge.svg)
 
-Investment Insights for Asset Managers is a Node.js application that uses IBM Financial services and Watson services.  
+**Investment Insights for Asset Managers** is a Node.js application that uses [IBM Financial services](https://www.ibm.com/watson/financial-services/) and Watson services.  
 
-The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact the investment to any given portfolio.
+The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact any given investment portfolio.
 
 # Overview
 
-The project deploys one Cloud Foundry application and uses:
+The project deploys a node.js Cloud Foundry application and uses the following services:
    * [Investment Portfolio](https://console.bluemix.net/catalog/services/fss-portfolio-service)
    * [Discovery](https://console.bluemix.net/catalog/services/discovery) and the pre-enriched News dataset
    * [Predictive Market Scenarios](https://console.bluemix.net/catalog/services/fss-predictive-scenario-analytics-service)
@@ -21,13 +21,13 @@ The application uses the financial services to analyze a stock portfolio in rega
 
    ![flow](./flow.png)
 
-1. The user selects a risk factor to consider.
+1. User selects a risk factor to consider.
 1. Using Watson Discovery, the app looks for articles related to the risk factor.
 1. The app computes a shock value based on the sentiment of the articles.
-1. Then it calls the Predictive Market Scenarios service to create conditional scenarios to model how, given a change to a subset of factors the broader set of market factors are expected to change.
+1. The app calls the Predictive Market Scenarios service to create conditional scenarios to model how, given a change to a subset of factors the broader set of market factors are expected to change.
 1. Finally it computes analytics on the portfolio stocks under the given scenarios.
 
-## Deploying the app automatically in Bluemix
+## Deploy to Bluemix using DevOps Toolchain
 
 The app comes with a toolchain you can use to deploy the solution with few clicks. If you want to deploy it manually, you can skip this section.
 
@@ -55,7 +55,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. Access the app when it's ready and start exploring.
 
-## Running the app on Bluemix
+## Deploy to Bluemix manually
 
 1. If you do not already have a Bluemix account, [sign up here][bluemix_signup_url]
 
