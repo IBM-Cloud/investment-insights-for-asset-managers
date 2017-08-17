@@ -29,6 +29,11 @@
                                 <md-content>
                                     <md-tabs md-dynamic-height md-border-bottom md-selected="data.selectedIndex" flex>
                                         <md-tab label="Select Portfolio" class="selectPortfolio">
+                                          <md-content class="md-padding">
+                                             <div class="serviceHeader">
+                                               Start by selecting a portfolio.
+                                             </div>
+                                          </md-content>
                                         </md-tab>
 
                                         <md-tab ng-repeat="portfolio in portfolios" label="{{portfolio.name}}" md-on-select="vm.getHoldings(portfolio)">
