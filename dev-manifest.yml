@@ -1,0 +1,10 @@
+---
+applications:
+- name: dev-investment-insights-for-asset-managers
+  random-route: true
+  memory: 256M
+  services:
+    - dev-discovery
+    - dev-investment-portfolio
+    - dev-predictive-market-scenarios
+    - dev-simulated-instrument-analytics
