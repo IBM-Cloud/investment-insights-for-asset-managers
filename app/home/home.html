@@ -93,7 +93,7 @@
                             </div>
 
                             <div class="top-stories widget">
-
+                                    
                                 <div class="buttons-group">
                                     <div class="buttons-group-items">
                                         <input type="radio" class="base--radio buttons-group--radio" checked="checked" id="rb-1" name="radio-buttons" value="1" ng-click="vm.toDiscovery(-1)">
@@ -111,6 +111,9 @@
                                         <input type="radio" class="base--radio buttons-group--radio" id="rb-4" name="radio-buttons" value="28Days" ng-click="vm.toDiscovery(-28)">
                                         <label class="base--inline-label base--button buttons-group--button buttons-group--button_last" for="rb-4" style="width: 100%;">28 Days</label>
                                     </div>
+                                    <button class="base--button widget--header-button" ng-click="toggleRight()">
+                                            View Query
+                                    </button>
                                 </div>
 
 
@@ -150,7 +153,36 @@
                                 <span class="neutralCount">{{neutralCount}} Neutral</span>
                             </div>
                         </div>
+                        <div ng-cloak>
+                                <section layout="row" flex>
+                                        
+                                            <md-sidenav class="md-sidenav-right" md-component-id="right"
+                                                        md-disable-backdrop md-whiteframe="4">
+                                        
+                                              <md-toolbar class="md-theme-indigo">
+                                                <h1 class="md-toolbar-tools">Response</h1>
+                                              </md-toolbar>
+                                              <br>
+                                              <button class="base--button widget--header-button" ng-click="toggleRight()">
+                                                    Go Back
+                                              </button>
+                                              <md-content layout-margin>
+                                                <pre class="base--pre language-json" prism source="{{discoveryResults | json}}"><code prism class="language-json">
+                                                 
+                                                </code></pre>
+                                              </md-content>
+                                              <br>
+                                              <button class="base--button widget--header-button" ng-click="toggleRight()">
+                                                    Go Back
+                                              </button>
+                                              <br>
+                                            </md-sidenav>
+                                        
+                                          </section>
+                        </div>
                     </div>
+
+                   
 
                     <span class="steppingArea" ng-if="showMessage == false">
                         <h4>Step 4. Shock value </h4>
