@@ -7,9 +7,32 @@
                 input = input || '';
                 return input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
             };
-        });
-
-    function homeController($scope, authService, $http, $location, $anchorScroll) {
+        }).directive('prism', ['$compile', function($compile) {
+            return {
+                restrict: 'A',
+                transclude: true,
+                scope: {
+                  source: '@'
+                },
+                link: function(scope, element, attrs, controller, transclude) {
+                    scope.$watch('source', function(v) {
+                      element.find("code").html(v);
+        
+                      Prism.highlightElement(element.find("code")[0]);
+                    });
+        
+                    transclude(function(clone) {
+                      if (clone.html() !== undefined) {
+                        element.find("code").html(clone.html());
+                        $compile(element.contents())(scope.$parent);
+                      }
+                    });
+                },
+                template: "<code></code>"
+            };
+        }]);
+        
+    function homeController($scope, authService, $http, $location, $anchorScroll,$mdSidenav) {
         var vm = this;
         vm.auth = authService;
         vm.login = login;
@@ -177,8 +200,8 @@
                 if (result.config.data.company !== undefined) {
                     $scope.newslist = result.data;
                     $scope.showMessage = false;
-
-
+                    $scope.discoveryResults = result.data;
+                    
                     // Total docSentiment (negative, positive and neutral)
                     var negativeCount = 0;
                     var positiveCount = 0;
@@ -349,8 +372,17 @@
             window.location = "./api/portfolios";
         };
 
+        //$scope.toggleLeft = buildToggler('left');
+        $scope.toggleRight = buildToggler('right');
+    
+        function buildToggler(componentId) {
+          return function() {
+            $mdSidenav(componentId).toggle();
+          };
+        }
+
 
     }
 
-    homeController.$inject = ['$scope', 'authService', '$http','$location', '$anchorScroll'];
+    homeController.$inject = ['$scope', 'authService', '$http','$location', '$anchorScroll','$mdSidenav'];
 })();

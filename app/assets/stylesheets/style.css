@@ -33,6 +33,24 @@ button:disabled {
     opacity: 0.65;
 }
 
+/***************PRISM*****************/
+
+.base--pre, pre {
+    margin: .5em 0;
+    overflow: auto;
+    margin-top: 0rem;
+    white-space: normal;
+    padding: 1rem 2rem;
+    background-color: #f0f2f4;
+    color: #121212;
+    font-size: .875em
+}
+/*************************sidenav******************/
+md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 450px !important;
+    width: 50vw !important;
+    max-width: 200px !important;
+   }
 
 /**************SPINNER*************/
 /* Absolute Center Spinner */
