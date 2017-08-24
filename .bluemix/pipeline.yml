@@ -22,6 +22,8 @@ stages:
   triggers:
   - type: stage
   properties:
+  - name: REPO_BRANCH
+    value: ${REPO_BRANCH}
   - name: CF_APP_HOSTNAME
     value: ${CF_APP_HOSTNAME}
   jobs:

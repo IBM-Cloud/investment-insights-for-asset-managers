@@ -1,0 +1,116 @@
+body {
+  background-color: #ffffff;
+  color: #394a52;
+}
+
+/**
+ * BUTTON GROUP
+ */
+.md-button.group {
+  background-color: #dfdfdf;
+}
+
+.md-button.selected {
+  background-color: #adadad;
+  color: #ffffff;
+}
+
+/**
+ * TOOLBAR
+ */
+md-toolbar {
+  background-color: #1a3643 !important;
+}
+
+/**
+ * SIDEBAR
+ */
+.sidebar {
+  background-color: #1a3542;
+  color: #f1f2f3;
+}
+
+.sidebar-user-avatar {
+  color: #f1f2f3 !important;
+}
+
+.sidebar-item md-icon {
+  color: #f1f2f3 !important;
+}
+
+.sidebar-item a {
+  color: #f1f2f3;
+}
+
+.sidebar-item > a.active md-icon,
+.sidebar-item > a.active {
+  background: #ff5722 !important;
+  color: #f1f2f3 !important;
+}
+
+.badge {
+  background-color: #ff5722;
+  color: #f1f2f3;
+}
+
+.active > .badge {
+  background-color: #f1f2f3;
+  color: #ff5722;
+}
+
+/**
+ *
+ */
+.page-header {
+  border-color: #9caab8;
+}
+
+/**
+ * PORTFOLIO PAGE
+ */
+.page-body {
+  background-color: #ffffff;
+}
+
+/**
+ * NEWS PAGE
+ */
+.article-sentiment-positive {
+  background-color: #4bb60c !important;
+}
+
+.article-sentiment-neutral {
+  background-color: #9e9e9e !important;
+}
+
+.article-sentiment-negative {
+  background-color: #de6b6b !important;
+}
+
+.article-sentiment-tag {
+  color: white;
+}
+
+/**
+ * SIMULATION PAGE
+ */
+.number-positive {
+  color: #4bb60c;
+}
+
+.number-negative {
+  color: #de6b6b;
+}
+
+/**
+ * ALERT
+ */
+.alert-warning {
+  background-color: #de6b6b;
+  color: #ffffff;
+}
+
+.alert-info {
+  background-color: #47aad7;
+  color: #ffffff;
+}
