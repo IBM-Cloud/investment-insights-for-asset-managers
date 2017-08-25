@@ -2,11 +2,11 @@ var express = require('express');
 
 var router = express.Router();
 
-router.get('/login', (req, res) => {
+router.get('/auth/login', (req, res) => {
   res.redirect('/#!/dashboard');
 });
 
-router.get('/loginanon', (req, res) => {
+router.get('/auth/loginanon', (req, res) => {
   res.redirect('/#!/dashboard');
 });
 
