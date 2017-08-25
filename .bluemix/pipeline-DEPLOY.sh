@@ -17,7 +17,7 @@ cf create-service discovery lite ${PREFIX}discovery
 cf create-service fss-portfolio-service fss-portfolio-service-free-plan ${PREFIX}investment-portfolio
 cf create-service fss-predictive-scenario-analytics-service fss-predictive-scenario-analytics-service-free-plan ${PREFIX}predictive-market-scenarios
 cf create-service fss-scenario-analytics-service fss-scenario-analytics-service-free-plan ${PREFIX}simulated-instrument-analytics
-cf create-service AppID "Graduated tier" appID
+cf create-service AppID "Graduated tier" ${PREFIX}appID
 
 ################################################################
 # Push app with blue/green deployment
