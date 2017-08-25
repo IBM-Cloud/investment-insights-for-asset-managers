@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const cfenv = require('cfenv');
 const bodyParser = require('body-parser');
@@ -74,6 +75,11 @@ var discovery = new DiscoveryV1({
 });
 
 //--Setting up the middle ware--------------------
+app.use(session({
+	secret: "finance-trade-app",
+	resave: true,
+	saveUninitialized: true
+}));
 app.use('/', express.static(__dirname + '/app'));
 //TODO:Remove
 app.use('/node_modules',express.static(__dirname + '/node_modules'));
