@@ -5,7 +5,7 @@ var dateFormat = require('dateformat');
 
 var Discovery;
 
-router.post('/api/v1/news/:search', (req, res) => {
+router.post('/api/v1/news', (req, res) => {
   // Getting date from Angular radio buttons
   var getDay = req.body.daysDate;
   var newDate = Date.now('dd:mm:yyyy') + (getDay * 24 * 3600 * 1000); // days ago in milliseconds
@@ -14,7 +14,7 @@ router.post('/api/v1/news/:search', (req, res) => {
   Discovery.query({
     environment_id: 'system',
     collection_id: 'news',
-    query: req.body.company,
+    query: req.body.search,
     count: 20,
     return: 'score,url,host,text,publication_date,enriched_text.sentiment,title',
     aggregations: [''],

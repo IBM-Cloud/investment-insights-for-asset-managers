@@ -28,7 +28,6 @@
     "express": "4.15.2",
     "express-session": "^1.15.2",
     "form-data": "1.0.0-rc3",
-    "lodash": "^4.17.4",
     "morgan": "1.8.1",
     "multer": "^1.3.0",
     "node-datetime": "1.0",

@@ -34,7 +34,7 @@ router.get('/api/v1/portfolios', (req, res) => {
     })
     // if we reach this point it means we have no portfolio yet, create some
     .then(() => {
-      var defaultPortfolios = JSON.parse(fs.readFileSync(`${__dirname}/../app/data/investmentPortfolio/portfolio/portfolios.json`));
+      var defaultPortfolios = JSON.parse(fs.readFileSync(`${__dirname}/../seed/investmentPortfolio/portfolio/portfolios.json`));
       var currentdate = currentISOTimestamp();
       defaultPortfolios.portfolios.forEach((portfolio) => {
         portfolio.timestamp = currentdate;
@@ -97,7 +97,7 @@ router.get('/api/v1/portfolios/:portfolioname/holdings', (req, res) => {
     .then(() => {
       var defaultHoldings = {
         holdings: [{
-          holdings: JSON.parse(fs.readFileSync(`${__dirname}/../app/data/investmentPortfolio/holdings/${portfolioname}_holdings.json`)).holdings,
+          holdings: JSON.parse(fs.readFileSync(`${__dirname}/../seed/investmentPortfolio/holdings/${portfolioname}_holdings.json`)).holdings,
           timestamp: currentISOTimestamp()
         }]
       };

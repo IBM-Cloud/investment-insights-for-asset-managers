@@ -1,61 +1,114 @@
 <html>
 <head>
   <title>Investment Insights for Asset Managers</title>
-  <base href="/">
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Viewport settings-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/stylesheets/style.css">
-  <link rel="stylesheet" href="/assets/stylesheets/font-awesome/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-  <link rel="icon" href="/assets/images/favicon.ico">
-  <link rel="stylesheet" href="/assets/stylesheets/prism.css">
+  <link href="node_modules/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="css/prism.css">
+
+  <link rel="stylesheet" href="css/app.css" type="text/css">
+  <link rel="stylesheet" href="routes/portfolio/portfolio.css" type="text/css">
+  <link rel="stylesheet" href="routes/news/news.css" type="text/css">
+  <link rel="stylesheet" href="routes/simulation/simulation.css" type="text/css">
+  <link rel="stylesheet" href="css/app-theme.css" type="text/css">
+  <link rel="icon" href="images/favicon.ico">
 </head>
 <body>
-<div ng-app="app">
+  <div ng-app="app" ng-controller="AppController as controller" ng-cloak layout="column" layout-fill class="app-container">
+    <header>
+      <md-toolbar>
+        <div class="md-toolbar-tools" md-whiteframe="4">
+          <md-button class="md-icon-button" ng-click="toggleSidebar()">
+            <md-icon>menu</md-icon>
+          </md-button>
+          <span class="title md-title">Investment Insights</span>&nbsp;<span class="title md-subtitle">for Asset Managers</span>
+          <span flex></span>
+          <md-button class="md-icon-button" href="https://github.com/IBM-Bluemix/investment-insights-for-asset-managers">
+            <md-icon md-svg-src="images/github-circle.svg"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+    </header>
 
-  <navbar></navbar>
+    <div layout="row" layout-xs="column" layout-fill flex>
+      <div class="sidebar" layout="column" ng-show="sidebarVisible" md-whiteframe="4">
+        <div>
+          <div class="sidebar-user" layout="column" hide-xs layout-align="center center">
+            <md-icon class="sidebar-user-avatar">face</md-icon>
+            <span class="sidebar-user-name">John Smith</span>
+          </div>
+        </div>
 
-  <div>
-    <ui-view></ui-view>
+        <div class="sidebar-item">
+          <a class="md-button md-ink-ripple" ui-sref="portfolio()" ui-sref-active="active">
+            <md-icon>card_travel</md-icon>
+            Portfolio
+          </a>
+        </div>
+
+        <div class="sidebar-item">
+          <a class="md-button md-ink-ripple" ui-sref="news()" ui-sref-active="active">
+            <md-icon>subject</md-icon>
+            News Analysis
+            <span class="badge" ng-if="state.get('news')">{{state.get('news').results.length}}</span>
+          </a>
+        </div>
+
+        <div class="sidebar-item">
+          <a class="md-button md-ink-ripple" ui-sref="simulation()" ui-sref-active="active">
+            <md-icon>show_chart</md-icon>
+            Simulation
+          </a>
+        </div>
+
+        <div flex></div>
+
+        <div class="sidebar-item">
+          <a class="md-button md-ink-ripple" ui-sref="about()" ui-sref-active="active">
+            <md-icon>info</md-icon>
+            About
+          </a>
+        </div>
+      </div>
+      <div class="main" flex ui-view layout="row"></div>
+    </div>
+
+    <spinner>
+      <div id="loadingProgress" layout="row" layout-align="center center">
+        <md-progress-circular md-diameter="96"></md-progress-circular>
+      </div>
+    </spinner>
   </div>
 
-  <footer>
-    MADE WITH <a href="https://www.ibm.com/watson/developercloud/" target="_blank">IBM WATSON</a> & <a
-          href="https://www.ibm.com/cloud-computing/solutions/banking/" target="_blank">IBM FINANCIAL SERVICES</a>
-  </footer>
-</div>
-
 <!-- Angular Material requires Angular.js Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
 
 <!-- Angular Material Library -->
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
 
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="app.run.js"></script>
-<script type="text/javascript" src="auth0-variables.js"></script>
-<script type="text/javascript" src="navbar/navbar.directive.js"></script>
-<script type="text/javascript" src="home/home.controller.js"></script>
-<script type="text/javascript" src="callback/callback.controller.js"></script>
-<script type="text/javascript" src="auth/auth.service.js"></script>
+<script type="text/javascript" src="node_modules/angular-material-data-table/dist/md-data-table.min.js"></script>
+<script type="text/javascript" src="js/prism.js"></script>
 
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/state.service.js"></script>
+<script type="text/javascript" src="js/portfolio.service.js"></script>
+<script type="text/javascript" src="js/news.service.js"></script>
+<script type="text/javascript" src="js/simulation.service.js"></script>
 
-<script type="text/javascript" src="lib/angular-ui-router.js"></script>
-<script type="text/javascript" src="lib/auth0.js"></script>
-<script type="text/javascript" src="lib/angular-auth0.js"></script>
-
-<script src="prism.js"></script>
-
+<script type="text/javascript" src="routes/about/about.js"></script>
+<script type="text/javascript" src="routes/portfolio/portfolio.js"></script>
+<script type="text/javascript" src="routes/news/news.js"></script>
+<script type="text/javascript" src="routes/simulation/simulation.js"></script>
 </body>
 </html>
