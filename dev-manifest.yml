@@ -8,3 +8,4 @@ applications:
     - dev-investment-portfolio
     - dev-predictive-market-scenarios
     - dev-simulated-instrument-analytics
+    - dev-appID
