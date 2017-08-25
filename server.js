@@ -86,6 +86,20 @@ app.use('/node_modules',express.static(__dirname + '/node_modules'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// routes for user authentication
+app.use(require('./routes/auth.js'));
+
+// protect all routes under /api/v1
+function checkAuthenticated(req, res, next) {
+  if (req.session && req.session.logged) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+}
+app.use('/api/v1/', checkAuthenticated);
+
+// register API routes
 app.use(require('./routes/portfolios.js')({
   baseUrl: INVESTMENT_PORFOLIO_BASE_URL || process.env.INVESTMENT_PORFOLIO_BASE_URL,
   userid: INVESTMENT_PORFOLIO_USERNAME || process.env.INVESTMENT_PORFOLIO_USERNAME,
@@ -99,7 +113,6 @@ app.use(require('./routes/simulation')({
   uri: PREDICTIVE_MARKET_SCENARIOS_URI || process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
   accessToken: PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN || process.env.PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN
 }));
-app.use(require('./routes/auth.js'));
 
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
