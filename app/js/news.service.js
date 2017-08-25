@@ -1,8 +1,8 @@
 (function () {
   angular.module('app')
-    .service('NewsService', ['$http', '$q', NewsService]);
+    .service('NewsService', ['$http', '$q', '$state', NewsService]);
 
-  function NewsService($http, $q) {
+  function NewsService($http, $q, $state) {
     console.log('NewsService loading...');
     var self = this;
     return {
@@ -17,6 +17,7 @@
           deferred.resolve(response.data);
         }).catch(function(err) {
           console.log(err);
+          if (err.status === 401) { $state.go('home'); }
           deferred.reject(err);
         });
         return deferred.promise;

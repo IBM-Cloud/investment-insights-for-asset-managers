@@ -35,7 +35,10 @@
             StateService.set('news.horizon', $scope.selectedHorizon);
             StateService.set('news.shockValue', articles.shockValue);
             StateService.set('news', articles);
-          });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });;
       };
 
       // restore view data

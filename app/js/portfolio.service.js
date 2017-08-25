@@ -1,8 +1,8 @@
 (function () {
   angular.module('app')
-    .service('PortfolioService', ['$http', '$q', PortfolioService]);
+    .service('PortfolioService', ['$http', '$q', '$state', PortfolioService]);
 
-  function PortfolioService($http, $q) {
+  function PortfolioService($http, $q, $state) {
     console.log('PortfolioService loading...');
     var self = this;
     var riskFactors = [
@@ -29,6 +29,7 @@
           deferred.resolve(response.data.portfolios);
         }).catch(function(err) {
           console.log(err);
+          if (err.status === 401) { $state.go('home'); }
           deferred.reject(err);
         });
         return deferred.promise;
@@ -40,6 +41,7 @@
           deferred.resolve(response.data.holdings[0].holdings);
         }).catch(function(err) {
           console.log(err);
+          if (err.status === 401) { $state.go('home'); }
           deferred.reject(err);
         });
         return deferred.promise;
