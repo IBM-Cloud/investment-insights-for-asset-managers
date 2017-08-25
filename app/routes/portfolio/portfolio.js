@@ -2,7 +2,7 @@
   var app = angular.module('app');
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('portfolio', {
+    $stateProvider.state('dashboard.portfolio', {
       url: '/portfolio',
       templateUrl: 'routes/portfolio/portfolio.html',
       controller: 'PortfolioController as controller'

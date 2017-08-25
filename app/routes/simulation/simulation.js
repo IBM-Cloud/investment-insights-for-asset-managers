@@ -2,7 +2,7 @@
   var app = angular.module('app');
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('simulation', {
+    $stateProvider.state('dashboard.simulation', {
       url: '/simulation',
       templateUrl: 'routes/simulation/simulation.html',
       css: 'routes/simulation/simulation.css'

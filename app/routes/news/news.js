@@ -2,7 +2,7 @@
   var app = angular.module('app');
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('news', {
+    $stateProvider.state('dashboard.news', {
       url: '/news',
       templateUrl: 'routes/news/news.html',
       controller: 'NewsController as controller'

@@ -13,19 +13,19 @@
     </p>
 
     <p>
-      This shock value is derived from the analysis performed in the <a ui-sref="news()">News Analysis</a> page.
+      This shock value is derived from the analysis performed in the <a ui-sref="dashboard.news">News Analysis</a> page.
     </p>
   </div>
 
   <div class="page-body" md-whiteframe="10">
     <div ng-if="!hasPortfolio()" class="alert alert-warning">
       You need to <strong>select a portfolio</strong> before running a simulation.
-      Head over to the <a ui-sref="portfolio()">Portfolio</a> page.
+      Head over to the <a ui-sref="dashboard.portfolio">Portfolio</a> page.
     </div>
 
     <div ng-if="!hasNews()" class="alert alert-warning">
       You need to <strong>analyze news articles</strong> before running a simulation.
-      Head over to the <a ui-sref="news()">News Analysis</a> page.
+      Head over to the <a ui-sref="dashboard.news">News Analysis</a> page.
     </div>
 
     <div ng-if="hasNews()" class="alert alert-info">
