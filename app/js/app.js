@@ -58,8 +58,9 @@
     };
   }]);
 
-  app.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/about');
+  app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.when('/dashboard', '/dashboard/about');
   });
 
   app.controller('AppController', ['$scope', '$mdDialog', 'StateService',
