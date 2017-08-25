@@ -93,6 +93,7 @@ app.use(require('./routes/simulation')({
   uri: PREDICTIVE_MARKET_SCENARIOS_URI || process.env.PREDICTIVE_MARKET_SCENARIOS_URI,
   accessToken: PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN || process.env.PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN
 }));
+app.use(require('./routes/auth.js'));
 
 //--All other routes to be sent to home page--------------------
 app.get('/*', function(req, res) {
