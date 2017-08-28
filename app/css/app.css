@@ -1,3 +1,8 @@
+body, html {
+  /** smooth scrolling on mobile devices **/
+  -webkit-overflow-scrolling: touch;
+}
+
 #loadingProgress {
   position: fixed;
   top: 0;
