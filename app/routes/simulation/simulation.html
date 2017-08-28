@@ -28,9 +28,10 @@
       Head over to the <a ui-sref="dashboard.news">News Analysis</a> page.
     </div>
 
-    <div ng-if="hasNews()" class="alert alert-info">
+    <div ng-if="hasNews() && hasPortfolio()" class="alert alert-info">
       The simulation will use the articles retrieved by the News Analysis
-      and a computed shock value of <strong>{{state.get('news.shockValue')}}%</strong>.
+      and a shock value of <strong>{{state.get('news.shockValue')}}%</strong>
+      to compute a projected impact on the portfolio <strong>{{state.get('portfolios.selected').name}}</strong>.
     </div>
 
     <md-button class="md-raised md-primary" ng-click="runSimulation()" ng-hide="!hasNews() || !hasPortfolio()">Run simulation...</md-button>
