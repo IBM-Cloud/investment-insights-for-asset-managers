@@ -61,10 +61,24 @@ body, html {
   margin-bottom: 40px;
 }
 
+.sidebar-anonymous-avatar {
+  font-size: 128px;
+  width: 128px;
+  height: 128px;
+  margin-bottom: 20px;
+}
+
 .sidebar-user-avatar {
   font-size: 128px;
   width: 128px;
   height: 128px;
+  border-radius: 64px;
+  margin-bottom: 20px;
+  border: 4px solid;
+}
+
+.sidebar-user-name {
+  text-align: center;
 }
 
 .sidebar-item a {
