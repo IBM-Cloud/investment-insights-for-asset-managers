@@ -4,7 +4,6 @@
 
   function NewsService($http, $q, $state) {
     console.log('NewsService loading...');
-    var self = this;
     return {
       findArticles: function(riskFactor, horizon) {
         console.log('Looking for', riskFactor, horizon);
@@ -24,5 +23,4 @@
       }
     };
   }
-
 })();

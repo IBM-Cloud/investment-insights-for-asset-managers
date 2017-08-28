@@ -4,7 +4,6 @@
 
   function PortfolioService($http, $q, $state) {
     console.log('PortfolioService loading...');
-    var self = this;
     var riskFactors = [
       { id: "CX_EQI_SPDJ_USA500_BMK_USD_LargeCap_Price", name: "S&P 500", search: "S&P 500" },
       { id: "CX_COS_ME_Gold_XCEC", name: "Gold Price", search: "price of gold, gold forecast" },
@@ -51,5 +50,4 @@
       }
     };
   }
-
 })();

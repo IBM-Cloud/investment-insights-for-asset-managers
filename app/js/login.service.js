@@ -4,7 +4,6 @@
 
   function LoginService($http, $q) {
     console.log('LoginService loading...');
-    var self = this;
     return {
       isLogged: function() {
         var deferred = $q.defer();

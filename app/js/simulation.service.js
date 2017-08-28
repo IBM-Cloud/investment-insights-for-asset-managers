@@ -4,7 +4,6 @@
 
   function SimulationService($http, $q, $state) {
     console.log('SimulationService loading...');
-    var values = { };
     return {
       simulate: function(instrumentIds, riskFactor, shockValue) {
         var deferred = $q.defer();
@@ -23,5 +22,4 @@
       }
     };
   }
-
 })();
