@@ -128,7 +128,7 @@ passport.use(new WebAppStrategy({
 	clientId: clientIdLocal,
 	secret: secretLocal,
 	oauthServerUrl: oauthServerUrlLocal,
-	redirectUri: appEnv.url + "/auth/callback" // ToDo update this url to pick up the url dynamic 
+	redirectUri: appEnv.url + "/auth/callback" 
 }));
 
 // Configure passportjs with user serialization/deserialization. This is required

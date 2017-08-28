@@ -18,10 +18,11 @@ const app = express();
 router.get('/auth/logged', (req, res) => {
   res.send({
     logged: req.isAuthenticated(),
-    anonymous: req.session.anonymous
-    // ToDo - send to client user info.
+    anonymous: req.session.anonymous,
+    profile: req.user
   });
 });
+
 
 // router.get('/auth/logout', (req, res) => {
 //   req.session.logged = false;
