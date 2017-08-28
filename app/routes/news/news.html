@@ -46,7 +46,7 @@
         <md-icon ng-if="article.enriched_text.sentiment.document.label==='neutral'" class="md-avatar-icon article-sentiment-neutral">sentiment_neutral</md-icon>
         <md-icon ng-if="article.enriched_text.sentiment.document.label==='negative'" class="md-avatar-icon article-sentiment-negative">sentiment_very_dissatisfied</md-icon>
         <div class="md-list-item-text" layout="column">
-          <h3><a href="{{article.url}}">{{article.title}}</a></h3>
+          <h3><a target="_blank" href="{{article.url}}">{{article.title}}</a></h3>
           <h4>{{article.publication_date | date:'short'}} | {{article.host}} | Overall score {{article.score}} | Sentiment: {{article.enriched_text.sentiment.document.label}} ({{article.enriched_text.sentiment.document.score}})</h4>
         </div>
       </md-list-item>
