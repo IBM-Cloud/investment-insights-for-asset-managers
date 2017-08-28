@@ -25,13 +25,6 @@ body, html {
   height: 16px;
 }
 
-@media screen and (max-width: 600px) {
-  .md-subtitle {
-    font-size: 10px;
-    height: 10px;
-  }
-}
-
 .md-button.group {
   margin: 0;
 }
@@ -50,7 +43,7 @@ body, html {
  * SIDEBAR
  */
 .sidebar {
-  min-width: 250px;
+  width: 250px;
   font-size: 18px;
   overflow: scroll;
   padding-top: 20px;
@@ -156,4 +149,17 @@ body, html {
 tfoot.md-foot tr td.md-cell {
   border-top: 3px solid;
   border-bottom: 3px solid;
+}
+
+/**
+ * ON SMALL SCREEN
+ */
+@media screen and (max-width: 600px) {
+  .md-subtitle {
+    font-size: 10px;
+    height: 10px;
+  }
+  .sidebar {
+    width: 100%;
+  }
 }
