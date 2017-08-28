@@ -4,26 +4,17 @@ const path = require('path');
 const cfenv = require('cfenv');
 const bodyParser = require('body-parser');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+var appEnv = cfenv.getAppEnv()
 
 // libraries for App-ID
 const passport = require("passport");
-const WebAppStrategy = require("./lib/appid-sdk").WebAppStrategy;
+const WebAppStrategy = require("bluemix-appid").WebAppStrategy; // ToDo get from NPM
 const helmet = require("helmet");
 const flash = require("connect-flash");
 
 const app = express();
+var port = process.env.VCAP_APP_PORT || appEnv.port;
 
-// Below URLs will be used for App ID OAuth flows
-// ToDo handle that in Angular
-const LANDING_PAGE_URL = "/";
-const LOGIN_URL = "/auth/login";
-const LOGIN_ANON_URL = "/auth/loginanon";
-const CALLBACK_URL = "/ibm/bluemix/appid/callback";
-const LOGOUT_URL = "/auth/logout";
-const ROP_LOGIN_PAGE_URL = "/auth/rop/login";
-
-
-var port = process.env.VCAP_APP_PORT || 3000;
 var vcapLocal = null;
 // declare service variables
 var INVESTMENT_PORFOLIO_BASE_URL,INVESTMENT_PORFOLIO_USERNAME,INVESTMENT_PORFOLIO_PASSWORD;
@@ -125,12 +116,11 @@ app.use('/node_modules',express.static(__dirname + '/node_modules'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// routes for user authentication
-app.use(require('./routes/auth.js'));
 
 // Configure express application to use passportjs
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Configure passportjs to use AppID WebAppStrategy
 passport.use(new WebAppStrategy({
@@ -138,9 +128,8 @@ passport.use(new WebAppStrategy({
 	clientId: clientIdLocal,
 	secret: secretLocal,
 	oauthServerUrl: oauthServerUrlLocal,
-	redirectUri: "http://localhost:3000" + CALLBACK_URL // ToDo update this url to pick up the url dynamic 
+	redirectUri: appEnv.url + "/auth/callback" // ToDo update this url to pick up the url dynamic 
 }));
-
 
 // Configure passportjs with user serialization/deserialization. This is required
 // for authenticated session persistence accross HTTP requests. See passportjs docs
@@ -155,35 +144,40 @@ passport.deserializeUser(function(obj, cb) {
 
 // Explicit login endpoint. Will always redirect browser to login widget due to {forceLogin: true}.
 // If forceLogin is set to false redirect to login widget will not occur of already authenticated users.
-app.get(LOGIN_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
-	successRedirect: LANDING_PAGE_URL,
+app.get('/auth/login', passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
+	successRedirect: '/#!/dashboard',
 	forceLogin: true
 }));
 
 // Explicit anonymous login endpoint. Will always redirect browser for anonymous login due to forceLogin: true
-app.get(LOGIN_ANON_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
-	successRedirect: LANDING_PAGE_URL,
+app.get('/auth/loginanon', passport.authenticate(WebAppStrategy.STRATEGY_NAME, {
+	successRedirect: '/#!/dashboard',
 	allowAnonymousLogin: true,
 	allowCreateNewAnonymousUser: true
 }));
+
+// routes for user authentication
+app.use(require('./routes/auth.js'));
 
 // Callback to finish the authorization process. Will retrieve access and identity tokens/
 // from App ID service and redirect to either (in below order)
 // 1. the original URL of the request that triggered authentication, as persisted in HTTP session under WebAppStrategy.ORIGINAL_URL key.
 // 2. successRedirect as specified in passport.authenticate(name, {successRedirect: "...."}) invocation
 // 3. application root ("/")
-app.get(CALLBACK_URL, passport.authenticate(WebAppStrategy.STRATEGY_NAME));
+app.get('/auth/callback', passport.authenticate(WebAppStrategy.STRATEGY_NAME));
 
 // Logout endpoint. Clears authentication information from session
-app.get(LOGOUT_URL, function(req, res){
+app.get('/auth/logout', function(req, res){
 	WebAppStrategy.logout(req);
-	res.redirect(LANDING_PAGE_URL);
+	res.redirect('/');
 });
+
 
 // protect all routes under /api/v1
 function checkAuthenticated(req, res, next) {
-  if (req.session && req.session.logged) {
-    next();
+  // if (req.session && req.session.logged) {
+  if (req.isAuthenticated()) {
+  next();
   } else {
     res.sendStatus(401);
   }
