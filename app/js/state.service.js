@@ -11,8 +11,10 @@
       },
       get: function(key) {
         return values[key];
+      },
+      unset: function(key) {
+        delete values[key];
       }
     };
   }
-
 })();

@@ -2,7 +2,7 @@
   var app = angular.module('app');
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('portfolio', {
+    $stateProvider.state('dashboard.portfolio', {
       url: '/portfolio',
       templateUrl: 'routes/portfolio/portfolio.html',
       controller: 'PortfolioController as controller'
@@ -30,6 +30,8 @@
           PortfolioService.getHoldings(portfolio).then(function(holdings) {
             console.log('Found', holdings);
             portfolio.holdings = holdings;
+          }).catch(function(err) {
+            console.log(err);
           });
         }
       };
@@ -42,6 +44,8 @@
             $scope.selectPortfolio(portfolios[0]);
           }
           StateService.set('portfolios', portfolios);
+        }).catch(function(err) {
+          console.log(err);
         });
       } else if ($scope.selectedPortfolio) {
         $scope.selectedPortfolioIndex =

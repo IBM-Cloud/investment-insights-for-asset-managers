@@ -2,7 +2,7 @@
   var app = angular.module('app');
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider.state('news', {
+    $stateProvider.state('dashboard.news', {
       url: '/news',
       templateUrl: 'routes/news/news.html',
       controller: 'NewsController as controller'
@@ -35,7 +35,10 @@
             StateService.set('news.horizon', $scope.selectedHorizon);
             StateService.set('news.shockValue', articles.shockValue);
             StateService.set('news', articles);
-          });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });;
       };
 
       // restore view data

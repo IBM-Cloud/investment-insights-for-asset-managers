@@ -8,3 +8,5 @@ applications:
     - investment-portfolio
     - predictive-market-scenarios
     - simulated-instrument-analytics
+    - appID
+

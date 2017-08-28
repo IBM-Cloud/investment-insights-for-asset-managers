@@ -58,8 +58,30 @@
     };
   }]);
 
-  app.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/about');
+  // ensure the login screen is shown before the user tries to access the dashboard pages
+  app.run(function($transitions) {
+    $transitions.onStart({
+      to: 'dashboard.**'
+    }, function(trans) {
+      var $state = trans.router.stateService;
+      var loginService = trans.injector().get('LoginService');
+      console.log('User must be authenticated to access this area...');
+      return loginService.isLogged().then(function(result) {
+        if (result.logged) {
+          console.log('User is authenticated. Proceeding...');
+        } else {
+          console.log('User needs to log in');
+          return $state.target('home');
+        }
+      }).catch(function(err) {
+        return $state.target('home');
+      });
+    });
+  });
+
+  app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.when('/dashboard', '/dashboard/about');
   });
 
   app.controller('AppController', ['$scope', '$mdDialog', 'StateService',

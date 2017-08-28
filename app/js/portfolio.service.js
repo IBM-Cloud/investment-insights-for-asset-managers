@@ -1,10 +1,9 @@
 (function () {
   angular.module('app')
-    .service('PortfolioService', ['$http', '$q', PortfolioService]);
+    .service('PortfolioService', ['$http', '$q', '$state', PortfolioService]);
 
-  function PortfolioService($http, $q) {
+  function PortfolioService($http, $q, $state) {
     console.log('PortfolioService loading...');
-    var self = this;
     var riskFactors = [
       { id: "CX_EQI_SPDJ_USA500_BMK_USD_LargeCap_Price", name: "S&P 500", search: "S&P 500" },
       { id: "CX_COS_ME_Gold_XCEC", name: "Gold Price", search: "price of gold, gold forecast" },
@@ -29,6 +28,7 @@
           deferred.resolve(response.data.portfolios);
         }).catch(function(err) {
           console.log(err);
+          if (err.status === 401) { $state.go('home'); }
           deferred.reject(err);
         });
         return deferred.promise;
@@ -40,6 +40,7 @@
           deferred.resolve(response.data.holdings[0].holdings);
         }).catch(function(err) {
           console.log(err);
+          if (err.status === 401) { $state.go('home'); }
           deferred.reject(err);
         });
         return deferred.promise;
@@ -49,5 +50,4 @@
       }
     };
   }
-
 })();

@@ -1,10 +1,9 @@
 (function () {
   angular.module('app')
-    .service('SimulationService', ['$http', '$q', SimulationService]);
+    .service('SimulationService', ['$http', '$q', '$state', SimulationService]);
 
-  function SimulationService($http, $q) {
+  function SimulationService($http, $q, $state) {
     console.log('SimulationService loading...');
-    var values = { };
     return {
       simulate: function(instrumentIds, riskFactor, shockValue) {
         var deferred = $q.defer();
@@ -16,11 +15,11 @@
           deferred.resolve(response.data);
         }).catch(function(err) {
           console.log(err);
+          if (err.status === 401) { $state.go('home'); }
           deferred.reject(err);
         });
         return deferred.promise;
       }
     };
   }
-
 })();

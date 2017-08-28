@@ -34,8 +34,12 @@ md-toolbar {
   color: #f1f2f3;
 }
 
-.sidebar-user-avatar {
+.sidebar-anonymous-avatar {
   color: #f1f2f3 !important;
+}
+
+.sidebar-user-avatar {
+  border-color: #234555;
 }
 
 .sidebar-item md-icon {
