@@ -1,0 +1,84 @@
+<div ng-controller="SimulationController as controller" flex>
+  <div class="page-header" layout="row">
+    <span class="page-title">Simulation</span>
+    <span flex></span>
+    <md-button class="md-raised md-secondary" ng-disabled="!simulationResults" ng-click="viewJSON($event, simulationResults)">View JSON</md-button>
+  </div>
+
+  <div class="page-description">
+    <p>
+      Using the <a href="https://console.bluemix.net/catalog/services/fss-predictive-scenario-analytics-service" target="_blank">Predictive Market Scenarios</a>
+      and the <a href="https://console.bluemix.net/catalog/services/fss-scenario-analytics-service" target="_blank">Simulated Instrument Analytics services</a>,
+      the application can compute a projected impact on your holding resulting from a rise or fall (also called shock value) of a risk factor.
+    </p>
+
+    <p>
+      This shock value is derived from the analysis performed in the <a ui-sref="dashboard.news">News Analysis</a> page.
+    </p>
+  </div>
+
+  <div class="page-body" md-whiteframe="10">
+    <div ng-if="!hasPortfolio()" class="alert alert-warning">
+      You need to <strong>select a portfolio</strong> before running a simulation.
+      Head over to the <a ui-sref="dashboard.portfolio">Portfolio</a> page.
+    </div>
+
+    <div ng-if="!hasNews()" class="alert alert-warning">
+      You need to <strong>analyze news articles</strong> before running a simulation.
+      Head over to the <a ui-sref="dashboard.news">News Analysis</a> page.
+    </div>
+
+    <div ng-if="hasNews() && hasPortfolio()" class="alert alert-info">
+      The simulation will use the articles retrieved by the News Analysis
+      and a shock value of <strong>{{(state.get('news.shockValue') - 1) * 100 | number:2}}%</strong>
+      to compute a projected impact on the portfolio <strong>{{state.get('portfolios.selected').name}}</strong>.
+    </div>
+
+    <md-button class="md-raised md-primary" ng-click="runSimulation()" ng-hide="!hasNews() || !hasPortfolio()">Run simulation...</md-button>
+  </div>
+
+  <div class="page-body" ng-if="simulationResults.holdings" md-whiteframe="4">
+
+    <md-tabs>
+      <md-tab label="{{simulationResults.portfolio.name}}">
+      </md-tab>
+    </md-tabs>
+
+    <md-table-container>
+      <table md-table md-row-select="true" ng-model="selectedHoldings">
+        <thead md-head md-order="sortOrder">
+          <tr md-row>
+            <th md-column md-order-by="companyName"><span>Company</span></th>
+            <th md-column md-order-by="asset"><span>Asset</span></th>
+            <th md-column md-order-by="quantity" md-numeric>Shares QTY</th>
+            <th md-column md-order-by="currentPrice" md-numeric>Current Price</th>
+            <th md-column md-order-by="stressedPrice" md-numeric>Stressed Price</th>
+            <th md-column md-order-by="profitLoss" md-numeric>Profit/Loss</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-auto-select ng-repeat="holding in simulationResults.holdings | orderBy:sortOrder">
+            <td md-cell>{{holding.companyName}}</td>
+            <td md-cell>{{holding.asset}}</td>
+            <td md-cell>{{holding.quantity | number: 0}}</td>
+            <td md-cell>{{holding.currentPrice}}</td>
+            <td md-cell>{{holding.stressedPrice}}</td>
+            <td md-cell><span ng-class='{"number-positive": holding.profitLoss >= 0, "number-negative": holding.profitLoss < 0}'>{{holding.profitLoss | number: 3}}</span></td>
+          </tr>
+        </tbody>
+        <tfoot md-foot>
+          <tr md-row>
+            <td md-cell><span></span></td>
+            <td md-cell><span class="total-portfolio">Portfolio Total</span></td>
+            <td md-cell><span></span></td>
+            <td md-cell><span></span></td>
+            <td md-cell md-numeric><span class="total-currentPrice">{{simulationResults.currentPrice}} USD</span></td>
+            <td md-cell md-numeric><span class="total-stressedPrice">{{simulationResults.stressedPrice}} USD</span></td>
+            <td md-cell md-numeric><span ng-class='{"number-positive": simulationResults.profitLoss >= 0, "number-negative": simulationResults.profitLoss < 0}' class="total-profitLoss">{{simulationResults.profitLoss | number:3}}</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </md-table-container>
+  </div>
+
+</div>

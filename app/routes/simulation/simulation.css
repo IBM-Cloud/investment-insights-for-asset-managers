@@ -1,0 +1,16 @@
+.total-portfolio {
+  font-weight: bold;
+  text-align: right;
+}
+
+.total-currentPrice {
+  font-weight: bold;
+}
+
+.total-stressedPrice {
+  font-weight: bold;
+}
+
+.total-profitLoss {
+  font-weight: bold;
+}

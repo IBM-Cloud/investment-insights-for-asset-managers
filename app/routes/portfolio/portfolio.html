@@ -1,0 +1,44 @@
+<div layout="column" flex>
+  <div class="page-header" flex="none" layout="row">
+    <span class="page-title">Portfolio</span>
+    <span flex></span>
+    <md-button class="md-raised md-secondary" ng-disabled="!portfolios" ng-click="viewJSON($event, portfolios)">View JSON</md-button>
+  </div>
+
+  <div class="page-description" flex="none">
+    The following shows your available portfolios.
+    They are maintained by the <a href="https://console.bluemix.net/catalog/services/fss-portfolio-service" target="_blank">Investment Portfolio</a> service.
+  </div>
+
+  <div class="page-body" md-whiteframe="4" ng-if="portfolios.length === 0">
+    No portfolio found
+  </div>
+
+  <div class="page-body" md-whiteframe="4" ng-if="portfolios.length > 0">
+    <md-tabs md-selected="selectedPortfolioIndex">
+      <md-tab label="{{portfolio.name}}"
+        ng-repeat="portfolio in portfolios"
+        md-on-select="selectPortfolio(portfolio)">
+      </md-tab>
+    </md-tabs>
+
+    <md-table-container>
+      <table md-table md-row-select="true" ng-model="selectedHoldings">
+        <thead md-head md-order="sortOrder">
+          <tr md-row>
+            <th md-column md-order-by="companyName"><span>Company</span></th>
+            <th md-column md-order-by="asset"><span>Asset</span></th>
+            <th md-column md-order-by="quantity" md-numeric>Shares QTY</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-auto-select ng-repeat="holding in selectedPortfolio.holdings | orderBy:sortOrder">
+            <td md-cell>{{holding.companyName}}</td>
+            <td md-cell>{{holding.asset}}</td>
+            <td md-cell>{{holding.quantity | number: 0}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</div>

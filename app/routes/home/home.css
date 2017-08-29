@@ -1,0 +1,19 @@
+.home {
+  margin: auto auto;
+  max-width: 960px;
+}
+
+.screenshots {
+  max-height: 200px;
+}
+
+.screenshot {
+  width: auto;
+  height: 100%;
+  display: block;
+}
+
+.login {
+  text-align: center;
+  padding: 20px;
+}

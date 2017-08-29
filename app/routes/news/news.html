@@ -1,0 +1,56 @@
+<div class="news" layout="column" flex>
+  <div class="page-header" flex="none" layout="row">
+    <span class="page-title">News Analysis</span>
+    <span flex></span>
+    <md-button class="md-raised md-secondary" ng-disabled="!articles" ng-click="viewJSON($event, articles)">View JSON</md-button>
+  </div>
+
+  <div class="page-description" flex="none">
+    Use this panel to find recent and relevant news articles about a risk factor.
+    Articles are retrieved from <a href="https://console.bluemix.net/catalog/services/discovery" target="_blank">Watson Discovery</a> News collection.
+  </div>
+
+  <div class="page-body news-filter" md-whiteframe="10">
+    <div layout="row" layout-align="start center">
+      <div>
+        Look for articles related to the risk Factor:
+      </div>
+      <md-select id="riskFactor" ng-model="selectedRiskFactor" required>
+        <md-option ng-value="riskFactor" ng-repeat="riskFactor in availableRiskFactors">{{riskFactor.name}}</md-option>
+      </md-select>
+    </div>
+
+    <div>
+      Consider articles in the last
+      <md-button md-no-ink class="group"
+        ng-click="selectHorizon(horizon)"
+        ng-class="{selected: horizon === selectedHorizon, groupFirst: $first, groupLast: $last}"
+        ng-repeat="horizon in horizons">
+        {{horizon.display}}
+      </md-button>
+    </div>
+
+    <md-button class="md-raised md-primary" ng-click="findArticles()">Find articles...</md-button>
+  </div>
+
+  <div class="page-body" ng-if="articles.results" md-whiteframe="4">
+    <md-subheader>
+      Showing {{articles.results.length}} of {{articles.matching_results}} matching documents
+      <span class="article-sentiment-tag article-sentiment-negative">{{articles.counts.negative}} negative</span>
+      <span class="article-sentiment-tag article-sentiment-positive">{{articles.counts.positive}} positive</span>
+      <span class="article-sentiment-tag article-sentiment-neutral">{{articles.counts.neutral}} neutral</span>
+    </md-subheader>
+    <md-list class="news-list md-dense">
+      <md-list-item class="md-3-line" ng-repeat="article in articles.results">
+        <md-icon ng-if="article.enriched_text.sentiment.document.label ==='positive'" class="md-avatar-icon article-sentiment-positive">sentiment_very_satisfied</md-icon>
+        <md-icon ng-if="article.enriched_text.sentiment.document.label==='neutral'" class="md-avatar-icon article-sentiment-neutral">sentiment_neutral</md-icon>
+        <md-icon ng-if="article.enriched_text.sentiment.document.label==='negative'" class="md-avatar-icon article-sentiment-negative">sentiment_very_dissatisfied</md-icon>
+        <div class="md-list-item-text" layout="column">
+          <h3><a target="_blank" href="{{article.url}}">{{article.title}}</a></h3>
+          <h4>{{article.publication_date | date:'short'}} | {{article.host}} | Overall score {{article.score}} | Sentiment: {{article.enriched_text.sentiment.document.label}} ({{article.enriched_text.sentiment.document.score}})</h4>
+        </div>
+      </md-list-item>
+    </md-list>
+  </div>
+
+</div>

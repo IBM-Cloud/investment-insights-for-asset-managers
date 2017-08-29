@@ -1,0 +1,27 @@
+<md-dialog aria-label="View JSON">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>View JSON</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="hide()">
+          <md-icon>close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <pre class="language-json" prism source="{{source | json}}">
+          <code class="language-json" prism>
+          </code>
+        </pre>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="hide()">Close</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

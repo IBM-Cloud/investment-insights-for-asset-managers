@@ -1,0 +1,20 @@
+.news-filter > div {
+  margin-bottom: 10px;
+}
+
+.news-filter md-select {
+  margin: 0;
+}
+
+#riskFactor {
+  margin-left: 10px;
+}
+
+.news-list {
+  padding: 0;
+}
+
+.article-sentiment-tag {
+  border-radius: 10px;
+  padding: 4px;
+}
