@@ -10,7 +10,7 @@
         $http.post('/api/v1/simulation', {
           instrumentIds: instrumentIds,
           riskFactor: riskFactor,
-          shockValue: shockValue,
+          shockValue: shockValue
         }).then(function(response) {
           deferred.resolve(response.data);
         }).catch(function(err) {
