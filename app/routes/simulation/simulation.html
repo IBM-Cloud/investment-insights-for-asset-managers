@@ -30,7 +30,7 @@
 
     <div ng-if="hasNews() && hasPortfolio()" class="alert alert-info">
       The simulation will use the articles retrieved by the News Analysis
-      and a shock value of <strong>{{state.get('news.shockValue')}}%</strong>
+      and a shock value of <strong>{{(state.get('news.shockValue') - 1) * 100 | number:2}}%</strong>
       to compute a projected impact on the portfolio <strong>{{state.get('portfolios.selected').name}}</strong>.
     </div>
 

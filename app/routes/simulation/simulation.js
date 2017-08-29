@@ -29,6 +29,7 @@
         var portfolio = StateService.get('portfolios.selected');
         var riskFactor = StateService.get('news.riskFactor');
         var shockValue = StateService.get('news.shockValue');
+        
 
         var instrumentIds = portfolio.holdings.map(function(holding) {
           return holding.instrumentId;

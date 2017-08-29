@@ -46,29 +46,46 @@ router.post('/api/v1/news', (req, res) => {
       // Check if negative sentiments are > then positive sentiments and
       // set shockType values to fall or rise
       var totalPositiveCountNegativeCount = 0;
+      var shockValue = 0; 
+
       if (response.counts.negative >= response.counts.positive) {
         totalPositiveCountNegativeCount = response.counts.negative - response.counts.positive;
         response.shockType = 'fall';
+
+        // Setting shock values for negative value
+        if (totalPositiveCountNegativeCount >= 1 && totalPositiveCountNegativeCount <= 3) {
+          shockValue = 1 - 0.7 / 100;
+        }
+        if (totalPositiveCountNegativeCount >= 4 && totalPositiveCountNegativeCount <= 6) {
+          shockValue = 1 - 0.9 / 100;
+        }
+        if (totalPositiveCountNegativeCount >= 7 && totalPositiveCountNegativeCount <= 10) {
+          shockValue = 1 - 1.1 / 100;
+        }
+        if (totalPositiveCountNegativeCount > 10) {
+          shockValue = 1 - 1.3 / 100;
+        }
       } else {
         totalPositiveCountNegativeCount = response.counts.positive - response.counts.negative;
         response.shockType = 'rise';
+
+        // Setting shock values for positive value
+        if (totalPositiveCountNegativeCount >= 1 && totalPositiveCountNegativeCount <= 3) {
+          shockValue = 0.7 / 100 + 1;
+        }
+        if (totalPositiveCountNegativeCount >= 4 && totalPositiveCountNegativeCount <= 6) {
+          shockValue = 0.9 / 100 + 1;
+        }
+        if (totalPositiveCountNegativeCount >= 7 && totalPositiveCountNegativeCount <= 10) {
+          shockValue = 1.1 / 100 + 1;
+        }
+        if (totalPositiveCountNegativeCount > 10) {
+          shockValue = 1.3 / 100 + 1;
+        }
       }
 
-      // Setting shock values
-      var shockValue = 0;
-      if (totalPositiveCountNegativeCount >= 1 && totalPositiveCountNegativeCount <= 3) {
-        shockValue = 0.7;
-      }
-      if (totalPositiveCountNegativeCount >= 4 && totalPositiveCountNegativeCount <= 6) {
-        shockValue = 0.9;
-      }
-      if (totalPositiveCountNegativeCount >= 7 && totalPositiveCountNegativeCount <= 10) {
-        shockValue = 1.1;
-      }
-      if (totalPositiveCountNegativeCount > 10) {
-        shockValue = 1.3;
-      }
       response.shockValue = shockValue;
+      //console.log("Shock Value: " + response.shockValue);
 
       res.send(response);
     }
