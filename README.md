@@ -14,8 +14,7 @@ The project deploys a node.js Cloud Foundry application and uses the following s
    * [Discovery](https://console.bluemix.net/catalog/services/discovery) and the pre-enriched News dataset
    * [Predictive Market Scenarios](https://console.bluemix.net/catalog/services/fss-predictive-scenario-analytics-service)
    * [Simulated Instrument Analytics](https://console.bluemix.net/catalog/services/fss-scenario-analytics-service)
-   * [App ID]
-   (https://console.bluemix.net/catalog/services/app-id)
+   * [App ID](https://console.bluemix.net/catalog/services/app-id)
 
    ![architecture](./architecture.png)
 
@@ -118,6 +117,9 @@ The app comes with a toolchain you can use to deploy the solution with few click
    ```
    ```
    cf create-service fss-scenario-analytics-service  fss-scenario-analytics-service-free-plan <Scenario_Analytics_Name as in manifest.yml>
+   ```
+   ```
+   cf create-service AppID bronze <AppID name as in manifest.yml>
    ```
 
 1. Push the app to Bluemix
