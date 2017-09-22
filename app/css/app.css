@@ -97,6 +97,10 @@ body, html {
   overflow: hidden;
 }
 
+.view-container {
+  overflow: scroll;
+}
+
 .main {
   overflow: scroll;
 }

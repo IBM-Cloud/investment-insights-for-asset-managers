@@ -14,6 +14,7 @@ The project deploys a node.js Cloud Foundry application and uses the following s
    * [Discovery](https://console.bluemix.net/catalog/services/discovery) and the pre-enriched News dataset
    * [Predictive Market Scenarios](https://console.bluemix.net/catalog/services/fss-predictive-scenario-analytics-service)
    * [Simulated Instrument Analytics](https://console.bluemix.net/catalog/services/fss-scenario-analytics-service)
+   * [App ID](https://console.bluemix.net/catalog/services/app-id)
 
    ![architecture](./architecture.png)
 
@@ -86,6 +87,22 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. Create services required for this app
 
+1. Run the shell script "run.sh" to create the services in one go. 
+   1.  Make your shell script executable by running this command 
+   ```
+     chmod +x script.sh
+   ```
+   1. Copy the shell file to /usr/local/bin with the below command
+   ```
+    cp script.sh /usr/local/bin
+   ```
+   
+   On the terminal. just run the script.sh.
+   
+   OR
+   
+   Manually create services
+
    ```
    cf create-service discovery lite <Discovery_Service_Name>
    ```
@@ -100,6 +117,9 @@ The app comes with a toolchain you can use to deploy the solution with few click
    ```
    ```
    cf create-service fss-scenario-analytics-service  fss-scenario-analytics-service-free-plan <Scenario_Analytics_Name as in manifest.yml>
+   ```
+   ```
+   cf create-service AppID bronze <AppID name as in manifest.yml>
    ```
 
 1. Push the app to Bluemix
@@ -132,6 +152,11 @@ And voila! You now have your very own application running on Bluemix.
 
 	SIMULATED_INSTRUMENT_ANALYSIS_URI=fss-analytics.mybluemix.net
 	SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN=
+
+    APPID_TENANTID=fab34d0b-a061-4e3e-af99-624efa8752b8
+    APPID_CLIENTID=f09de90a-17fd-4f76-8e09-723b860c27f3
+    APPID_SECRET=OTEyMjIwYWYtMTIzNS00OGQ4LTg4NjItZWQwMjIzZTZhZDUz
+    APPID_OAUTHSERVERURL=
 	```
 1. For credentials and access tokens, run this command
 

@@ -72,8 +72,8 @@
             <td md-cell><span class="total-portfolio">Portfolio Total</span></td>
             <td md-cell><span></span></td>
             <td md-cell><span></span></td>
-            <td md-cell md-numeric><span class="total-currentPrice">{{simulationResults.currentPrice}} USD</span></td>
-            <td md-cell md-numeric><span class="total-stressedPrice">{{simulationResults.stressedPrice}} USD</span></td>
+            <td md-cell md-numeric><span class="total-currentPrice">{{simulationResults.currentPrice | number:3}} USD</span></td>
+            <td md-cell md-numeric><span class="total-stressedPrice">{{simulationResults.stressedPrice | number:3}} USD</span></td>
             <td md-cell md-numeric><span ng-class='{"number-positive": simulationResults.profitLoss >= 0, "number-negative": simulationResults.profitLoss < 0}' class="total-profitLoss">{{simulationResults.profitLoss | number:3}}</span></td>
           </tr>
         </tfoot>
