@@ -1,3 +1,4 @@
+// Required dependencies
 const express = require('express');
 const passport = require('passport');
 const WebAppStrategy = require('bluemix-appid').WebAppStrategy;
