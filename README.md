@@ -28,15 +28,11 @@ The application uses the financial services to analyze a stock portfolio in rega
 4. The app calls the Predictive Market Scenarios service to create conditional scenarios to model how, given a change to a subset of factors the broader set of market factors are expected to change.
 5. Finally it computes analytics on the portfolio stocks under the given scenarios.
 
------
-
 ## Related Blog Posts, Videos, etc
 
 - [Developing a finance application using IBM Cloud](https://www.ibm.com/blogs/bluemix/2017/08/developing-finance-application-using-ibm-cloud/)
 - [Securing single page apps with App ID service](https://www.ibm.com/blogs/bluemix/2017/09/securing-single-page-apps-app-id-service/)
 - [Investment insights for Asset Managers in depth](https://www.ibm.com/blogs/bluemix/2017/09/investment-insights-asset-managers-depth/)
-
-----
 
 ## Deploy to Bluemix using DevOps Toolchain
 
