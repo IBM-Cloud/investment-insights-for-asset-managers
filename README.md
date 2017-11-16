@@ -23,10 +23,20 @@ The application uses the financial services to analyze a stock portfolio in rega
    ![flow](./flow.png)
 
 1. User selects a risk factor to consider.
-1. Using Watson Discovery, the app looks for articles related to the risk factor.
-1. The app computes a shock value based on the sentiment of the articles.
-1. The app calls the Predictive Market Scenarios service to create conditional scenarios to model how, given a change to a subset of factors the broader set of market factors are expected to change.
-1. Finally it computes analytics on the portfolio stocks under the given scenarios.
+2. Using Watson Discovery, the app looks for articles related to the risk factor.
+3. The app computes a shock value based on the sentiment of the articles.
+4. The app calls the Predictive Market Scenarios service to create conditional scenarios to model how, given a change to a subset of factors the broader set of market factors are expected to change.
+5. Finally it computes analytics on the portfolio stocks under the given scenarios.
+
+-----
+
+## Related Blog Posts, Videos, etc
+
+- [Developing a finance application using IBM Cloud](https://www.ibm.com/blogs/bluemix/2017/08/developing-finance-application-using-ibm-cloud/)
+- [Securing single page apps with App ID service](https://www.ibm.com/blogs/bluemix/2017/09/securing-single-page-apps-app-id-service/)
+- [Investment insights for Asset Managers in depth](https://www.ibm.com/blogs/bluemix/2017/09/investment-insights-asset-managers-depth/)
+
+----
 
 ## Deploy to Bluemix using DevOps Toolchain
 
@@ -34,60 +44,60 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. **Ensure your organization has enough quota for one web application using 256MB of memory and 4 services.**
 
-1. Click ***Deploy to Bluemix*** to start the Bluemix DevOps wizard:
+2. Click ***Deploy to Bluemix*** to start the Bluemix DevOps wizard:
 
    [![Deploy To Bluemix](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/investment-insights-for-asset-managers&branch=master)
 
-1. Select the **GitHub** box.
+3. Select the **GitHub** box.
 
-1. Decide whether you want to fork/clone the app repository.
+4. Decide whether you want to fork/clone the app repository.
 
-1. If you decide to Clone, set a name for your GitHub repository.
+5. If you decide to Clone, set a name for your GitHub repository.
 
-1. Select the **Delivery Pipeline** box.
+6. Select the **Delivery Pipeline** box.
 
-1. Select the region, organization and space where you want to deploy the app.
+7. Select the region, organization and space where you want to deploy the app.
 
-1. Click **Create**.
+8. Click **Create**.
 
-1. Select the Delivery Pipeline.
+9. Select the Delivery Pipeline.
 
-1. Wait for the Deploy job to complete.
+10. Wait for the Deploy job to complete.
 
-1. Access the app when it's ready and start exploring.
+11. Access the app when it's ready and start exploring.
 
 ## Deploy to Bluemix manually
 
 1. If you do not already have a Bluemix account, [sign up here][bluemix_signup_url]
 
-1. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
+2. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
 
-1. Use this command to display or specify the URL of the API endpoint of Bluemix.
+3. Use this command to display or specify the URL of the API endpoint of Bluemix.
 
     ```
     cf api https://api.ng.bluemix.net
     ```
-1. Connect to Bluemix in the command line tool and follow the prompts to log in
+4. Connect to Bluemix in the command line tool and follow the prompts to log in
 
    ```
    cf login -a https://api.ng.bluemix.net
    ```
-1. Clone the app to your local environment from your terminal using the following command:
+5. Clone the app to your local environment from your terminal using the following command:
 
    ```
    git clone https://github.com/IBM-Bluemix/investment-insights-for-asset-managers.git
    ```
 
-1. `cd` into this newly created directory
+6. `cd` into this newly created directory
 
-1. Navigate to manifest.yml file and change the NAME "investment-insights-for-sset-managers" to an unique name of your choice. The new name is your APP_NAME in the commands below.
+7. Navigate to manifest.yml file and change the NAME "investment-insights-for-sset-managers" to an unique name of your choice. The new name is your APP_NAME in the commands below.
 
-1. Follow the above step for SERVICES as well.
+8. Follow the above step for SERVICES as well.
 
 
 1. Create services required for this app
 
-1. Run the shell script "run.sh" to create the services in one go. 
+2. Run the shell script "run.sh" to create the services in one go. 
    1.  Make your shell script executable by running this command 
    ```
      chmod +x script.sh
@@ -96,11 +106,11 @@ The app comes with a toolchain you can use to deploy the solution with few click
    ```
     cp script.sh /usr/local/bin
    ```
-   
+
    On the terminal. just run the script.sh.
-   
+
    OR
-   
+
    Manually create services
 
    ```
@@ -122,12 +132,12 @@ The app comes with a toolchain you can use to deploy the solution with few click
    cf create-service AppID bronze <AppID name as in manifest.yml>
    ```
 
-1. Push the app to Bluemix
+3. Push the app to Bluemix
 
    ```
    cf push
    ```
- _This command uses the manifest.yml file in your directory to CREATE the app and BIND the services to the app_
+    _This command uses the manifest.yml file in your directory to CREATE the app and BIND the services to the app_
 
 And voila! You now have your very own application running on Bluemix.
 
@@ -139,26 +149,26 @@ And voila! You now have your very own application running on Bluemix.
 
 3. In the checkout directory, create a file ```.env``` and paste the below snippet
 
-	```
-	INVESTMENT_PORFOLIO_BASE_URL=investment-portfolio.mybluemix.net
-	INVESTMENT_PORFOLIO_USERNAME=
-	INVESTMENT_PORFOLIO_PASSWORD=
+  ```
+  INVESTMENT_PORFOLIO_BASE_URL=investment-portfolio.mybluemix.net
+  INVESTMENT_PORFOLIO_USERNAME=
+  INVESTMENT_PORFOLIO_PASSWORD=
 
-	DISCOVERY_USERNAME=
-	DISCOVERY_PASSWORD=
+  DISCOVERY_USERNAME=
+  DISCOVERY_PASSWORD=
 
-	PREDICTIVE_MARKET_SCENARIOS_URI=fss-analytics.mybluemix.net
-	PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN=
+  PREDICTIVE_MARKET_SCENARIOS_URI=fss-analytics.mybluemix.net
+  PREDICTIVE_MARKET_SCENARIOS_ACCESS_TOKEN=
 
-	SIMULATED_INSTRUMENT_ANALYSIS_URI=fss-analytics.mybluemix.net
-	SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN=
+  SIMULATED_INSTRUMENT_ANALYSIS_URI=fss-analytics.mybluemix.net
+  SIMULATED_INSTRUMENT_ANALYSIS_ACCESS_TOKEN=
 
     APPID_TENANTID=fab34d0b-a061-4e3e-af99-624efa8752b8
     APPID_CLIENTID=f09de90a-17fd-4f76-8e09-723b860c27f3
     APPID_SECRET=OTEyMjIwYWYtMTIzNS00OGQ4LTg4NjItZWQwMjIzZTZhZDUz
     APPID_OAUTHSERVERURL=
-	```
-1. For credentials and access tokens, run this command
+  ```
+4. For credentials and access tokens, run this command
 
     ```
     cf env APP_NAME
@@ -171,7 +181,7 @@ And voila! You now have your very own application running on Bluemix.
    npm install
    ```
 
-1. Run
+2. Run
 
    ```
    npm start
