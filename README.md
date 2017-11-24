@@ -3,7 +3,7 @@
 [![Build Status](https://api.travis-ci.org/IBM-Bluemix/investment-insights-for-asset-managers.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/investment-insights-for-asset-managers)
 ![Bluemix Deployments](https://deployment-tracker.mybluemix.net/stats/e13ee7de3df5bc6cf89950a82ef7a248/badge.svg)
 
-**Investment Insights for Asset Managers** is a Node.js application that uses [IBM Financial services](https://www.ibm.com/watson/financial-services/) and Watson services.  
+**Investment Insights for Asset Managers** is a Node.js application that uses [IBM Financial services](https://www.ibm.com/watson/financial-services/) and Watson services.
 
 The application is a modern portfolio manager that provides real-time insights into how news all around the world can impact any given investment portfolio.
 
@@ -87,8 +87,8 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 1. Create services required for this app
 
-1. Run the shell script "run.sh" to create the services in one go. 
-   1.  Make your shell script executable by running this command 
+1. Run the shell script "run.sh" to create the services in one go.
+   1.  Make your shell script executable by running this command
    ```
      chmod +x script.sh
    ```
@@ -96,11 +96,11 @@ The app comes with a toolchain you can use to deploy the solution with few click
    ```
     cp script.sh /usr/local/bin
    ```
-   
+
    On the terminal. just run the script.sh.
-   
+
    OR
-   
+
    Manually create services
 
    ```
@@ -119,7 +119,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
    cf create-service fss-scenario-analytics-service  fss-scenario-analytics-service-free-plan <Scenario_Analytics_Name as in manifest.yml>
    ```
    ```
-   cf create-service AppID bronze <AppID name as in manifest.yml>
+   cf create-service AppID "Graduated tier" <AppID name as in manifest.yml>
    ```
 
 1. Push the app to Bluemix
