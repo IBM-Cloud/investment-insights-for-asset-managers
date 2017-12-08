@@ -56,9 +56,6 @@ if (process.env.VCAP_SERVICES) {
 // --Config--------------------
 require('dotenv').config();
 
-// --Deployment Tracker--------------------
-require('cf-deployment-tracker-client').track();
-
 // --Get the app environment from Cloud Foundry, defaulting to local VCAP--------------------
 var vcapLocal = null;
 var appEnvOpts = vcapLocal ? {
