@@ -15,7 +15,6 @@
     "angular-material-data-table": "^0.10.10",
     "bluemix-appid": "^1.1.1",
     "body-parser": "^1.17.1",
-    "cf-deployment-tracker-client": "*",
     "cfenv": "^1.0.3",
     "dateformat": "^2.0.0",
     "dotenv": "^4.0.0",
