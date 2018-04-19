@@ -1,6 +1,6 @@
 # Investment Insights for Asset Managers
 
-[![Build Status](https://api.travis-ci.org/IBM-Bluemix/investment-insights-for-asset-managers.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/investment-insights-for-asset-managers)
+[![Build Status](https://api.travis-ci.org/IBM-Cloud/investment-insights-for-asset-managers.svg?branch=master)](https://travis-ci.org/IBM-Cloud/investment-insights-for-asset-managers)
 
 **Investment Insights for Asset Managers** is a Node.js application that uses [IBM Financial services](https://www.ibm.com/watson/financial-services/) and Watson services.
 
@@ -33,15 +33,15 @@ The application uses the financial services to analyze a stock portfolio in rega
 - [Securing single page apps with App ID service](https://www.ibm.com/blogs/bluemix/2017/09/securing-single-page-apps-app-id-service/)
 - [Investment insights for Asset Managers in depth](https://www.ibm.com/blogs/bluemix/2017/09/investment-insights-asset-managers-depth/)
 
-## Deploy to Bluemix using DevOps Toolchain
+## Deploy to IBM Cloud using DevOps Toolchain
 
 The app comes with a toolchain you can use to deploy the solution with few clicks. If you want to deploy it manually, you can skip this section.
 
 1. **Ensure your organization has enough quota for one web application using 256MB of memory and 4 services.**
 
-2. Click ***Deploy to Bluemix*** to start the Bluemix DevOps wizard:
+2. Click ***Deploy to IBM Cloud*** to start the IBM Cloud DevOps wizard:
 
-   [![Deploy To Bluemix](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/investment-insights-for-asset-managers&branch=master)
+   [![Deploy To IBM Cloud](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Cloud/investment-insights-for-asset-managers&branch=master)
 
 3. Select the **GitHub** box.
 
@@ -61,9 +61,9 @@ The app comes with a toolchain you can use to deploy the solution with few click
 
 11. Access the app when it's ready and start exploring.
 
-## Deploy to Bluemix manually
+## Deploy to IBM Cloud manually
 
-1. If you do not already have a Bluemix account, [sign up here][bluemix_signup_url]
+1. If you do not already have an IBM Cloud account, [sign up here][bluemix_signup_url]
 
 2. Download and install the [Cloud Foundry CLI][cloud_foundry_url] tool
 
@@ -72,7 +72,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
     ```
     cf api https://api.ng.bluemix.net
     ```
-4. Connect to Bluemix in the command line tool and follow the prompts to log in
+4. Connect to IBM Cloud in the command line tool and follow the prompts to log in
 
    ```
    cf login -a https://api.ng.bluemix.net
@@ -80,7 +80,7 @@ The app comes with a toolchain you can use to deploy the solution with few click
 5. Clone the app to your local environment from your terminal using the following command:
 
    ```
-   git clone https://github.com/IBM-Bluemix/investment-insights-for-asset-managers.git
+   git clone https://github.com/IBM-Cloud/investment-insights-for-asset-managers.git
    ```
 
 6. `cd` into this newly created directory
@@ -127,18 +127,18 @@ The app comes with a toolchain you can use to deploy the solution with few click
    cf create-service AppID "Graduated tier" <AppID name as in manifest.yml>
    ```
 
-3. Push the app to Bluemix
+3. Push the app to IBM Cloud
 
    ```
    cf push
    ```
     _This command uses the manifest.yml file in your directory to CREATE the app and BIND the services to the app_
 
-And voila! You now have your very own application running on Bluemix.
+And voila! You now have your very own application running on IBM Cloud.
 
 ## Run the app locally
 
-1. If you do not already have a Bluemix account, [sign up here][bluemix_signup_url]
+1. If you do not already have an IBM Cloud account, [sign up here][bluemix_signup_url]
 
 2. If you have not already, [download Node.js][download_node_url] and install it on your local machine.
 
@@ -188,19 +188,19 @@ If you find a bug, please report it via the [Issues section][issues_url] or even
 
 ## Troubleshooting
 
-The primary source of debugging information for your Bluemix app is the logs. To see them, run the following command using the Cloud Foundry CLI:
+The primary source of debugging information for your IBM Cloud app is the logs. To see them, run the following command using the Cloud Foundry CLI:
 
    ```
    $ cf logs APP_NAME --recent
    ```
 
-For more detailed information on troubleshooting your application, see the [Troubleshooting section](https://www.ng.bluemix.net/docs/troubleshoot/tr.html) in the Bluemix documentation.
+For more detailed information on troubleshooting your application, see the [Troubleshooting section](https://www.ng.bluemix.net/docs/troubleshoot/tr.html) in the IBM Cloud documentation.
 
 ## License
 
 See [License.txt](License.txt) for license information.
 
-[bluemix_signup_url]: https://console.bluemix.net/?cm_mmc=GitHubReadMe
+[IBM Cloud_signup_url]: https://console.bluemix.net/?cm_mmc=GitHubReadMe
 [cloud_foundry_url]: https://github.com/cloudfoundry/cli
 [download_node_url]: https://nodejs.org/download/
 [travis_url]: https://travis-ci.org/
